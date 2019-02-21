@@ -1,0 +1,4 @@
+/vendor/
+
+# fichiers de config
+/app/config.conf

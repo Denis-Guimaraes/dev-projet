@@ -1,0 +1,18 @@
+{
+    "name": "hk1873/dev-projet",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Denis Guimaraes",
+            "email": "guimaraes.dev@gmail.com"
+        }
+    ],
+    "require": {
+        "altorouter/altorouter": "^1.2",
+        "league/plates": "^3.3",
+        "symfony/var-dumper": "^4.1"
+    },
+    "autoload": {
+        "psr-4": {"DevProjet\\": "app/"}
+    }
+}
