@@ -12,6 +12,9 @@
         "league/plates": "^3.3",
         "symfony/var-dumper": "^4.1"
     },
+    "require-dev": {
+        "phpunit/phpunit": "^8"
+    },
     "autoload": {
         "psr-4": {"MotivOnline\\": "app/"}
     }
