@@ -13,6 +13,6 @@
         "symfony/var-dumper": "^4.1"
     },
     "autoload": {
-        "psr-4": {"DevProjet\\": "app/"}
+        "psr-4": {"MotivOnline\\": "app/"}
     }
 }

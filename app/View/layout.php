@@ -8,7 +8,7 @@
     </head>
     <body>
         <header> 
-            <h1>Bienvenue sur Dev Projet</h1>
+            <h1>Bienvenue sur Motiv'Online</h1>
         </header>
         <main>
             <?= $this->section('content'); ?>

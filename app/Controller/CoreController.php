@@ -1,8 +1,8 @@
 <?php
-namespace DevProjet\Controller;
+namespace MotivOnline\Controller;
 
 use League\Plates\Engine as Plates;
-use DevProjet\Application;
+use MotivOnline\Application;
 
 abstract class CoreController
 {

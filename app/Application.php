@@ -1,5 +1,5 @@
 <?php
-namespace DevProjet;
+namespace MotivOnline;
 
 use AltoRouter;
 
@@ -32,12 +32,12 @@ Class Application
             $controllerAndMethod = explode('#', $match['target']);
             $controllerName = $controllerAndMethod[0];
             $methodName = $controllerAndMethod[1];
-            $controllerName = 'DevProjet\Controller\\'. $controllerName;
+            $controllerName = 'MotivOnline\Controller\\'. $controllerName;
             
             $controller = new $controllerName($this);
             $controller->$methodName($match['params']);
         } else {
-            \DevProjet\Controller\CoreController::sendHttpError(404, 'Dev-Projet - erreur 404');
+            \MotivOnline\Controller\CoreController::sendHttpError(404, 'Dev-Projet - erreur 404');
         }
     }
 

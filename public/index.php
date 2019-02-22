@@ -3,7 +3,7 @@ require __DIR__ . DIRECTORY_SEPARATOR . '..'. DIRECTORY_SEPARATOR .'vendor' . DI
 
 session_start();
 
-use DevProjet\Application;
+use MotivOnline\Application;
 
 // Run application
 $app = new Application();

@@ -1,5 +1,5 @@
 <?php
-namespace DevProjet\Controller;
+namespace MotivOnline\Controller;
 
 class MainController extends CoreController
 {

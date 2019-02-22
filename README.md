@@ -1,2 +1,2 @@
-# dev-projet
-Site web pour partager des projets web et mobile.
+# Motiv'online
+Créez vos lettres de motivation en ligne et partagez-les avec les recruteurs via des liens uniques.
