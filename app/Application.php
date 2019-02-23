@@ -37,10 +37,12 @@ Class Application
             $controller = new $controllerName($this);
             $controller->$methodName($match['params']);
         } else {
-            \MotivOnline\Controller\CoreController::sendHttpError(404, 'Dev-Projet - erreur 404');
+            $controller = new \MotivOnline\Controller\MainController($this);
+            $controller->error(404);
         }
     }
 
+    // Getters and Setter
     public function getRouter()
     {
         return $this->router;

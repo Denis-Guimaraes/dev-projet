@@ -23,7 +23,7 @@ abstract class CoreController
         );
     }
 
-    public static function sendHttpError(int $errorCode, string $htmlContent='')
+    public function sendHttpError(int $errorCode, string $htmlContent='')
     {
         if ($errorCode == 404) {
             header("HTTP/1.0 404 Not Found");
@@ -32,7 +32,7 @@ abstract class CoreController
         }
     }
 
-    public static function sendJson(array $data)
+    public function sendJson(array $data)
     {
         header('Content-Type: application/json');
         echo json_encode($data);
