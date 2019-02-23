@@ -2,11 +2,12 @@
 namespace MotivOnline\Controller;
 
 use MotivOnline\Model\UserModel;
+use MotivOnline\Util\User;
 
 class UserController extends CoreController
 {
     private $data;
-    private $TemplateName;
+    private $templateName;
 
     public function signup()
     {
@@ -63,21 +64,62 @@ class UserController extends CoreController
                     $newUserModel->setCity($city);
                     $newUserModel->setAdress($adress);
                     $insert = $newUserModel->insert();
-                    // Return view
+
                     if ($insert) {
-                        $this->TemplateName = 'main/home';
+                        // Set data and return view
+                        $this->templateName = 'main/home';
                         $this->data['success'] = 'Bienvenue sur Motiv\'Online, vous pouvez dès à présent vous connecter.';
-                        $this->show($this->TemplateName, $this->data);
+                        $this->show($this->templateName, $this->data);
                     } else {
                         $errorList[] = 'Une erreur inattendue s\'est produite.';
                     }
                 }
             }
         }
-        // Return view
-        $this->TemplateName = 'main/home';
+        // Set data and return view
+        $this->templateName = 'main/home';
         $this->data['error'] = $errorList;
-        $this->show($this->TemplateName, $this->data);
+        $this->show($this->templateName, $this->data);
+    }
+
+    public function signin()
+    {
+        $errorList = [];
+        if (!empty($_POST)) {
+            // Check parameters
+            $email = (isset($_POST['email'])) ? $_POST['email'] : '';
+            $password = (isset($_POST['password'])) ? $_POST['password'] : '';
+
+            // Check if user exist and if password match
+            $userModel = UserModel::findByEmail($email);
+            if (!empty($userModel)) {
+                $passwordInBdd = $userModel->getPassword();
+                if (password_verify($password ,$passwordInBdd)) {
+                    // Connect user in session
+                    User::connect($userModel);
+                    // Redirect to profile
+                    header('Location: '. $this->getRouter()->generate('user_profile'));
+                } else {
+                    $errorList[]= "L'identifiant ou le mot de passe est incorrecte";
+                }
+            } else {
+                $errorList[]= "L'identifiant ou le mot de passe est incorrecte";
+            }
+        }
+        // Set data and return view
+        $this->templateName = 'main/home';
+        $this->data['error'] = $errorList;
+        $this->show($this->templateName, $this->data);
+    }
+
+    public function profile()
+    {
+        if(!User::isConnected()) {
+            header('Location: '. $this->getRouter()->generate('main_home'));
+        }
+        $this->templateName = 'user/profile';
+        $this->data['userLetter'] = [];
+        $this->show($this->templateName, $this->data);
     }
 
     // Getters and Setters
@@ -95,12 +137,12 @@ class UserController extends CoreController
 
     public function getTemplateName()
     {
-        return $this->TemplateName;
+        return $this->templateName;
     }
 
-    public function setTemplateName($TemplateName)
+    public function setTemplateName($templateName)
     {
-        $this->TemplateName = $TemplateName;
+        $this->templateName = $templateName;
 
         return $this;
     }

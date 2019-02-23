@@ -22,6 +22,10 @@ Class Application
     {
         // Define route
         $this->router->map('GET', '/', 'MainController#home', 'main_home');
+
+        $this->router->map('POST', '/signup', 'UserController#signup', 'user_signup');
+        $this->router->map('POST', '/signin', 'UserController#signin', 'user_signin');
+        $this->router->map('GET', '/profil', 'UserController#profile', 'user_profile');
     }
 
     public function run()
