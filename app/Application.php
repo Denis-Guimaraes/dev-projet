@@ -22,6 +22,10 @@ Class Application
     {
         // Define route
         $this->router->map('GET', '/', 'MainController#home', 'main_home');
+
+        $this->router->map('POST', '/signup', 'UserController#signup', 'user_signup');
+        $this->router->map('POST', '/signin', 'UserController#signin', 'user_signin');
+        $this->router->map('GET', '/profil', 'UserController#profile', 'user_profile');
     }
 
     public function run()
@@ -37,10 +41,12 @@ Class Application
             $controller = new $controllerName($this);
             $controller->$methodName($match['params']);
         } else {
-            \MotivOnline\Controller\CoreController::sendHttpError(404, 'Dev-Projet - erreur 404');
+            $controller = new \MotivOnline\Controller\MainController($this);
+            $controller->error(404);
         }
     }
 
+    // Getters and Setter
     public function getRouter()
     {
         return $this->router;

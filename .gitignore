@@ -1,4 +1,7 @@
 /vendor/
 
-# fichiers de config
+# Config
 /app/config.conf
+
+# phpunit
+.phpunit.result.cache

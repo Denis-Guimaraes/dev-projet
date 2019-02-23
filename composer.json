@@ -1,6 +1,7 @@
 {
-    "name": "hk1873/dev-projet",
+    "name": "hk1873/motivonline",
     "type": "project",
+    "description": "Motiv'Online",
     "authors": [
         {
             "name": "Denis Guimaraes",
@@ -11,6 +12,10 @@
         "altorouter/altorouter": "^1.2",
         "league/plates": "^3.3",
         "symfony/var-dumper": "^4.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8",
+        "roave/security-advisories": "dev-master"
     },
     "autoload": {
         "psr-4": {"MotivOnline\\": "app/"}
