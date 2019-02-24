@@ -30,9 +30,8 @@ class UserControllerTest extends TestCase
         ];
 
         $controller->signup();
-        $this->assertIsString($controller->getTemplateName());
         $this->assertIsArray($controller->getData());
-        $this->assertFileExists(__DIR__ .'/../../app/View/main/home.php');
+        $this->assertFileExists(__DIR__ .'/../../app/View/user/signin.php');
     }
 
     public function testSigninUser()

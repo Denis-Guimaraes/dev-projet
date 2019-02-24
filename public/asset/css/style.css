@@ -35,7 +35,8 @@
   white-space: pre-line;
 }
 
-.signin {
+.signin,
+.signup {
   background-color: #f1faff;
   border: 1px solid #caebff;
   border-radius: 5px;
@@ -44,12 +45,19 @@
   max-width: 20rem;
 }
 
-.signin__title {
+.signin__title,
+.singup__title {
   font-size: 1.5rem;
   font-weight: bold;
 }
 
-.signin__form {
+.signup__span {
+  color: #721c24;
+  font-size: 1.2rem;
+}
+
+.signin__form,
+.signup__form {
   margin: 0.8rem 0;
 }
 
