@@ -3,6 +3,7 @@ namespace MotivOnline\Controller;
 
 use League\Plates\Engine as Plates;
 use MotivOnline\Application;
+use MotivOnline\Util\User;
 
 abstract class CoreController
 {
@@ -19,6 +20,8 @@ abstract class CoreController
             [
                 'router' => $this->router,
                 'basePath' => $config['BASE_PATH'],
+                'connectedUser' => User::getConnectedUser(),
+                'isConnected' => User::isConnected(),
             ]
         );
     }

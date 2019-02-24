@@ -25,23 +25,18 @@ class UserController extends CoreController
             $city = (isset($_POST['city'])) ? $_POST['city'] : '';
             $adress = (isset($_POST['adress'])) ? $_POST['adress'] : '';
 
-            if (empty($firstname)) {
-                $errorList[] = 'Prénom vide';
-            }
-            if (empty($lastname)) {
-                $errorList[] = 'Nom vide';
-            }
             if (empty($email)) {
                 $errorList[] = 'Email vide';
             } else if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
                 $errorList[] = 'Email incorrect';
             }
             if (empty($password)) {
-                $errorList[] = 'Password vide';
+                $errorList[] = 'Mot de passe vide';
             } elseif( strlen($password) < 8) {
-                $errorList[] = 'Password trop court, minimum 8 char';
+                $errorList[] = 'Mot de passe trop court, minimum 8 caractères';
             }
             if ($password !== $confirmPassword) {
+                dump($password . ' = ' . $confirmPassword);
                 $errorList[] = 'Les deux mots de passe sont différents';
             }
             
@@ -66,18 +61,16 @@ class UserController extends CoreController
                     $insert = $newUserModel->insert();
 
                     if ($insert) {
-                        // Set data and return view
-                        $this->templateName = 'main/home';
-                        $this->data['success'] = 'Bienvenue sur Motiv\'Online, vous pouvez dès à présent vous connecter.';
-                        $this->show($this->templateName, $this->data);
+                        // Set success
+                        $this->data['success'] = 'Vous pouvez maintenant vous connecter et profiter de notre service.';
                     } else {
-                        $errorList[] = 'Une erreur inattendue s\'est produite.';
+                        $errorList[] = 'Une erreur inattendue s\'est produite';
                     }
                 }
             }
         }
-        // Set data and return view
-        $this->templateName = 'main/home';
+        // Set data and return signup view
+        $this->templateName = 'user/signup';
         $this->data['error'] = $errorList;
         $this->show($this->templateName, $this->data);
     }
@@ -106,8 +99,8 @@ class UserController extends CoreController
                 $errorList[]= "L'identifiant ou le mot de passe est incorrecte";
             }
         }
-        // Set data and return view
-        $this->templateName = 'main/home';
+        // Set data and return sigin view
+        $this->templateName = 'user/signin';
         $this->data['error'] = $errorList;
         $this->show($this->templateName, $this->data);
     }
