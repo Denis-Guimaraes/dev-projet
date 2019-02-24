@@ -67,11 +67,11 @@ class UserController extends CoreController
 
                     if ($insert) {
                         // Set data and return view
-                        $this->templateName = 'main/home';
-                        $this->data['success'] = 'Bienvenue sur Motiv\'Online, vous pouvez dès à présent vous connecter.';
+                        $this->templateName = 'user/signup';
+                        $this->data['success'] = 'Bienvenue sur Motiv\'Online, vous pouvez dès à présent vous connecter';
                         $this->show($this->templateName, $this->data);
                     } else {
-                        $errorList[] = 'Une erreur inattendue s\'est produite.';
+                        $errorList[] = 'Une erreur inattendue s\'est produite';
                     }
                 }
             }

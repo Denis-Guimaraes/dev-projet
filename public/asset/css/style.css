@@ -35,6 +35,24 @@
   white-space: pre-line;
 }
 
+.signin {
+  background-color: #f1faff;
+  border: 1px solid #caebff;
+  border-radius: 5px;
+  padding: 0.8rem;
+  margin: 1rem auto;
+  max-width: 20rem;
+}
+
+.signin__title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.signin__form {
+  margin: 0.8rem 0;
+}
+
 .footer {
   background-color: #104161;
   color: #fff;
