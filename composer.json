@@ -19,5 +19,9 @@
     },
     "autoload": {
         "psr-4": {"MotivOnline\\": "app/"}
+    },
+    "scripts" : {
+        "test-controller": "phpunit --coverage-html report/ --whitelist app/ --bootstrap vendor/autoload.php tests/controller/",
+        "test-model": "phpunit --bootstrap vendor/autoload.php tests/model/"
     }
 }

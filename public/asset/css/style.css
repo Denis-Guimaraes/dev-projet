@@ -1,0 +1,44 @@
+.body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.header {
+  background-color: #104161;
+  color: #fff;
+  padding: 0.2rem;
+  margin-bottom: 0.4rem;
+}
+
+.header__title {
+  font-size: 2rem;
+  font-weight: bold;
+  text-transform: capitalize;
+  margin-left: 0.4rem;
+}
+
+.main {
+  flex-grow: 2;
+}
+
+.home {
+  margin-top: 1rem;
+}
+
+.home__title {
+  font-size: 1.5rem;
+  font-weight: Bold;
+}
+
+.home__content {
+  white-space: pre-line;
+}
+
+.footer {
+  background-color: #104161;
+  color: #fff;
+  text-align: center;
+  padding: 0.2rem;
+  margin-top: 0.4rem;
+}

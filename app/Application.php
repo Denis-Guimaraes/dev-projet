@@ -24,7 +24,9 @@ Class Application
         $this->router->map('GET', '/', 'MainController#home', 'main_home');
 
         $this->router->map('POST', '/signup', 'UserController#signup', 'user_signup');
+        $this->router->map('GET', '/signup', 'UserController#signup', 'user_signup_view');
         $this->router->map('POST', '/signin', 'UserController#signin', 'user_signin');
+        $this->router->map('GET', '/signin', 'UserController#signin', 'user_signin_view');
         $this->router->map('GET', '/profil', 'UserController#profile', 'user_profile');
     }
 

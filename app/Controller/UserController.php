@@ -76,8 +76,8 @@ class UserController extends CoreController
                 }
             }
         }
-        // Set data and return view
-        $this->templateName = 'main/home';
+        // Set data and return signup view
+        $this->templateName = 'user/signup';
         $this->data['error'] = $errorList;
         $this->show($this->templateName, $this->data);
     }
@@ -106,8 +106,8 @@ class UserController extends CoreController
                 $errorList[]= "L'identifiant ou le mot de passe est incorrecte";
             }
         }
-        // Set data and return view
-        $this->templateName = 'main/home';
+        // Set data and return sigin view
+        $this->templateName = 'user/signin';
         $this->data['error'] = $errorList;
         $this->show($this->templateName, $this->data);
     }

@@ -32,7 +32,7 @@ class UserControllerTest extends TestCase
         $controller->signup();
         $this->assertIsString($controller->getTemplateName());
         $this->assertIsArray($controller->getData());
-        $this->assertFileExists(__DIR__ .'/../app/View/main/home.php');
+        $this->assertFileExists(__DIR__ .'/../../app/View/main/home.php');
     }
 
     public function testSigninUser()
@@ -54,7 +54,7 @@ class UserControllerTest extends TestCase
         } else {
             $this->assertIsString($controller->getTemplateName());
             $this->assertIsArray($controller->getData());
-            $this->assertFileExists(__DIR__ .'/../app/View/main/home.php');
+            $this->assertFileExists(__DIR__ .'/../../app/View/main/home.php');
         }
     }
 
@@ -68,7 +68,7 @@ class UserControllerTest extends TestCase
             $this->assertInstanceOf(UserModel::class, $_SESSION['connectedUser']);
             $this->assertIsString($controller->getTemplateName());
             $this->assertIsArray($controller->getData());
-            $this->assertFileExists(__DIR__ .'/../app/View/user/profile.php');
+            $this->assertFileExists(__DIR__ .'/../../app/View/user/profile.php');
         } else {
             $this->assertContains(
                 'Location: ' . $controller->getRouter()->generate('main_home'),
