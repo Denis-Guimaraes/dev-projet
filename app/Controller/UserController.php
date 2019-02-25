@@ -36,7 +36,6 @@ class UserController extends CoreController
                 $errorList[] = 'Mot de passe trop court, minimum 8 caractères';
             }
             if ($password !== $confirmPassword) {
-                dump($password . ' = ' . $confirmPassword);
                 $errorList[] = 'Les deux mots de passe sont différents';
             }
             
@@ -117,7 +116,39 @@ class UserController extends CoreController
 
     public function updateUser()
     {
-        // todo
+        $errorList= [];
+        // Check parameters
+        if (!empty($_POST)) {
+            $firstname = (isset($_POST['firstname'])) ? $_POST['firstname'] : '';
+            $lastname = (isset($_POST['lastname'])) ? $_POST['lastname'] : '';
+            $picture = (isset($_POST['picture'])) ? $_POST['picture'] : '';
+            $phoneNumber = (isset($_POST['phoneNumber'])) ? $_POST['phoneNumber'] : '';
+            $zipCode = (isset($_POST['zipCode'])) ? $_POST['zipCode'] : '';
+            $city = (isset($_POST['city'])) ? $_POST['city'] : '';
+            $adress = (isset($_POST['adress'])) ? $_POST['adress'] : '';
+
+            // Set user and update it in database
+            $user = User::getConnectedUser();
+            $user->setFirstname($firstname);
+            $user->setLastname($lastname);
+            $user->setPicture($picture);
+            $user->setPhoneNumber($phoneNumber);
+            $user->setZipCode($zipCode);
+            $user->setCity($city);
+            $user->setAdress($adress);
+            $userUpdate = $user->update();
+            
+            if ($userUpdate) {
+                // Set success
+                $this->data['success'] = 'Vos informations personnelles ont bien été modifiées.';
+            } else {
+                $errorList[] = 'Une erreur inattendue s\'est produite';
+            }
+        }
+        // Set data and return profile view
+        $this->templateName = 'user/profile';
+        $this->data['error'] = $errorList;
+        $this->show($this->templateName, $this->data);
     }
 
     // Getters and Setters

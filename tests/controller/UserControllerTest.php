@@ -61,6 +61,7 @@ class UserControllerTest extends TestCase
 
     public function testProfileUser()
     {
+        $this->testSigninUser();
         $application = new Application();
         $controller = new UserController($application);
         $_SERVER['REQUEST_URI'] = '';
@@ -77,5 +78,27 @@ class UserControllerTest extends TestCase
                 xdebug_get_headers()
             );
         }
+    }
+
+    public function testUpdateUser()
+    {
+        $this->testSigninUser();
+        $application = new Application();
+        $controller = new UserController($application);
+        $_SERVER['REQUEST_URI'] = '';
+        $_POST = [
+            'firstname' => 'test3',
+            'lastname' => 'test3',
+            'picture' => '',
+            'phoneNumber' => 'test3',
+            'zipCode' => 'test3',
+            'city' => 'test3',
+            'adress' => 'test3',
+        ];
+
+        $controller->updateUser();
+        $this->assertIsString($controller->getTemplateName());
+        $this->assertIsArray($controller->getData());
+        $this->assertFileExists(__DIR__ .'/../../app/View/user/profile.php');
     }
 }
