@@ -33,9 +33,10 @@ Class Application
         $this->router->map('GET', '/profil/supprimer', 'UserController#deleteUser', 'user_delete');
 
         $this->router->map('GET', '/lettre-de-motivation', 'LetterController#showAllLetter', 'letter_list');
-        $this->router->map('GET', '/lettre-de-motivation/:id', 'LetterController#showLetter', 'letter_view');
         $this->router->map('GET', '/lettre-de-motivation/creer', 'LetterController#createLetter', 'letter_create_view');
         $this->router->map('POST', '/lettre-de-motivation/creer', 'LetterController#createLetter', 'letter_create');
+        $this->router->map('GET', '/lettre-de-motivation/[i:id]', 'LetterController#showLetter', 'letter_view');
+        $this->router->map('GET', '/lettre-de-motivation/[i:id]/previsualiser', 'LetterController#showPreviewLetter', 'letter_preview');
     }
 
     public function run()

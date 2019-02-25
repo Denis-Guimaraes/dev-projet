@@ -1,3 +1,3 @@
-<?= $this->layout('layout', ['myTitle' => 'lettre de motivation']); ?>
+<?= $this->layout('layout', ['myTitle' => 'Lettre de motivation']); ?>
 
 <h2>View letter page !</h2>

@@ -24,7 +24,8 @@
 .home,
 .signin,
 .signup,
-.profile{
+.profile,
+.letter {
   background-color: #fff;
   border-radius: 5px;
   padding: 0.8rem;
@@ -36,9 +37,12 @@
 .home__title,
 .signin__title,
 .singup__title,
-.profile__title {
+.profile__title,
+.letter__title {
   font-size: 1.5rem;
   font-weight: bold;
+  color: #104161;
+  text-align: center;
 }
 
 .home__content {
@@ -47,11 +51,13 @@
 
 .signin__form,
 .signup__form,
-.profile__form {
+.profile__form,
+.letter__card {
   margin: 0.8rem 0;
 }
 
-.profile__delete {
+.profile__delete,
+.letter__delete {
   border-top: 1px solid #343a40;
   padding-top: 2rem;
   margin-top: 2rem;
