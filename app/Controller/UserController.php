@@ -110,8 +110,7 @@ class UserController extends CoreController
             header('Location: '. $this->getRouter()->generate('main_home'));
         }
         $this->templateName = 'user/profile';
-        $this->data['userLetter'] = [];
-        $this->show($this->templateName, $this->data);
+        $this->show($this->templateName);
     }
 
     public function updateUser()

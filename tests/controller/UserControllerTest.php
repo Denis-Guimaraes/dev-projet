@@ -70,7 +70,6 @@ class UserControllerTest extends TestCase
         if (User::isConnected()) {
             $this->assertInstanceOf(UserModel::class, $_SESSION['connectedUser']);
             $this->assertIsString($controller->getTemplateName());
-            $this->assertIsArray($controller->getData());
             $this->assertFileExists(__DIR__ .'/../../app/View/user/profile.php');
         } else {
             $this->assertContains(
