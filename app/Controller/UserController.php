@@ -53,8 +53,8 @@ class UserController extends CoreController
                     $newUserModel->setEmail($email);
                     $newUserModel->setPassword($encryptedPassword);
                     $newUserModel->setPicture($picture);
-                    $newUserModel->setPhoneNumber($phoneNumber);
-                    $newUserModel->setZipCode($zipCode);
+                    $newUserModel->setPhone_number($phoneNumber);
+                    $newUserModel->setZip_code($zipCode);
                     $newUserModel->setCity($city);
                     $newUserModel->setAdress($adress);
                     $insert = $newUserModel->insert();
@@ -116,6 +116,9 @@ class UserController extends CoreController
     public function updateUser()
     {
         $errorList= [];
+        if(!User::isConnected()) {
+            header('Location: '. $this->getRouter()->generate('main_home'));
+        }
         // Check parameters
         if (!empty($_POST)) {
             $firstname = (isset($_POST['firstname'])) ? $_POST['firstname'] : '';
@@ -131,8 +134,8 @@ class UserController extends CoreController
             $user->setFirstname($firstname);
             $user->setLastname($lastname);
             $user->setPicture($picture);
-            $user->setPhoneNumber($phoneNumber);
-            $user->setZipCode($zipCode);
+            $user->setPhone_number($phoneNumber);
+            $user->setZip_code($zipCode);
             $user->setCity($city);
             $user->setAdress($adress);
             $userUpdate = $user->update();
@@ -159,6 +162,9 @@ class UserController extends CoreController
 
     public function deleteUser()
     {
+        if(!User::isConnected()) {
+            header('Location: '. $this->getRouter()->generate('main_home'));
+        }
         $user = User::getConnectedUser();
         $userDelete = $user->delete();
         User::disconnect();

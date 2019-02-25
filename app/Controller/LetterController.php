@@ -11,16 +11,19 @@ class LetterController extends CoreController
 
     public function showAllLetter()
     {
-      // Get user id
-      $user = User::getConnectedUser();
-      $userId = $user->getId();
-      // Get user letter list
-      $letterModel = new LetterModel();
-      $letterList = $letterModel->findAllLetter($userId);
-      // Set data and return letterList view
-      $this->templateName = 'letter/letterList';
-      $this->data['letterList'] = $letterList;
-      $this->show($this->templateName, $this->data);
+        if(!User::isConnected()) {
+            header('Location: '. $this->getRouter()->generate('main_home'));
+        }
+        // Get user id
+        $user = User::getConnectedUser();
+        $userId = $user->getId();
+        // Get letter list
+        $letterModel = new LetterModel();
+        $letterList = $letterModel->findAllLetter($userId);
+        // Set data and return letterList view
+        $this->templateName = 'letter/letterList';
+        $this->data['letterList'] = $letterList;
+        $this->show($this->templateName, $this->data);
     }
 
     public function createLetter()
