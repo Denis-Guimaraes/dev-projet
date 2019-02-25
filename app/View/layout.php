@@ -11,10 +11,9 @@
     </head>
     <body class="body">
         <header class="header"> 
-            <h1 class="header__title">Motiv'Online</h1>
+            <?= $this->insert('partial/nav'); ?>
         </header>
         <main class="main container-fluid">
-            <?= $this->insert('partial/nav'); ?>
             <?= $this->section('content'); ?>
         </main>
         <footer class="footer">

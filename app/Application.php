@@ -28,6 +28,10 @@ Class Application
         $this->router->map('POST', '/connexion', 'UserController#signin', 'user_signin');
         $this->router->map('GET', '/connexion', 'UserController#signin', 'user_signin_view');
         $this->router->map('GET', '/profil', 'UserController#profile', 'user_profile');
+        $this->router->map('POST', '/profil', 'UserController#updateUser', 'user_update');
+
+        $this->router->map('GET', '/lettre-de-motivation', 'LetterController#showAllLetter', 'letter_list');
+        $this->router->map('GET', '/lettre-de-motivation/creer', 'LetterController#createLetter', 'letter_create');
     }
 
     public function run()

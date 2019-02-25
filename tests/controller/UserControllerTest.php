@@ -16,6 +16,7 @@ class UserControllerTest extends TestCase
     {
         $application = new Application();
         $controller = new UserController($application);
+        $_SERVER['REQUEST_URI'] = '';
         $_POST = [
             'firstname' => 'test2',
             'lastname' => 'test2',
@@ -38,6 +39,7 @@ class UserControllerTest extends TestCase
     {
         $application = new Application();
         $controller = new UserController($application);
+        $_SERVER['REQUEST_URI'] = '';
         $_POST = [
             'email' => 'test2@test.test',
             'password' => 'testtest',
@@ -61,6 +63,7 @@ class UserControllerTest extends TestCase
     {
         $application = new Application();
         $controller = new UserController($application);
+        $_SERVER['REQUEST_URI'] = '';
 
         $controller->profile();
         if (User::isConnected()) {
