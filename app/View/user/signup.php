@@ -2,18 +2,17 @@
 
 <section class="signup">
     <h2 class="signup__title">Inscription</h2>
-    <small class="form-text text-muted text-right"><span class="signup__span">*</span> champs obligatoires</small>
     <form class="signup__form" method="post" action="<?= $router->generate('user_signup') ?>">
         <div class="form-group">
-            <label for="email">Email <span class="signup__span">*</span></label>
+            <label for="email">Email</label>
             <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Email">
         </div>
         <div class="form-group">
-            <label for="password">Mot de passe <span class="signup__span">*</span></label>
+            <label for="password">Mot de passe</label>
             <input type="password" class="form-control" id="password" name="password" placeholder="Mot de passe">
         </div>
         <div class="form-group">
-            <label for="confirmPassword">Confirmer mot de passe <span class="signup__span">*</span></label>
+            <label for="confirmPassword">Confirmer mot de passe</label>
             <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirmer mot de passe">
         </div>
         <button type="submit" class="btn btn-primary">Inscription</button>

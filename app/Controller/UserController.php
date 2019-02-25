@@ -115,6 +115,11 @@ class UserController extends CoreController
         $this->show($this->templateName, $this->data);
     }
 
+    public function updateUser()
+    {
+        // todo
+    }
+
     // Getters and Setters
     public function getData()
     {

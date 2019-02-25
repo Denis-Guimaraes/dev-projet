@@ -4,67 +4,56 @@
   min-height: 100vh;
 }
 
-.header {
-  background-color: #104161;
-  color: #fff;
-  padding: 0.2rem;
-  margin-bottom: 0.4rem;
-}
-
-.header__title {
-  font-size: 2rem;
-  font-weight: bold;
-  text-transform: capitalize;
-  margin-left: 0.4rem;
-}
-
 .main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: radial-gradient(#fff, #104161);
   flex-grow: 2;
 }
 
-.home {
-  margin-top: 1rem;
+.header__title {
+  font-size: 1.8rem;
+  font-weight: bold;
 }
 
-.home__title {
+.header__link {
+  font-weight: bold;
+}
+
+.home,
+.signin,
+.signup,
+.profile{
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 0.8rem;
+  margin: 1rem 0;
+  width: 100%;
+  max-width: 21rem;
+}
+
+.home__title,
+.signin__title,
+.singup__title,
+.profile__title {
   font-size: 1.5rem;
-  font-weight: Bold;
+  font-weight: bold;
 }
 
 .home__content {
   white-space: pre-line;
 }
 
-.signin,
-.signup {
-  background-color: #f1faff;
-  border: 1px solid #caebff;
-  border-radius: 5px;
-  padding: 0.8rem;
-  margin: 1rem auto;
-  max-width: 20rem;
-}
-
-.signin__title,
-.singup__title {
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-.signup__span {
-  color: #721c24;
-  font-size: 1.2rem;
-}
-
 .signin__form,
-.signup__form {
+.signup__form,
+.profile__form {
   margin: 0.8rem 0;
 }
 
 .footer {
-  background-color: #104161;
+  background-color: #343a40;
   color: #fff;
   text-align: center;
   padding: 0.2rem;
-  margin-top: 0.4rem;
 }
