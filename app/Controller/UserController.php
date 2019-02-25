@@ -12,7 +12,7 @@ class UserController extends CoreController
     public function signup()
     {
         $errorList = [];
-        // Check parameters
+        // Check and set parameters
         if (!empty($_POST)) {
             $firstname = (isset($_POST['firstname'])) ? $_POST['firstname'] : '';
             $lastname = (isset($_POST['lastname'])) ? $_POST['lastname'] : '';
@@ -27,7 +27,7 @@ class UserController extends CoreController
 
             if (empty($email)) {
                 $errorList[] = 'Email vide';
-            } else if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+            } elseif (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
                 $errorList[] = 'Email incorrect';
             }
             if (empty($password)) {
@@ -41,23 +41,23 @@ class UserController extends CoreController
             
             if (empty($errorList)) {
                 // Check if user already exist
-                $userModel = UserModel::findByEmail($email);
+                $userModel = new UserModel();
+                $user = $userModel->findByEmail($email);
                 if ($userModel) {
                     $errorList[] = 'Le compte existe déjà pour cet email';
                 } else {
                     // Set user and insert it in database
                     $encryptedPassword = password_hash($password, PASSWORD_DEFAULT);
-                    $newUserModel= new UserModel();
-                    $newUserModel->setFirstname($firstname);
-                    $newUserModel->setLastname($lastname);
-                    $newUserModel->setEmail($email);
-                    $newUserModel->setPassword($encryptedPassword);
-                    $newUserModel->setPicture($picture);
-                    $newUserModel->setPhone_number($phoneNumber);
-                    $newUserModel->setZip_code($zipCode);
-                    $newUserModel->setCity($city);
-                    $newUserModel->setAdress($adress);
-                    $insert = $newUserModel->insert();
+                    $userModel->setFirstname($firstname);
+                    $userModel->setLastname($lastname);
+                    $userModel->setEmail($email);
+                    $userModel->setPassword($encryptedPassword);
+                    $userModel->setPicture($picture);
+                    $userModel->setPhone_number($phoneNumber);
+                    $userModel->setZip_code($zipCode);
+                    $userModel->setCity($city);
+                    $userModel->setAdress($adress);
+                    $insert = $userModel->insert();
 
                     if ($insert) {
                         // Set success
@@ -78,17 +78,18 @@ class UserController extends CoreController
     {
         $errorList = [];
         if (!empty($_POST)) {
-            // Check parameters
+            // Check and set parameters
             $email = (isset($_POST['email'])) ? $_POST['email'] : '';
             $password = (isset($_POST['password'])) ? $_POST['password'] : '';
 
             // Check if user exist and if password match
-            $userModel = UserModel::findByEmail($email);
-            if (!empty($userModel)) {
-                $passwordInBdd = $userModel->getPassword();
+            $userModel = new UserModel();
+            $user = $userModel->findByEmail($email);
+            if (!empty($user)) {
+                $passwordInBdd = $user->getPassword();
                 if (password_verify($password ,$passwordInBdd)) {
                     // Connect user in session
-                    User::connect($userModel);
+                    User::connect($user);
                     // Redirect to profile
                     header('Location: '. $this->getRouter()->generate('user_profile'));
                 } else {
@@ -106,7 +107,7 @@ class UserController extends CoreController
 
     public function profile()
     {
-        if(!User::isConnected()) {
+        if (!User::isConnected()) {
             header('Location: '. $this->getRouter()->generate('main_home'));
         }
         $this->templateName = 'user/profile';
@@ -116,10 +117,10 @@ class UserController extends CoreController
     public function updateUser()
     {
         $errorList= [];
-        if(!User::isConnected()) {
+        if (!User::isConnected()) {
             header('Location: '. $this->getRouter()->generate('main_home'));
         }
-        // Check parameters
+        // Check and set parameters
         if (!empty($_POST)) {
             $firstname = (isset($_POST['firstname'])) ? $_POST['firstname'] : '';
             $lastname = (isset($_POST['lastname'])) ? $_POST['lastname'] : '';
@@ -162,7 +163,7 @@ class UserController extends CoreController
 
     public function deleteUser()
     {
-        if(!User::isConnected()) {
+        if (!User::isConnected()) {
             header('Location: '. $this->getRouter()->generate('main_home'));
         }
         $user = User::getConnectedUser();

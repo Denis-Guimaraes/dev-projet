@@ -10,7 +10,7 @@ class LetterModelTest extends TestCase
     {
         $letterModel = new LetterModel();
         $allLetter = $letterModel->findAllLetter(36);
-        $this->assertInstanceOf(LetterModel::class, $allLetter);
+        $this->assertIsArray($allLetter);
     }
 
     public function testCreateLetter()

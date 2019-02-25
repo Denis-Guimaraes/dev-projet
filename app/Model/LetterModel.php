@@ -46,7 +46,7 @@ class LetterModel
         $pdoStatement = $pdo->prepare($sql);
         $pdoStatement->bindValue(':userId', $userId, PDO::PARAM_INT);
         $pdoStatement->execute();
-        $result = $pdoStatement->fetchObject(self::class);
+        $result = $pdoStatement->fetchAll(PDO::FETCH_CLASS, self::class);
         return $result;
     }
 
