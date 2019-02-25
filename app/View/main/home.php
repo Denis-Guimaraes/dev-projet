@@ -1,7 +1,7 @@
 <?= $this->layout('layout', ['myTitle' => 'Accueil']); ?>
-<section class="home">
-    <h2 class="home__title">Des lettres de motivations un peu plus fun !</h2>
-    <p class="home__content">
+<section class="section">
+    <h2 class="section__title">Des lettres de motivations un peu plus fun !</h2>
+    <p class="section__content section__content--space">
         Ecrivez vos lettres de motivation en ligne.
         Choisissez leurs styles.
         Choisissez leurs animations.

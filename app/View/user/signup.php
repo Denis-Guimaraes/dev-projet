@@ -1,8 +1,8 @@
 <?= $this->layout('layout', ['myTitle' => 'Inscription']); ?>
 
-<section class="signup">
-    <h2 class="signup__title">Inscription</h2>
-    <form class="signup__form" method="post" action="<?= $router->generate('user_signup') ?>">
+<section class="section">
+    <h2 class="section__title">Inscription</h2>
+    <form class="section__content" method="post" action="<?= $router->generate('user_signup') ?>">
         <div class="form-group">
             <label for="email">Email</label>
             <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Email">

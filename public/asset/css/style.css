@@ -21,11 +21,7 @@
   font-weight: bold;
 }
 
-.home,
-.signin,
-.signup,
-.profile,
-.letter {
+.section {
   background-color: #fff;
   border-radius: 5px;
   padding: 0.8rem;
@@ -34,30 +30,24 @@
   max-width: 21rem;
 }
 
-.home__title,
-.signin__title,
-.singup__title,
-.profile__title,
-.letter__title {
+.section__title {
   font-size: 1.5rem;
   font-weight: bold;
   color: #104161;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid #343a40;
   text-align: center;
 }
 
-.home__content {
-  white-space: pre-line;
-}
-
-.signin__form,
-.signup__form,
-.profile__form,
-.letter__card {
+.section__content {
   margin: 0.8rem 0;
 }
 
-.profile__delete,
-.letter__delete {
+.section__content--space {
+  white-space: pre-line;
+}
+
+.section__delete {
   border-top: 1px solid #343a40;
   padding-top: 2rem;
   margin-top: 2rem;

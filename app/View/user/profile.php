@@ -1,8 +1,8 @@
 <?= $this->layout('layout', ['myTitle' => 'profil']); ?>
 
-<section class="profile">
-    <h2 class="profile__title">Mon profil</h2>
-    <form class="profile__form" method="post" action="<?= $router->generate('user_update') ?>">
+<section class="section">
+    <h2 class="section__title">Mon profil</h2>
+    <form class="section__content" method="post" action="<?= $router->generate('user_update') ?>">
         <div class="form-group">
             <span><?= $connectedUser->getEmail(); ?></span>
         </div>
@@ -32,7 +32,7 @@
         </div>
         <button type="submit" class="btn btn-primary">Sauvegarder</button>
     </form>
-    <div class="profile__delete">
+    <div class="section__delete">
         <button type="button" class="btn btn-danger" id="deleteUser">Supprimer mon profil</button>
     </div>
     <?php if(isset($error) && !empty($error)) : ?>
