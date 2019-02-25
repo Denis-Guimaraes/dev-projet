@@ -151,6 +151,22 @@ class UserController extends CoreController
         $this->show($this->templateName, $this->data);
     }
 
+    public function signout()
+    {
+        User::disconnect();
+        header('Location: '. $this->getRouter()->generate('main_home'));
+
+    }
+
+    public function deleteUser()
+    {
+        $user = User::getConnectedUser();
+        $userDelete = $user->delete();
+        User::disconnect();
+        header('Location: '. $this->getRouter()->generate('main_home'));
+
+    }
+
     // Getters and Setters
     public function getData()
     {

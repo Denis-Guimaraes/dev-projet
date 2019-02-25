@@ -127,6 +127,24 @@ class UserModel
         return true;
     }
 
+    public function delete()
+    {
+        // SQL request
+        $sql = 'DELETE FROM ' . self::TABLE_NAME . ' WHERE id = :id';
+
+        // Prepare and execute request
+        $pdo = Database::getPDO();
+        $pdoStatement = $pdo->prepare($sql);
+        $pdoStatement->bindValue(':id', $this->id, PDO::PARAM_INT);
+        $pdoStatement->execute();
+        // Check Result
+        $affectedRow = $pdoStatement->rowCount();
+        if ($affectedRow < 1 ) {
+            return false;
+        }
+        return true;
+    }
+
     // Getters and Setters
     public function getId()
     {

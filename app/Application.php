@@ -29,6 +29,8 @@ Class Application
         $this->router->map('GET', '/connexion', 'UserController#signin', 'user_signin_view');
         $this->router->map('GET', '/profil', 'UserController#profile', 'user_profile');
         $this->router->map('POST', '/profil', 'UserController#updateUser', 'user_update');
+        $this->router->map('GET', '/deconnexion', 'UserController#signout', 'user_signout');
+        $this->router->map('GET', '/profil/supprimer', 'UserController#deleteUser', 'user_delete');
 
         $this->router->map('GET', '/lettre-de-motivation', 'LetterController#showAllLetter', 'letter_list');
         $this->router->map('GET', '/lettre-de-motivation/creer', 'LetterController#createLetter', 'letter_create');
