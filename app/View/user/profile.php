@@ -16,7 +16,7 @@
         </div>
         <div class="form-group">
             <label for="phoneNumber">Numéro de téléphone</label>
-            <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" value="<?= $connectedUser->getPhoneNumber(); ?>" placeholder="Numéro de téléphone">
+            <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" value="<?= $connectedUser->getPhone_number(); ?>" placeholder="Numéro de téléphone">
         </div>
         <div class="form-group">
             <label for="adress">Adresse</label>
@@ -24,7 +24,7 @@
         </div>
         <div class="form-group">
             <label for="zipCode">Code postal</label>
-            <input type="text" class="form-control" id="zipCode" name="zipCode" value="<?= $connectedUser->getZipCode(); ?>" placeholder="Code postal">
+            <input type="text" class="form-control" id="zipCode" name="zipCode" value="<?= $connectedUser->getZip_code(); ?>" placeholder="Code postal">
         </div>
         <div class="form-group">
             <label for="city">Ville</label>

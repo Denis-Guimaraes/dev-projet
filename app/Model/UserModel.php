@@ -19,7 +19,7 @@ class UserModel
 
     const TABLE_NAME = 'user';
 
-    public static function findByEmail(string $email)
+    public function findByEmail(string $email)
     {
         // SQL request
         $sql = 'SELECT
@@ -206,23 +206,23 @@ class UserModel
         return $this;
     }
 
-    public function getPhoneNumber()
+    public function getPhone_number()
     {
         return $this->phone_number;
     }
 
-    public function setPhoneNumber(string $phone_number)
+    public function setPhone_number(string $phone_number)
     {
         $this->phone_number = $phone_number;
         return $this;
     }
 
-    public function getZipCode()
+    public function getZip_code()
     {
         return $this->zip_code;
     }
 
-    public function setZipCode(string $zip_code)
+    public function setZip_code(string $zip_code)
     {
         $this->zip_code = $zip_code;
         return $this;
