@@ -20,10 +20,13 @@
                     <a class="header__link nav-link <?= $_SERVER['REQUEST_URI'] === $router->generate('user_profile') ? 'active' : '' ?>  " href="<?= $router->generate('user_profile'); ?>">Mon profil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="header__link nav-link <?= $_SERVER['REQUEST_URI'] === $router->generate('letter_list') ? 'active' : '' ?>  " href="<?= $router->generate('letter_list'); ?>">Mes lettres de motvation</a>
+                    <a class="header__link nav-link <?= $_SERVER['REQUEST_URI'] === $router->generate('letter_list') ? 'active' : '' ?>  " href="<?= $router->generate('letter_list'); ?>">Mes lettres</a>
                 </li>
                 <li class="nav-item">
-                    <a class="header__link nav-link <?= $_SERVER['REQUEST_URI'] === $router->generate('letter_create') ? 'active' : '' ?>  " href="<?= $router->generate('letter_create'); ?>">Nouvelle lettre de motivation</a>
+                    <a class="header__link nav-link <?= $_SERVER['REQUEST_URI'] === $router->generate('letter_create') ? 'active' : '' ?>  " href="<?= $router->generate('letter_create'); ?>">Ajouer une lettre</a>
+                </li>
+                <li class="nav-item">
+                    <a class="header__link nav-link" href="<?= $router->generate('user_signout'); ?>">Déconnexion</a>
                 </li>
             <?php endif; ?>
         </ul>

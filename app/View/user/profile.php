@@ -32,6 +32,9 @@
         </div>
         <button type="submit" class="btn btn-primary">Sauvegarder</button>
     </form>
+    <div class="profile__delete">
+        <button type="button" class="btn btn-danger" id="deleteUser">Supprimer mon profil</button>
+    </div>
     <?php if(isset($error) && !empty($error)) : ?>
         <ul class="alert alert-danger" role="alert">
             <?php foreach($error as $errorText): ?>
@@ -46,7 +49,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="modalMessageTitle">Bienvenue sur Motiv'Online</h5>
+                        <h5 class="modal-title" id="modalMessageTitle">Message</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
@@ -61,4 +64,25 @@
             </div>
         </div>
     <?php endif; ?>
+    <div class="modal" id="modalAlert" tabindex="-1" role="dialog" aria-labelledby="modalAlertTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalAlertTitle">Message</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Êtes-vous sûr de vouloir supprimer votre profil ?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <form action="<?= $router->generate('user_delete') ?>" method="get">
+                        <button type="submit" class="btn btn-danger">Supprimer</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 </section>

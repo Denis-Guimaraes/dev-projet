@@ -21,4 +21,17 @@ class UserModelTest extends TestCase
         $this->assertInstanceOf(UserModel::class, $userModel->setPassword('test1'));
         $this->assertTrue(true, $userModel->insert());
     }
+
+    public function testUpdateUser()
+    {
+        $userModel = new UserModel();
+        $user = $userModel->findByEmail('test1');
+        $this->assertInstanceOf(UserModel::class, $user->setFirstname('test4'));
+        $this->assertInstanceOf(UserModel::class, $user->setLastname('test4'));
+        $this->assertInstanceOf(UserModel::class, $user->setPhoneNumber('test4'));
+        $this->assertInstanceOf(UserModel::class, $user->setAdress('test4'));
+        $this->assertInstanceOf(UserModel::class, $user->setZipCode('test4'));
+        $this->assertInstanceOf(UserModel::class, $user->setCity('test4'));
+        $this->assertTrue(true, $user->update());
+    }
 }
