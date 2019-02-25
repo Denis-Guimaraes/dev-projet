@@ -93,6 +93,40 @@ class UserModel
         return true;
     }
 
+    public function update()
+    {
+        // SQL request
+        $sql = 'UPDATE ' . self::TABLE_NAME . ' SET
+                    `firstname` = :firstname,
+                    `lastname` = :lastname,
+                    `picture` = :picture,
+                    `phone_number` = :phone_number,
+                    `zip_code` = :zip_code,
+                    `city` = :city,
+                    `adress` = :adress
+                WHERE `id` = :id
+                ';
+
+        // Prepare and execute request
+        $pdo = Database::getPDO();
+        $pdoStatement = $pdo->prepare($sql);
+        $pdoStatement->bindValue(':id', $this->id, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':firstname', $this->firstname, PDO::PARAM_STR);
+        $pdoStatement->bindValue(':lastname', $this->lastname, PDO::PARAM_STR);
+        $pdoStatement->bindValue(':picture', $this->picture, PDO::PARAM_STR);
+        $pdoStatement->bindValue(':phone_number', $this->phone_number, PDO::PARAM_STR);
+        $pdoStatement->bindValue(':zip_code', $this->zip_code, PDO::PARAM_STR);
+        $pdoStatement->bindValue(':city', $this->city, PDO::PARAM_STR);
+        $pdoStatement->bindValue(':adress', $this->adress, PDO::PARAM_STR);
+        $pdoStatement->execute();
+        // Check Result
+        $affectedRow = $pdoStatement->rowCount();
+        if ($affectedRow < 1 ) {
+            return false;
+        }
+        return true;
+    }
+
     // Getters and Setters
     public function getId()
     {
