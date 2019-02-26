@@ -158,7 +158,6 @@ class UserController extends CoreController
     {
         User::disconnect();
         header('Location: '. $this->getRouter()->generate('main_home'));
-
     }
 
     public function deleteUser()
@@ -170,7 +169,6 @@ class UserController extends CoreController
         $userDelete = $user->delete();
         User::disconnect();
         header('Location: '. $this->getRouter()->generate('main_home'));
-
     }
 
     // Getters and Setters

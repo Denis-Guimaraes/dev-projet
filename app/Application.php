@@ -36,6 +36,7 @@ Class Application
         $this->router->map('GET', '/lettre-de-motivation/creer', 'LetterController#createLetter', 'letter_create_view');
         $this->router->map('POST', '/lettre-de-motivation/creer', 'LetterController#createLetter', 'letter_create');
         $this->router->map('GET', '/lettre-de-motivation/[i:id]', 'LetterController#showLetter', 'letter_view');
+        $this->router->map('POST', '/lettre-de-motivation/[i:id]/[a:section]', 'LetterController#updateLetter', 'letter_update');
         $this->router->map('GET', '/lettre-de-motivation/[i:id]/previsualiser', 'LetterController#showPreviewLetter', 'letter_preview');
     }
 
@@ -53,7 +54,7 @@ Class Application
             $controller->$methodName($match['params']);
         } else {
             $controller = new \MotivOnline\Controller\MainController($this);
-            $controller->error(404);
+            $controller->sendHttpError(404, "Motiv'Online - erreur 404");
         }
     }
 
