@@ -35,16 +35,17 @@ class LetterModel
                     letter.name,
                     letter.link,
                     letter.title,
+                    letter.user_id,
                     letter.company_id,
                     company.name as company_name
                 FROM ' . self::TABLE_NAME . '
-                INNER JOIN company ON letter.company_id = company.id
-                WHERE user_id = :userId';
+                LEFT JOIN company ON letter.company_id = company.id
+                WHERE letter.user_id = :userId';
 
         // Prepare and execute request
         $pdo = Database::getPDO();
         $pdoStatement = $pdo->prepare($sql);
-        $pdoStatement->bindValue(':userId', $userId, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':userId', 36, PDO::PARAM_INT);
         $pdoStatement->execute();
         $result = $pdoStatement->fetchAll(PDO::FETCH_CLASS, self::class);
         return $result;

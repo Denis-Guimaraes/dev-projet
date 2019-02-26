@@ -49,7 +49,7 @@ class LetterController extends CoreController
             $letterModel->setUser_id($user_id);
             $letter = $letterModel->insert();
 
-            if (is_a($letter, 'LetterModel')) {
+            if ($letter instanceof LetterModel) {
                 // Redirect to letter
                 $parameter = [
                     'id' => $letter->getId(),

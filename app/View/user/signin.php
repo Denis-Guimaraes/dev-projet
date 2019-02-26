@@ -1,8 +1,8 @@
 <?= $this->layout('layout', ['myTitle' => 'Connexion']); ?>
 
-<section class="signin">
-    <h2 class="signin__title">Connexion</h2>
-    <form class="signin__form" method="post" action="<?= $router->generate('user_signin') ?>">
+<section class="section">
+    <h2 class="section__title">Connexion</h2>
+    <form class="section__content" method="post" action="<?= $router->generate('user_signin') ?>">
         <div class="form-group">
             <label for="email">Email</label>
             <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Email">
