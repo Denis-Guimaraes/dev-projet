@@ -65,6 +65,11 @@ class LetterController extends CoreController
         $this->show($this->templateName, $this->data);
     }
 
+    public function showLetter()
+    {
+        // todo
+    }
+
     // Getters and Setters
     public function getData()
     {

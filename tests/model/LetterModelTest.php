@@ -23,4 +23,13 @@ class LetterModelTest extends TestCase
         $result = $letterModel->insert();
         $this->assertInstanceOf(LetterModel::class, $result);
     }
+
+    public function testFindLetter()
+    {
+        $letterModel = new LetterModel();
+        $this->assertInstanceOf(LetterModel::class, $letterModel->setUser_id(36));
+        $result = $letterModel->findLetter(19);
+        $this->assertInstanceOf(LetterModel::class, $result);
+        dump($result);
+    }
 }

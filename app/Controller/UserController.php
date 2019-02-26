@@ -91,7 +91,7 @@ class UserController extends CoreController
                     // Connect user in session
                     User::connect($user);
                     // Redirect to profile
-                    header('Location: '. $this->getRouter()->generate('user_profile'));
+                    header('Location: '. $this->getRouter()->generate('letter_list'));
                 } else {
                     $errorList[]= "L'identifiant ou le mot de passe est incorrecte";
                 }
