@@ -31,7 +31,6 @@ abstract class CoreController
         if ($errorCode == 404) {
             header("HTTP/1.0 404 Not Found");
             echo $htmlContent;
-            exit;
         }
     }
 
@@ -39,7 +38,6 @@ abstract class CoreController
     {
         header('Content-Type: application/json');
         echo json_encode($data);
-        exit;
     }
 
     public function show(string $templateName, array $dataToView=[])

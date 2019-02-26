@@ -24,6 +24,8 @@ class LetterModel
     protected $user_id;
     protected $company_id;
     protected $company_name;
+    protected $style_name;
+    protected $animation_name;
 
     const TABLE_NAME = 'letter';
 
@@ -45,9 +47,49 @@ class LetterModel
         // Prepare and execute request
         $pdo = Database::getPDO();
         $pdoStatement = $pdo->prepare($sql);
-        $pdoStatement->bindValue(':userId', 36, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':userId', $userId, PDO::PARAM_INT);
         $pdoStatement->execute();
         $result = $pdoStatement->fetchAll(PDO::FETCH_CLASS, self::class);
+        return $result;
+    }
+
+    public function findLetter(int $letterId)
+    {
+        // SQL request
+        $sql = 'SELECT
+                    letter.id,
+                    letter.name,
+                    letter.link,
+                    letter.date,
+                    letter.title,
+                    letter.object,
+                    letter.title_section_1,
+                    letter.content_section_1,
+                    letter.title_section_2,
+                    letter.content_section_2,
+                    letter.title_section_3,
+                    letter.content_section_3,
+                    letter.conclusion,
+                    letter.letter_style_id,
+                    letter_style.name as style_name,
+                    letter.letter_animation_id,
+                    letter_animation.name as animation_name,
+                    letter.user_id,
+                    letter.company_id,
+                    company.name as company_name
+                FROM ' . self::TABLE_NAME . '
+                LEFT JOIN letter_style ON letter.letter_style_id = letter_style.id
+                LEFT JOIN letter_animation ON letter.letter_animation_id = letter_animation.id
+                LEFT JOIN company ON letter.company_id = company.id
+                WHERE letter.user_id = :userId AND letter.id = :letterId';
+
+        // Prepare and execute request
+        $pdo = Database::getPDO();
+        $pdoStatement = $pdo->prepare($sql);
+        $pdoStatement->bindValue(':userId', $this->user_id, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':letterId', $letterId, PDO::PARAM_INT);
+        $pdoStatement->execute();
+        $result = $pdoStatement->fetchObject(self::class);
         return $result;
     }
 
@@ -82,6 +124,156 @@ class LetterModel
         }
         $this->id = $pdo->lastInsertId();
         return $this;
+    }
+
+    public function updateHeader(int $letterId)
+    {
+         // SQL request
+         $sql = 'UPDATE ' . self::TABLE_NAME . ' SET
+                    `date` = :date,
+                    `title` = :title,
+                    `object` = :object
+                WHERE `id` = :id AND `user_id` = :user_id
+                ';
+
+        // Prepare and execute request
+        $pdo = Database::getPDO();
+        $pdoStatement = $pdo->prepare($sql);
+        $pdoStatement->bindValue(':id', $letterId, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':user_id', $this->user_id, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':date', $this->date, PDO::PARAM_STR);
+        $pdoStatement->bindValue(':title', $this->title, PDO::PARAM_STR);
+        $pdoStatement->bindValue(':object', $this->object, PDO::PARAM_STR);
+        $pdoStatement->execute();
+        // Check Result
+        $affectedRow = $pdoStatement->rowCount();
+        if ($affectedRow < 1 ) {
+            return false;
+        }
+        return true;
+    }
+
+    public function updateSection1(int $letterId)
+    {
+         // SQL request
+         $sql = 'UPDATE ' . self::TABLE_NAME . ' SET
+                    `title_section_1` = :title_section_1,
+                    `content_section_1` = :content_section_1
+                WHERE `id` = :id AND `user_id` = :user_id
+                    ';
+    
+        // Prepare and execute request
+        $pdo = Database::getPDO();
+        $pdoStatement = $pdo->prepare($sql);
+        $pdoStatement->bindValue(':id', $letterId, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':user_id', $this->user_id, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':title_section_1', $this->title_section_1, PDO::PARAM_STR);
+        $pdoStatement->bindValue(':content_section_1', $this->content_section_1, PDO::PARAM_STR);
+        $pdoStatement->execute();
+        // Check Result
+        $affectedRow = $pdoStatement->rowCount();
+        if ($affectedRow < 1 ) {
+            return false;
+        }
+        return true;
+    }
+
+    public function updateSection2(int $letterId)
+    {
+         // SQL request
+         $sql = 'UPDATE ' . self::TABLE_NAME . ' SET
+                    `title_section_2` = :title_section_2,
+                    `content_section_2` = :content_section_2
+                WHERE `id` = :id AND `user_id` = :user_id
+                ';
+
+        // Prepare and execute request
+        $pdo = Database::getPDO();
+        $pdoStatement = $pdo->prepare($sql);
+        $pdoStatement->bindValue(':id', $letterId, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':user_id', $this->user_id, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':title_section_2', $this->title_section_2, PDO::PARAM_STR);
+        $pdoStatement->bindValue(':content_section_2', $this->content_section_2, PDO::PARAM_STR);
+        $pdoStatement->execute();
+        // Check Result
+        $affectedRow = $pdoStatement->rowCount();
+        if ($affectedRow < 1 ) {
+            return false;
+        }
+        return true;
+    }
+
+    public function updateSection3(int $letterId)
+    {
+         // SQL request
+         $sql = 'UPDATE ' . self::TABLE_NAME . ' SET
+                    `title_section_3` = :title_section_3,
+                    `content_section_3` = :content_section_3,
+                    `conclusion` = :conclusion
+                WHERE `id` = :id AND `user_id` = :user_id
+                ';
+
+        // Prepare and execute request
+        $pdo = Database::getPDO();
+        $pdoStatement = $pdo->prepare($sql);
+        $pdoStatement->bindValue(':id', $letterId, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':user_id', $this->user_id, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':title_section_3', $this->title_section_3, PDO::PARAM_STR);
+        $pdoStatement->bindValue(':content_section_3', $this->content_section_3, PDO::PARAM_STR);
+        $pdoStatement->bindValue(':conclusion', $this->conclusion, PDO::PARAM_STR);
+        $pdoStatement->execute();
+        // Check Result
+        $affectedRow = $pdoStatement->rowCount();
+        if ($affectedRow < 1 ) {
+            return false;
+        }
+        return true;
+    }
+
+    public function updateStyle(int $letterId)
+    {
+         // SQL request
+         $sql = 'UPDATE ' . self::TABLE_NAME . ' SET
+                    `name` = :name,
+                    `letter_style_id` = :letter_style_id,
+                    `letter_animation_id` = :letter_animation_id
+                WHERE `id` = :id AND `user_id` = :user_id
+                ';
+
+        // Prepare and execute request
+        $pdo = Database::getPDO();
+        $pdoStatement = $pdo->prepare($sql);
+        $pdoStatement->bindValue(':id', $letterId, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':user_id', $this->user_id, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':name', $this->name, PDO::PARAM_STR);
+        $pdoStatement->bindValue(':letter_style_id', $this->letter_style_id, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':letter_animation_id', $this->letter_animation_id, PDO::PARAM_INT);
+        $pdoStatement->execute();
+        // Check Result
+        $affectedRow = $pdoStatement->rowCount();
+        if ($affectedRow < 1 ) {
+            return false;
+        }
+        return true;
+    }
+
+    public function delete(int $letterId)
+    {
+        // SQL request
+        $sql = 'DELETE FROM ' . self::TABLE_NAME . ' WHERE id = :id AND `user_id` = :user_id';
+
+        // Prepare and execute request
+        $pdo = Database::getPDO();
+        $pdoStatement = $pdo->prepare($sql);
+        $pdoStatement->bindValue(':id', $letterId, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':user', $this->user_id, PDO::PARAM_INT);
+        $pdoStatement->execute();
+        // Check Result
+        $affectedRow = $pdoStatement->rowCount();
+        if ($affectedRow < 1 ) {
+            return false;
+        }
+        return true;
     }
 
     // Getters and Setters
@@ -290,6 +482,30 @@ class LetterModel
     public function setCompany_name(string $company_name)
     {
         $this->company_name = $company_name;
+
+        return $this;
+    }
+
+    public function getStyle_name()
+    {
+        return $this->style_name;
+    }
+
+    public function setStyle_name($style_name)
+    {
+        $this->style_name = $style_name;
+
+        return $this;
+    }
+
+    public function getAnimation_name()
+    {
+        return $this->animation_name;
+    }
+ 
+    public function setAnimation_name($animation_name)
+    {
+        $this->animation_name = $animation_name;
 
         return $this;
     }
