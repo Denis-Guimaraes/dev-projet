@@ -92,6 +92,8 @@ class LetterController extends CoreController
         $errorList = [];
         $section = $params['section'];
         $letterId = $params['id'];
+        $user = User::getConnectedUser();
+        $userId = $user->getId();
 
         switch ($section) {
             case 'entete':
@@ -104,6 +106,7 @@ class LetterController extends CoreController
                 $letterModel->setDate($date);
                 $letterModel->setTitle($title);
                 $letterModel->setObject($object);
+                $letterModel->setUser_id($userId);
                 $result = $letterModel->updateHeader($letterId);
                 if ($result) {
                     // Redirect to letter
@@ -123,6 +126,7 @@ class LetterController extends CoreController
                 $letterModel = new LetterModel();
                 $letterModel->setTitle_section_1($title);
                 $letterModel->setContent_section_1($content);
+                $letterModel->setUser_id($userId);
                 $result = $letterModel->updateSection1($letterId);
                 if ($result) {
                     // Redirect to letter
@@ -142,6 +146,7 @@ class LetterController extends CoreController
                 $letterModel = new LetterModel();
                 $letterModel->setTitle_section_2($title);
                 $letterModel->setContent_section_2($content);
+                $letterModel->setUser_id($userId);
                 $result = $letterModel->updateSection2($letterId);
                 if ($result) {
                     // Redirect to letter
@@ -163,6 +168,7 @@ class LetterController extends CoreController
                 $letterModel->setTitle_section_3($title);
                 $letterModel->setContent_section_3($content);
                 $letterModel->setConclusion($conclusion);
+                $letterModel->setUser_id($userId);
                 $result = $letterModel->updateSection3($letterId);
                 if ($result) {
                     // Redirect to letter
@@ -184,6 +190,7 @@ class LetterController extends CoreController
                 $letterModel->setLetter_style_id($styleId);
                 $letterModel->setLetter_animation_id($animationId);
                 $letterModel->setName($name);
+                $letterModel->setUser_id($userId);
                 $result = $letterModel->updateStyle($letterId);
                 if ($result) {
                     // Redirect to letter
@@ -202,6 +209,11 @@ class LetterController extends CoreController
         $this->templateName = 'letter/' . $section;
         $this->data['error'] = $errorList;
         $this->show($this->templateName, $this->data);
+    }
+
+    public function deleteLetter(array $params)
+    {
+        // Todo
     }
 
     // Getters and Setters

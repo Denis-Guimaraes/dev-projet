@@ -133,13 +133,14 @@ class LetterModel
                     `date` = :date,
                     `title` = :title,
                     `object` = :object
-                WHERE `id` = :id
+                WHERE `id` = :id AND `user_id` = :user_id
                 ';
 
         // Prepare and execute request
         $pdo = Database::getPDO();
         $pdoStatement = $pdo->prepare($sql);
         $pdoStatement->bindValue(':id', $letterId, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':user_id', $this->user_id, PDO::PARAM_INT);
         $pdoStatement->bindValue(':date', $this->date, PDO::PARAM_STR);
         $pdoStatement->bindValue(':title', $this->title, PDO::PARAM_STR);
         $pdoStatement->bindValue(':object', $this->object, PDO::PARAM_STR);
@@ -158,13 +159,14 @@ class LetterModel
          $sql = 'UPDATE ' . self::TABLE_NAME . ' SET
                     `title_section_1` = :title_section_1,
                     `content_section_1` = :content_section_1
-                WHERE `id` = :id
-                ';
-
+                WHERE `id` = :id AND `user_id` = :user_id
+                    ';
+    
         // Prepare and execute request
         $pdo = Database::getPDO();
         $pdoStatement = $pdo->prepare($sql);
         $pdoStatement->bindValue(':id', $letterId, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':user_id', $this->user_id, PDO::PARAM_INT);
         $pdoStatement->bindValue(':title_section_1', $this->title_section_1, PDO::PARAM_STR);
         $pdoStatement->bindValue(':content_section_1', $this->content_section_1, PDO::PARAM_STR);
         $pdoStatement->execute();
@@ -182,13 +184,14 @@ class LetterModel
          $sql = 'UPDATE ' . self::TABLE_NAME . ' SET
                     `title_section_2` = :title_section_2,
                     `content_section_2` = :content_section_2
-                WHERE `id` = :id
+                WHERE `id` = :id AND `user_id` = :user_id
                 ';
 
         // Prepare and execute request
         $pdo = Database::getPDO();
         $pdoStatement = $pdo->prepare($sql);
         $pdoStatement->bindValue(':id', $letterId, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':user_id', $this->user_id, PDO::PARAM_INT);
         $pdoStatement->bindValue(':title_section_2', $this->title_section_2, PDO::PARAM_STR);
         $pdoStatement->bindValue(':content_section_2', $this->content_section_2, PDO::PARAM_STR);
         $pdoStatement->execute();
@@ -207,13 +210,14 @@ class LetterModel
                     `title_section_3` = :title_section_3,
                     `content_section_3` = :content_section_3,
                     `conclusion` = :conclusion
-                WHERE `id` = :id
+                WHERE `id` = :id AND `user_id` = :user_id
                 ';
 
         // Prepare and execute request
         $pdo = Database::getPDO();
         $pdoStatement = $pdo->prepare($sql);
         $pdoStatement->bindValue(':id', $letterId, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':user_id', $this->user_id, PDO::PARAM_INT);
         $pdoStatement->bindValue(':title_section_3', $this->title_section_3, PDO::PARAM_STR);
         $pdoStatement->bindValue(':content_section_3', $this->content_section_3, PDO::PARAM_STR);
         $pdoStatement->bindValue(':conclusion', $this->conclusion, PDO::PARAM_STR);
@@ -233,13 +237,14 @@ class LetterModel
                     `name` = :name,
                     `letter_style_id` = :letter_style_id,
                     `letter_animation_id` = :letter_animation_id
-                WHERE `id` = :id
+                WHERE `id` = :id AND `user_id` = :user_id
                 ';
 
         // Prepare and execute request
         $pdo = Database::getPDO();
         $pdoStatement = $pdo->prepare($sql);
         $pdoStatement->bindValue(':id', $letterId, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':user_id', $this->user_id, PDO::PARAM_INT);
         $pdoStatement->bindValue(':name', $this->name, PDO::PARAM_STR);
         $pdoStatement->bindValue(':letter_style_id', $this->letter_style_id, PDO::PARAM_INT);
         $pdoStatement->bindValue(':letter_animation_id', $this->letter_animation_id, PDO::PARAM_INT);
@@ -255,12 +260,13 @@ class LetterModel
     public function delete(int $letterId)
     {
         // SQL request
-        $sql = 'DELETE FROM ' . self::TABLE_NAME . ' WHERE id = :id';
+        $sql = 'DELETE FROM ' . self::TABLE_NAME . ' WHERE id = :id AND `user_id` = :user_id';
 
         // Prepare and execute request
         $pdo = Database::getPDO();
         $pdoStatement = $pdo->prepare($sql);
         $pdoStatement->bindValue(':id', $letterId, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':user', $this->user_id, PDO::PARAM_INT);
         $pdoStatement->execute();
         // Check Result
         $affectedRow = $pdoStatement->rowCount();
