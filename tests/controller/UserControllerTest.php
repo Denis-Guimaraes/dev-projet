@@ -49,7 +49,7 @@ class UserControllerTest extends TestCase
         if (User::isConnected()) {
             $this->assertInstanceOf(UserModel::class, $_SESSION['connectedUser']);
             $this->assertContains(
-                'Location: ' . $controller->getRouter()->generate('user_profile'),
+                'Location: ' . $controller->getRouter()->generate('letter_list'),
                 xdebug_get_headers()
             );
         } else {

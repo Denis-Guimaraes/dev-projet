@@ -39,14 +39,14 @@ class LetterController extends CoreController
             $title = (isset($_POST['title'])) ? $_POST['title'] : '';
             $link = uniqid();
             $user = User::getConnectedUser();
-            $user_id = $user->getId();
+            $userId = $user->getId();
 
             // Set letter and insert it in database
             $letterModel = new LetterModel();
             $letterModel->setName($name);
             $letterModel->setLink($link);
             $letterModel->setTitle($title);
-            $letterModel->setUser_id($user_id);
+            $letterModel->setUser_id($userId);
             $letter = $letterModel->insert();
 
             if ($letter instanceof LetterModel) {
@@ -65,9 +65,23 @@ class LetterController extends CoreController
         $this->show($this->templateName, $this->data);
     }
 
-    public function showLetter()
+    public function showLetter(array $params)
     {
-        // todo
+        if (!User::isConnected()) {
+            header('Location: '. $this->getRouter()->generate('main_home'));
+        }
+        // Get parameters
+        $letterId = $params['id'];
+        $user = User::getConnectedUser();
+        $userid = $user->getId();
+        // Get letter
+        $letterModel = new LetterModel();
+        $letterModel->setUser_id($userid);
+        $letter = $letterModel->findLetter($letterId);
+        // Set data and return viewLetter view
+        $this->templateName = 'letter/viewLetter';
+        $this->data['letter'] = $letter;
+        $this->show($this->templateName, $this->data);
     }
 
     // Getters and Setters

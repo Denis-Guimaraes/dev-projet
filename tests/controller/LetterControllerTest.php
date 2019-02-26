@@ -49,4 +49,25 @@ class LetterControllerTest extends TestCase
         $this->assertFileExists(__DIR__ .'/../../app/View/letter/newLetter.php');
         $this->assertFileExists(__DIR__ .'/../../app/View/letter/viewLetter.php');
     }
+
+    public function testShowLetter()
+    {
+        $_SERVER['REQUEST_URI'] = '';
+        $_POST = [
+            'email' => 'test2@test.test',
+            'password' => 'testtest',
+        ];
+        $params = [
+            'id' => 19,
+        ];
+        $application = new Application();
+        $userController = new UserController($application);
+        $userController->signin();
+        $controller = new LetterController($application);
+
+        $controller->showLetter($params);
+        $this->assertIsString($controller->getTemplateName());
+        $this->assertIsArray($controller->getData());
+        $this->assertFileExists(__DIR__ .'/../../app/View/letter/viewLetter.php');
+    }
 }
