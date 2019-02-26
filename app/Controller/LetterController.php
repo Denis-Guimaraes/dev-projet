@@ -27,6 +27,25 @@ class LetterController extends CoreController
         $this->show($this->templateName, $this->data);
     }
 
+    public function showLetter(array $params)
+    {
+        if (!User::isConnected()) {
+            header('Location: '. $this->getRouter()->generate('main_home'));
+        }
+        // Get parameters
+        $letterId = $params['id'];
+        $user = User::getConnectedUser();
+        $userid = $user->getId();
+        // Get letter
+        $letterModel = new LetterModel();
+        $letterModel->setUser_id($userid);
+        $letter = $letterModel->findLetter($letterId);
+        // Set data and return viewLetter view
+        $this->templateName = 'letter/viewLetter';
+        $this->data['letter'] = $letter;
+        $this->show($this->templateName, $this->data);
+    }
+
     public function createLetter()
     {
         if (!User::isConnected()) {
@@ -62,25 +81,6 @@ class LetterController extends CoreController
         // Set data and return letterList view
         $this->templateName = 'letter/newLetter';
         $this->data['error'] = $errorList;
-        $this->show($this->templateName, $this->data);
-    }
-
-    public function showLetter(array $params)
-    {
-        if (!User::isConnected()) {
-            header('Location: '. $this->getRouter()->generate('main_home'));
-        }
-        // Get parameters
-        $letterId = $params['id'];
-        $user = User::getConnectedUser();
-        $userid = $user->getId();
-        // Get letter
-        $letterModel = new LetterModel();
-        $letterModel->setUser_id($userid);
-        $letter = $letterModel->findLetter($letterId);
-        // Set data and return viewLetter view
-        $this->templateName = 'letter/viewLetter';
-        $this->data['letter'] = $letter;
         $this->show($this->templateName, $this->data);
     }
 
