@@ -6,6 +6,8 @@ use MotivOnline\Model\LetterModel;
 
 class LetterModelTest extends TestCase
 {
+    public $letterId;
+
     public function testFindAllLetter()
     {
         $letterModel = new LetterModel();
@@ -19,7 +21,6 @@ class LetterModelTest extends TestCase
         $this->assertInstanceOf(LetterModel::class, $letterModel->setUser_id(36));
         $result = $letterModel->findLetter(19);
         $this->assertInstanceOf(LetterModel::class, $result);
-        dump($result);
     }
 
     public function testCreateLetter()
@@ -31,9 +32,10 @@ class LetterModelTest extends TestCase
         $this->assertInstanceOf(LetterModel::class, $letterModel->setUser_id(36));
         $result = $letterModel->insert();
         $this->assertInstanceOf(LetterModel::class, $result);
+        return (int) $result->getId();
     }
 
-    public function testUpdateHeader()
+    public function testUpdateHeaderLetter()
     {
         $letterModel = new LetterModel();
         $this->assertInstanceOf(LetterModel::class, $letterModel->setTitle('test10 title'));
@@ -43,7 +45,7 @@ class LetterModelTest extends TestCase
         $this->assertTrue($result);
     }
 
-    public function testUpdatesection1()
+    public function testUpdatesection1Letter()
     {
         $letterModel = new LetterModel();
         $this->assertInstanceOf(LetterModel::class, $letterModel->setTitle_section_1('test10 title section 1'));
@@ -52,7 +54,7 @@ class LetterModelTest extends TestCase
         $this->assertTrue($result);
     }
 
-    public function testUpdatesection2()
+    public function testUpdatesection2Letter()
     {
         $letterModel = new LetterModel();
         $this->assertInstanceOf(LetterModel::class, $letterModel->setTitle_section_2('test10 title section 2'));
@@ -61,7 +63,7 @@ class LetterModelTest extends TestCase
         $this->assertTrue($result);
     }
 
-    public function testUpdateSection3()
+    public function testUpdateSection3Letter()
     {
         $letterModel = new LetterModel();
         $this->assertInstanceOf(LetterModel::class, $letterModel->setTitle_section_3('test10 title section 3'));
@@ -71,13 +73,23 @@ class LetterModelTest extends TestCase
         $this->assertTrue($result);
     }
 
-    public function testUpdateStyle()
+    public function testUpdateStyleLetter()
     {
         $letterModel = new LetterModel();
         $this->assertInstanceOf(LetterModel::class, $letterModel->setLetter_style_id(1));
         $this->assertInstanceOf(LetterModel::class, $letterModel->setLetter_animation_id(1));
         $this->assertInstanceOf(LetterModel::class, $letterModel->setName('test10'));
         $result = $letterModel->updateStyle(19);
+        $this->assertTrue($result);
+    }
+
+    /**
+     * @depends testCreateLetter
+     */
+    public function testDeleteLetter(int $letterId)
+    {
+        $letterModel = new LetterModel();
+        $result = $letterModel->delete($letterId);
         $this->assertTrue($result);
     }
 }
