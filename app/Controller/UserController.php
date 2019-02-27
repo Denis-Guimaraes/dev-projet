@@ -11,6 +11,9 @@ class UserController extends CoreController
 
     public function signup()
     {
+        if (User::isConnected()) {
+            $this->redirect('letter_list');
+        }
         $errorList = [];
         // Check and set parameters
         if (!empty($_POST)) {
@@ -76,6 +79,9 @@ class UserController extends CoreController
 
     public function signin()
     {
+        if (User::isConnected()) {
+            $this->redirect('letter_list');
+        }
         $errorList = [];
         if (!empty($_POST)) {
             // Check and set parameters
@@ -91,7 +97,7 @@ class UserController extends CoreController
                     // Connect user in session
                     User::connect($user);
                     // Redirect to profile
-                    header('Location: '. $this->getRouter()->generate('letter_list'));
+                    $this->redirect('letter_list');
                 } else {
                     $errorList[]= "L'identifiant ou le mot de passe est incorrecte";
                 }
@@ -108,7 +114,7 @@ class UserController extends CoreController
     public function profile()
     {
         if (!User::isConnected()) {
-            header('Location: '. $this->getRouter()->generate('main_home'));
+            $this->redirect('main_home');
         }
         $this->templateName = 'user/profile';
         $this->show($this->templateName);
@@ -118,7 +124,7 @@ class UserController extends CoreController
     {
         $errorList= [];
         if (!User::isConnected()) {
-            header('Location: '. $this->getRouter()->generate('main_home'));
+            $this->redirect('main_home');
         }
         // Check and set parameters
         if (!empty($_POST)) {
@@ -157,18 +163,18 @@ class UserController extends CoreController
     public function signout()
     {
         User::disconnect();
-        header('Location: '. $this->getRouter()->generate('main_home'));
+        $this->redirect('main_home');
     }
 
     public function deleteUser()
     {
         if (!User::isConnected()) {
-            header('Location: '. $this->getRouter()->generate('main_home'));
+            $this->redirect('main_home');
         }
         $user = User::getConnectedUser();
         $userDelete = $user->delete();
         User::disconnect();
-        header('Location: '. $this->getRouter()->generate('main_home'));
+        $this->redirect('main_home');
     }
 
     // Getters and Setters

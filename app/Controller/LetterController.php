@@ -12,7 +12,7 @@ class LetterController extends CoreController
     public function showAllLetter()
     {
         if (!User::isConnected()) {
-            header('Location: '. $this->getRouter()->generate('main_home'));
+            $this->redirect('main_home');
         }
         $letterList = [];
         // Get user id
@@ -30,7 +30,7 @@ class LetterController extends CoreController
     public function showLetter(array $params)
     {
         if (!User::isConnected()) {
-            header('Location: '. $this->getRouter()->generate('main_home'));
+            $this->redirect('main_home');
         }
         // Get parameters
         $letterId = $params['id'];
@@ -49,7 +49,7 @@ class LetterController extends CoreController
     public function createLetter()
     {
         if (!User::isConnected()) {
-            header('Location: '. $this->getRouter()->generate('main_home'));
+            $this->redirect('main_home');
         }
         $errorList = [];
         // Check and set parameters
@@ -73,7 +73,7 @@ class LetterController extends CoreController
                 $parameter = [
                     'id' => $letter->getId(),
                 ];
-                header('Location: '. $this->getRouter()->generate('letter_view', $parameter));
+                $this->redirect('letter_view', $parameter);
             } else {
                 $errorList[] = 'Une erreur inattendue s\'est produite';
             }
@@ -87,7 +87,7 @@ class LetterController extends CoreController
     public function updateLetter(array $params)
     {
         if (!User::isConnected()) {
-            header('Location: '. $this->getRouter()->generate('main_home'));
+            $this->redirect('main_home');
         }
         $errorList = [];
         $section = $params['section'];
@@ -113,7 +113,7 @@ class LetterController extends CoreController
                     $parameter = [
                         'id' => $letterId,
                     ];
-                    header('Location: '. $this->getRouter()->generate('letter_view', $parameter));
+                    $this->redirect('letter_view', $parameter);
                 } else {
                     $errorList[] = 'Une erreur inattendue s\'est produite';
                 }
@@ -133,7 +133,7 @@ class LetterController extends CoreController
                     $parameter = [
                         'id' => $letterId,
                     ];
-                    header('Location: '. $this->getRouter()->generate('letter_view', $parameter));
+                    $this->redirect('letter_view', $parameter);
                 } else {
                     $errorList[] = 'Une erreur inattendue s\'est produite';
                 }
@@ -153,7 +153,7 @@ class LetterController extends CoreController
                     $parameter = [
                         'id' => $letterId,
                     ];
-                    header('Location: '. $this->getRouter()->generate('letter_view', $parameter));
+                    $this->redirect('letter_view', $parameter);
                 } else {
                     $errorList[] = 'Une erreur inattendue s\'est produite';
                 }
@@ -175,7 +175,7 @@ class LetterController extends CoreController
                     $parameter = [
                         'id' => $letterId,
                     ];
-                    header('Location: '. $this->getRouter()->generate('letter_view', $parameter));
+                    $this->redirect('letter_view', $parameter);
                 } else {
                     $errorList[] = 'Une erreur inattendue s\'est produite';
                 }
@@ -197,7 +197,7 @@ class LetterController extends CoreController
                     $parameter = [
                         'id' => $letterId,
                     ];
-                    header('Location: '. $this->getRouter()->generate('letter_view', $parameter));
+                    $this->redirect('letter_view', $parameter);
                 } else {
                     $errorList[] = 'Une erreur inattendue s\'est produite';
                 }

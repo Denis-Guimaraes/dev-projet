@@ -45,6 +45,11 @@ abstract class CoreController
         echo $this->templateEngine->render($templateName, $dataToView);
     }
 
+    public function redirect(string $routeName, array $params=[])
+    {
+        header('Location: '. $this->getRouter()->generate($routeName, $params));
+    }
+
     public function getRouter()
     {
         return $this->router;
