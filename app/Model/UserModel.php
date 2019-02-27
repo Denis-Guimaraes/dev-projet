@@ -15,7 +15,7 @@ class UserModel
     protected $phone_number;
     protected $zip_code;
     protected $city;
-    protected $adress;
+    protected $address;
 
     const TABLE_NAME = 'user';
 
@@ -32,7 +32,7 @@ class UserModel
                     `phone_number`,
                     `zip_code`,
                     `city`,
-                    `adress`
+                    `address`
                 FROM ' . self::TABLE_NAME . '
                 WHERE email = :email';
 
@@ -57,7 +57,7 @@ class UserModel
                     `phone_number`,
                     `zip_code`,
                     `city`,
-                    `adress`
+                    `address`
                 )
                 VALUES (
                     :firstname,
@@ -68,7 +68,7 @@ class UserModel
                     :phone_number,
                     :zip_code,
                     :city,
-                    :adress
+                    :address
                 )';
 
         // Prepare and execute request
@@ -82,7 +82,7 @@ class UserModel
         $pdoStatement->bindValue(':phone_number', $this->phone_number, PDO::PARAM_STR);
         $pdoStatement->bindValue(':zip_code', $this->zip_code, PDO::PARAM_STR);
         $pdoStatement->bindValue(':city', $this->city, PDO::PARAM_STR);
-        $pdoStatement->bindValue(':adress', $this->adress, PDO::PARAM_STR);
+        $pdoStatement->bindValue(':address', $this->address, PDO::PARAM_STR);
         $pdoStatement->execute();
         // Check Result
         $affectedRow = $pdoStatement->rowCount();
@@ -103,7 +103,7 @@ class UserModel
                     `phone_number` = :phone_number,
                     `zip_code` = :zip_code,
                     `city` = :city,
-                    `adress` = :adress
+                    `address` = :address
                 WHERE `id` = :id
                 ';
 
@@ -117,7 +117,7 @@ class UserModel
         $pdoStatement->bindValue(':phone_number', $this->phone_number, PDO::PARAM_STR);
         $pdoStatement->bindValue(':zip_code', $this->zip_code, PDO::PARAM_STR);
         $pdoStatement->bindValue(':city', $this->city, PDO::PARAM_STR);
-        $pdoStatement->bindValue(':adress', $this->adress, PDO::PARAM_STR);
+        $pdoStatement->bindValue(':address', $this->address, PDO::PARAM_STR);
         $pdoStatement->execute();
         // Check Result
         $affectedRow = $pdoStatement->rowCount();
@@ -239,14 +239,14 @@ class UserModel
         return $this;
     }
 
-    public function getAdress()
+    public function getAddress()
     {
-        return $this->adress;
+        return $this->address;
     }
 
-    public function setAdress(string $adress)
+    public function setAddress(string $address)
     {
-        $this->adress = $adress;
+        $this->address = $address;
         return $this;
     }
 } 

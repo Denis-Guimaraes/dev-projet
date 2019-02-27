@@ -23,6 +23,7 @@
     "scripts" : {
         "test-controller": "phpunit --coverage-html report/ --whitelist app/ --bootstrap vendor/autoload.php tests/controller/",
         "test-user-model": "phpunit --bootstrap vendor/autoload.php tests/model/UserModelTest",
-        "test-letter-model": "phpunit --bootstrap vendor/autoload.php tests/model/LetterModelTest"
+        "test-letter-model": "phpunit --bootstrap vendor/autoload.php tests/model/LetterModelTest",
+        "test-company-model": "phpunit --bootstrap vendor/autoload.php tests/model/CompanyModelTest"
     }
 }

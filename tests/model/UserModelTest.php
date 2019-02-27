@@ -29,7 +29,7 @@ class UserModelTest extends TestCase
         $this->assertInstanceOf(UserModel::class, $user->setFirstname('test4'));
         $this->assertInstanceOf(UserModel::class, $user->setLastname('test4'));
         $this->assertInstanceOf(UserModel::class, $user->setPhone_number('test4'));
-        $this->assertInstanceOf(UserModel::class, $user->setAdress('test4'));
+        $this->assertInstanceOf(UserModel::class, $user->setAddress('test4'));
         $this->assertInstanceOf(UserModel::class, $user->setZip_code('test4'));
         $this->assertInstanceOf(UserModel::class, $user->setCity('test4'));
         $this->assertTrue(true, $user->update());

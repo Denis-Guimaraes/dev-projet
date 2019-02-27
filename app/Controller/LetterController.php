@@ -68,10 +68,10 @@ class LetterController extends CoreController
             $letterModel->setUser_id($userId);
             $letter = $letterModel->insert();
 
-            if ($letter instanceof LetterModel) {
+            if ($letter) {
                 // Redirect to letter
                 $parameter = [
-                    'id' => $letter->getId(),
+                    'id' => $letterModel->getId(),
                 ];
                 $this->redirect('letter_view', $parameter);
             } else {

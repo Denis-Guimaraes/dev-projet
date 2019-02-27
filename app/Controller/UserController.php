@@ -26,7 +26,7 @@ class UserController extends CoreController
             $phoneNumber = (isset($_POST['phoneNumber'])) ? $_POST['phoneNumber'] : '';
             $zipCode = (isset($_POST['zipCode'])) ? $_POST['zipCode'] : '';
             $city = (isset($_POST['city'])) ? $_POST['city'] : '';
-            $adress = (isset($_POST['adress'])) ? $_POST['adress'] : '';
+            $address = (isset($_POST['address'])) ? $_POST['address'] : '';
 
             if (empty($email)) {
                 $errorList[] = 'Email vide';
@@ -59,7 +59,7 @@ class UserController extends CoreController
                     $userModel->setPhone_number($phoneNumber);
                     $userModel->setZip_code($zipCode);
                     $userModel->setCity($city);
-                    $userModel->setAdress($adress);
+                    $userModel->setAddress($address);
                     $insert = $userModel->insert();
 
                     if ($insert) {
@@ -134,7 +134,7 @@ class UserController extends CoreController
             $phoneNumber = (isset($_POST['phoneNumber'])) ? $_POST['phoneNumber'] : '';
             $zipCode = (isset($_POST['zipCode'])) ? $_POST['zipCode'] : '';
             $city = (isset($_POST['city'])) ? $_POST['city'] : '';
-            $adress = (isset($_POST['adress'])) ? $_POST['adress'] : '';
+            $address = (isset($_POST['address'])) ? $_POST['address'] : '';
 
             // Set user and update it in database
             $user = User::getConnectedUser();
@@ -144,7 +144,7 @@ class UserController extends CoreController
             $user->setPhone_number($phoneNumber);
             $user->setZip_code($zipCode);
             $user->setCity($city);
-            $user->setAdress($adress);
+            $user->setAddress($address);
             $userUpdate = $user->update();
             
             if ($userUpdate) {

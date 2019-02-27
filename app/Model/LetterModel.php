@@ -123,7 +123,7 @@ class LetterModel
             return false;
         }
         $this->id = $pdo->lastInsertId();
-        return $this;
+        return true;
     }
 
     public function updateHeader(int $letterId)
@@ -266,7 +266,7 @@ class LetterModel
         $pdo = Database::getPDO();
         $pdoStatement = $pdo->prepare($sql);
         $pdoStatement->bindValue(':id', $letterId, PDO::PARAM_INT);
-        $pdoStatement->bindValue(':user', $this->user_id, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':user_id', $this->user_id, PDO::PARAM_INT);
         $pdoStatement->execute();
         // Check Result
         $affectedRow = $pdoStatement->rowCount();

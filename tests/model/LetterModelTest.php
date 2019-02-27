@@ -6,8 +6,6 @@ use MotivOnline\Model\LetterModel;
 
 class LetterModelTest extends TestCase
 {
-    public $letterId;
-
     public function testFindAllLetter()
     {
         $letterModel = new LetterModel();

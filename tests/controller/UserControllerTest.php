@@ -27,7 +27,7 @@ class UserControllerTest extends TestCase
             'phoneNumber' => 'test2',
             'zipCode' => 'test2',
             'city' => 'test2',
-            'adress' => 'test2',
+            'address' => 'test2',
         ];
 
         $controller->signup();
@@ -92,7 +92,7 @@ class UserControllerTest extends TestCase
             'phoneNumber' => 'test3',
             'zipCode' => 'test3',
             'city' => 'test3',
-            'adress' => 'test3',
+            'address' => 'test3',
         ];
 
         $controller->updateUser();
