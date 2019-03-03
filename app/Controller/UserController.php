@@ -11,6 +11,9 @@ class UserController extends CoreController
 
     public function signup()
     {
+        if (User::isConnected()) {
+            $this->redirect('letter_list');
+        }
         $errorList = [];
         // Check and set parameters
         if (!empty($_POST)) {
@@ -23,7 +26,7 @@ class UserController extends CoreController
             $phoneNumber = (isset($_POST['phoneNumber'])) ? $_POST['phoneNumber'] : '';
             $zipCode = (isset($_POST['zipCode'])) ? $_POST['zipCode'] : '';
             $city = (isset($_POST['city'])) ? $_POST['city'] : '';
-            $adress = (isset($_POST['adress'])) ? $_POST['adress'] : '';
+            $address = (isset($_POST['address'])) ? $_POST['address'] : '';
 
             if (empty($email)) {
                 $errorList[] = 'Email vide';
@@ -32,7 +35,7 @@ class UserController extends CoreController
             }
             if (empty($password)) {
                 $errorList[] = 'Mot de passe vide';
-            } elseif( strlen($password) < 8) {
+            } elseif (strlen($password) < 8) {
                 $errorList[] = 'Mot de passe trop court, minimum 8 caractères';
             }
             if ($password !== $confirmPassword) {
@@ -53,10 +56,10 @@ class UserController extends CoreController
                     $userModel->setEmail($email);
                     $userModel->setPassword($encryptedPassword);
                     $userModel->setPicture($picture);
-                    $userModel->setPhone_number($phoneNumber);
-                    $userModel->setZip_code($zipCode);
+                    $userModel->setPhoneNumber($phoneNumber);
+                    $userModel->setZipCode($zipCode);
                     $userModel->setCity($city);
-                    $userModel->setAdress($adress);
+                    $userModel->setAddress($address);
                     $insert = $userModel->insert();
 
                     if ($insert) {
@@ -76,6 +79,9 @@ class UserController extends CoreController
 
     public function signin()
     {
+        if (User::isConnected()) {
+            $this->redirect('letter_list');
+        }
         $errorList = [];
         if (!empty($_POST)) {
             // Check and set parameters
@@ -87,11 +93,11 @@ class UserController extends CoreController
             $user = $userModel->findByEmail($email);
             if (!empty($user)) {
                 $passwordInBdd = $user->getPassword();
-                if (password_verify($password ,$passwordInBdd)) {
+                if (password_verify($password, $passwordInBdd)) {
                     // Connect user in session
                     User::connect($user);
                     // Redirect to profile
-                    header('Location: '. $this->getRouter()->generate('letter_list'));
+                    $this->redirect('letter_list');
                 } else {
                     $errorList[]= "L'identifiant ou le mot de passe est incorrecte";
                 }
@@ -108,7 +114,7 @@ class UserController extends CoreController
     public function profile()
     {
         if (!User::isConnected()) {
-            header('Location: '. $this->getRouter()->generate('main_home'));
+            $this->redirect('main_home');
         }
         $this->templateName = 'user/profile';
         $this->show($this->templateName);
@@ -118,7 +124,7 @@ class UserController extends CoreController
     {
         $errorList= [];
         if (!User::isConnected()) {
-            header('Location: '. $this->getRouter()->generate('main_home'));
+            $this->redirect('main_home');
         }
         // Check and set parameters
         if (!empty($_POST)) {
@@ -128,17 +134,17 @@ class UserController extends CoreController
             $phoneNumber = (isset($_POST['phoneNumber'])) ? $_POST['phoneNumber'] : '';
             $zipCode = (isset($_POST['zipCode'])) ? $_POST['zipCode'] : '';
             $city = (isset($_POST['city'])) ? $_POST['city'] : '';
-            $adress = (isset($_POST['adress'])) ? $_POST['adress'] : '';
+            $address = (isset($_POST['address'])) ? $_POST['address'] : '';
 
             // Set user and update it in database
             $user = User::getConnectedUser();
             $user->setFirstname($firstname);
             $user->setLastname($lastname);
             $user->setPicture($picture);
-            $user->setPhone_number($phoneNumber);
-            $user->setZip_code($zipCode);
+            $user->setPhoneNumber($phoneNumber);
+            $user->setZipCode($zipCode);
             $user->setCity($city);
-            $user->setAdress($adress);
+            $user->setAddress($address);
             $userUpdate = $user->update();
             
             if ($userUpdate) {
@@ -157,18 +163,18 @@ class UserController extends CoreController
     public function signout()
     {
         User::disconnect();
-        header('Location: '. $this->getRouter()->generate('main_home'));
+        $this->redirect('main_home');
     }
 
     public function deleteUser()
     {
         if (!User::isConnected()) {
-            header('Location: '. $this->getRouter()->generate('main_home'));
+            $this->redirect('main_home');
         }
         $user = User::getConnectedUser();
         $userDelete = $user->delete();
         User::disconnect();
-        header('Location: '. $this->getRouter()->generate('main_home'));
+        $this->redirect('main_home');
     }
 
     // Getters and Setters

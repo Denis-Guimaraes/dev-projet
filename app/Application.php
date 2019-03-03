@@ -3,7 +3,7 @@ namespace MotivOnline;
 
 use AltoRouter;
 
-Class Application
+class Application
 {
     private $config;
     private $router;
@@ -11,7 +11,7 @@ Class Application
     public function __construct()
     {
         // Get config and set router
-        $config = parse_ini_file(__DIR__ . '/config.conf',true);
+        $config = parse_ini_file(__DIR__ . '/config.conf', true);
         $this->config = $config;
         $this->router = new AltoRouter();
         $this->router->setBasePath($config['BASE_PATH']);
@@ -32,12 +32,54 @@ Class Application
         $this->router->map('GET', '/deconnexion', 'UserController#signout', 'user_signout');
         $this->router->map('GET', '/profil/supprimer', 'UserController#deleteUser', 'user_delete');
 
-        $this->router->map('GET', '/lettre-de-motivation', 'LetterController#showAllLetter', 'letter_list');
-        $this->router->map('GET', '/lettre-de-motivation/creer', 'LetterController#createLetter', 'letter_create_view');
-        $this->router->map('POST', '/lettre-de-motivation/creer', 'LetterController#createLetter', 'letter_create');
-        $this->router->map('GET', '/lettre-de-motivation/[i:id]', 'LetterController#showLetter', 'letter_view');
-        $this->router->map('POST', '/lettre-de-motivation/[i:id]/[a:section]', 'LetterController#updateLetter', 'letter_update');
-        $this->router->map('GET', '/lettre-de-motivation/[i:id]/previsualiser', 'LetterController#showPreviewLetter', 'letter_preview');
+        $this->router->map(
+            'GET',
+            '/lettre-de-motivation',
+            'LetterController#showAllLetter',
+            'letter_list'
+        );
+        $this->router->map(
+            'GET',
+            '/lettre-de-motivation/creer',
+            'LetterController#createLetter',
+            'letter_create_view'
+        );
+        $this->router->map(
+            'POST',
+            '/lettre-de-motivation/creer',
+            'LetterController#createLetter',
+            'letter_create'
+        );
+        $this->router->map(
+            'GET',
+            '/lettre-de-motivation/[i:id]',
+            'LetterController#showLetter',
+            'letter_view'
+        );
+        $this->router->map(
+            'POST',
+            '/lettre-de-motivation/[i:id]/[a:section]',
+            'LetterController#updateLetter',
+            'letter_update'
+        );
+        $this->router->map(
+            'GET',
+            '/lettre-de-motivation/[i:id]/previsualiser',
+            'LetterController#showPreviewLetter',
+            'letter_preview'
+        );
+        $this->router->map(
+            'GET',
+            '/lettre-de-motivation/[i:id]/entreprise/[i:companyId]',
+            'CompanyController#showCompany',
+            'company_view'
+        );
+        $this->router->map(
+            'POST',
+            '/lettre-de-motivation/[i:id]/entreprise/[i:companyId]',
+            'CompanyController#updateCompany',
+            'company_update'
+        );
     }
 
     public function run()

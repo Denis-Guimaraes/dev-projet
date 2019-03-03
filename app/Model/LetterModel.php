@@ -29,7 +29,7 @@ class LetterModel
 
     const TABLE_NAME = 'letter';
 
-    public function findAllLetter(int $userId)
+    public function findAllLetter(int $user_id)
     {
         // SQL request
         $sql = 'SELECT
@@ -42,18 +42,18 @@ class LetterModel
                     company.name as company_name
                 FROM ' . self::TABLE_NAME . '
                 LEFT JOIN company ON letter.company_id = company.id
-                WHERE letter.user_id = :userId';
+                WHERE letter.user_id = :user_id';
 
         // Prepare and execute request
         $pdo = Database::getPDO();
         $pdoStatement = $pdo->prepare($sql);
-        $pdoStatement->bindValue(':userId', $userId, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':user_id', $user_id, PDO::PARAM_INT);
         $pdoStatement->execute();
         $result = $pdoStatement->fetchAll(PDO::FETCH_CLASS, self::class);
         return $result;
     }
 
-    public function findLetter(int $letterId)
+    public function findLetter(int $letter_id)
     {
         // SQL request
         $sql = 'SELECT
@@ -81,13 +81,13 @@ class LetterModel
                 LEFT JOIN letter_style ON letter.letter_style_id = letter_style.id
                 LEFT JOIN letter_animation ON letter.letter_animation_id = letter_animation.id
                 LEFT JOIN company ON letter.company_id = company.id
-                WHERE letter.user_id = :userId AND letter.id = :letterId';
+                WHERE letter.user_id = :user_id AND letter.id = :letter_id';
 
         // Prepare and execute request
         $pdo = Database::getPDO();
         $pdoStatement = $pdo->prepare($sql);
-        $pdoStatement->bindValue(':userId', $this->user_id, PDO::PARAM_INT);
-        $pdoStatement->bindValue(':letterId', $letterId, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':user_id', $this->user_id, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':letter_id', $letter_id, PDO::PARAM_INT);
         $pdoStatement->execute();
         $result = $pdoStatement->fetchObject(self::class);
         return $result;
@@ -100,13 +100,15 @@ class LetterModel
             `name`,
             `link`,
             `title`,
-            `user_id`
+            `user_id`,
+            `company_id`
         )
         VALUES (
             :name,
             :link,
             :title,
-            :user_id
+            :user_id,
+            :company_id
         )';
 
         // Prepare and execute request
@@ -116,17 +118,18 @@ class LetterModel
         $pdoStatement->bindValue(':link', $this->link, PDO::PARAM_STR);
         $pdoStatement->bindValue(':title', $this->title, PDO::PARAM_STR);
         $pdoStatement->bindValue(':user_id', $this->user_id, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':company_id', $this->company_id, PDO::PARAM_INT);
         $pdoStatement->execute();
         // Check Result
         $affectedRow = $pdoStatement->rowCount();
-        if ($affectedRow < 1 ) {
+        if ($affectedRow < 1) {
             return false;
         }
         $this->id = $pdo->lastInsertId();
-        return $this;
+        return true;
     }
 
-    public function updateHeader(int $letterId)
+    public function updateHeader(int $letter_id)
     {
          // SQL request
          $sql = 'UPDATE ' . self::TABLE_NAME . ' SET
@@ -139,7 +142,7 @@ class LetterModel
         // Prepare and execute request
         $pdo = Database::getPDO();
         $pdoStatement = $pdo->prepare($sql);
-        $pdoStatement->bindValue(':id', $letterId, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':id', $letter_id, PDO::PARAM_INT);
         $pdoStatement->bindValue(':user_id', $this->user_id, PDO::PARAM_INT);
         $pdoStatement->bindValue(':date', $this->date, PDO::PARAM_STR);
         $pdoStatement->bindValue(':title', $this->title, PDO::PARAM_STR);
@@ -147,13 +150,13 @@ class LetterModel
         $pdoStatement->execute();
         // Check Result
         $affectedRow = $pdoStatement->rowCount();
-        if ($affectedRow < 1 ) {
+        if ($affectedRow < 1) {
             return false;
         }
         return true;
     }
 
-    public function updateSection1(int $letterId)
+    public function updateSection1(int $letter_id)
     {
          // SQL request
          $sql = 'UPDATE ' . self::TABLE_NAME . ' SET
@@ -165,20 +168,20 @@ class LetterModel
         // Prepare and execute request
         $pdo = Database::getPDO();
         $pdoStatement = $pdo->prepare($sql);
-        $pdoStatement->bindValue(':id', $letterId, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':id', $letter_id, PDO::PARAM_INT);
         $pdoStatement->bindValue(':user_id', $this->user_id, PDO::PARAM_INT);
         $pdoStatement->bindValue(':title_section_1', $this->title_section_1, PDO::PARAM_STR);
         $pdoStatement->bindValue(':content_section_1', $this->content_section_1, PDO::PARAM_STR);
         $pdoStatement->execute();
         // Check Result
         $affectedRow = $pdoStatement->rowCount();
-        if ($affectedRow < 1 ) {
+        if ($affectedRow < 1) {
             return false;
         }
         return true;
     }
 
-    public function updateSection2(int $letterId)
+    public function updateSection2(int $letter_id)
     {
          // SQL request
          $sql = 'UPDATE ' . self::TABLE_NAME . ' SET
@@ -190,20 +193,20 @@ class LetterModel
         // Prepare and execute request
         $pdo = Database::getPDO();
         $pdoStatement = $pdo->prepare($sql);
-        $pdoStatement->bindValue(':id', $letterId, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':id', $letter_id, PDO::PARAM_INT);
         $pdoStatement->bindValue(':user_id', $this->user_id, PDO::PARAM_INT);
         $pdoStatement->bindValue(':title_section_2', $this->title_section_2, PDO::PARAM_STR);
         $pdoStatement->bindValue(':content_section_2', $this->content_section_2, PDO::PARAM_STR);
         $pdoStatement->execute();
         // Check Result
         $affectedRow = $pdoStatement->rowCount();
-        if ($affectedRow < 1 ) {
+        if ($affectedRow < 1) {
             return false;
         }
         return true;
     }
 
-    public function updateSection3(int $letterId)
+    public function updateSection3(int $letter_id)
     {
          // SQL request
          $sql = 'UPDATE ' . self::TABLE_NAME . ' SET
@@ -216,7 +219,7 @@ class LetterModel
         // Prepare and execute request
         $pdo = Database::getPDO();
         $pdoStatement = $pdo->prepare($sql);
-        $pdoStatement->bindValue(':id', $letterId, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':id', $letter_id, PDO::PARAM_INT);
         $pdoStatement->bindValue(':user_id', $this->user_id, PDO::PARAM_INT);
         $pdoStatement->bindValue(':title_section_3', $this->title_section_3, PDO::PARAM_STR);
         $pdoStatement->bindValue(':content_section_3', $this->content_section_3, PDO::PARAM_STR);
@@ -224,13 +227,13 @@ class LetterModel
         $pdoStatement->execute();
         // Check Result
         $affectedRow = $pdoStatement->rowCount();
-        if ($affectedRow < 1 ) {
+        if ($affectedRow < 1) {
             return false;
         }
         return true;
     }
 
-    public function updateStyle(int $letterId)
+    public function updateStyle(int $letter_id)
     {
          // SQL request
          $sql = 'UPDATE ' . self::TABLE_NAME . ' SET
@@ -243,7 +246,7 @@ class LetterModel
         // Prepare and execute request
         $pdo = Database::getPDO();
         $pdoStatement = $pdo->prepare($sql);
-        $pdoStatement->bindValue(':id', $letterId, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':id', $letter_id, PDO::PARAM_INT);
         $pdoStatement->bindValue(':user_id', $this->user_id, PDO::PARAM_INT);
         $pdoStatement->bindValue(':name', $this->name, PDO::PARAM_STR);
         $pdoStatement->bindValue(':letter_style_id', $this->letter_style_id, PDO::PARAM_INT);
@@ -251,13 +254,13 @@ class LetterModel
         $pdoStatement->execute();
         // Check Result
         $affectedRow = $pdoStatement->rowCount();
-        if ($affectedRow < 1 ) {
+        if ($affectedRow < 1) {
             return false;
         }
         return true;
     }
 
-    public function delete(int $letterId)
+    public function delete(int $letter_id)
     {
         // SQL request
         $sql = 'DELETE FROM ' . self::TABLE_NAME . ' WHERE id = :id AND `user_id` = :user_id';
@@ -265,12 +268,12 @@ class LetterModel
         // Prepare and execute request
         $pdo = Database::getPDO();
         $pdoStatement = $pdo->prepare($sql);
-        $pdoStatement->bindValue(':id', $letterId, PDO::PARAM_INT);
-        $pdoStatement->bindValue(':user', $this->user_id, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':id', $letter_id, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':user_id', $this->user_id, PDO::PARAM_INT);
         $pdoStatement->execute();
         // Check Result
         $affectedRow = $pdoStatement->rowCount();
-        if ($affectedRow < 1 ) {
+        if ($affectedRow < 1) {
             return false;
         }
         return true;
@@ -342,72 +345,72 @@ class LetterModel
         return $this;
     }
 
-    public function getTitle_section_1()
+    public function getTitleSection1()
     {
         return $this->title_section_1;
     }
 
-    public function setTitle_section_1(string $title_section_1)
+    public function setTitleSection1(string $title_section_1)
     {
         $this->title_section_1 = $title_section_1;
 
         return $this;
     }
 
-    public function getContent_section_1()
+    public function getContentSection1()
     {
         return $this->content_section_1;
     }
 
-    public function setContent_section_1(string $content_section_1)
+    public function setContentSection1(string $content_section_1)
     {
         $this->content_section_1 = $content_section_1;
 
         return $this;
     }
 
-    public function getTitle_section_2()
+    public function getTitleSection2()
     {
         return $this->title_section_2;
     }
 
-    public function setTitle_section_2(string $title_section_2)
+    public function setTitleSection2(string $title_section_2)
     {
         $this->title_section_2 = $title_section_2;
 
         return $this;
     }
 
-    public function getContent_section_2()
+    public function getContentSection2()
     {
         return $this->content_section_2;
     }
 
-    public function setContent_section_2(string $content_section_2)
+    public function setContentSection2(string $content_section_2)
     {
         $this->content_section_2 = $content_section_2;
 
         return $this;
     }
 
-    public function getTitle_section_3()
+    public function getTitleSection3()
     {
         return $this->title_section_3;
     }
 
-    public function setTitle_section_3(string $title_section_3)
+    public function setTitleSection3(string $title_section_3)
     {
         $this->title_section_3 = $title_section_3;
 
         return $this;
     }
 
-    public function getContent_section_3()
+    public function getContentSection3()
     {
         return $this->content_section_3;
     }
 
-    public function setContent_section_3(string $content_section_3)
+    public function setContentSection3(string $content_section_3)
     {
         $this->content_section_3 = $content_section_3;
 
@@ -426,84 +429,84 @@ class LetterModel
         return $this;
     }
 
-    public function getLetter_style_id()
+    public function getLetterStyleId()
     {
         return $this->letter_style_id;
     }
  
-    public function setLetter_style_id(int $letter_style_id)
+    public function setLetterStyleId(int $letter_style_id)
     {
         $this->letter_style_id = $letter_style_id;
 
         return $this;
     }
 
-    public function getLetter_animation_id()
+    public function getLetterAnimationId()
     {
         return $this->letter_animation_id;
     }
 
-    public function setLetter_animation_id(int $letter_animation_id)
+    public function setLetterAnimationId(int $letter_animation_id)
     {
         $this->letter_animation_id = $letter_animation_id;
 
         return $this;
     }
 
-    public function getUser_id()
+    public function getUserId()
     {
         return $this->user_id;
     }
  
-    public function setUser_id(int $user_id)
+    public function setUserId(int $user_id)
     {
         $this->user_id = $user_id;
 
         return $this;
     }
  
-    public function getCompany_id()
+    public function getCompanyId()
     {
         return $this->company_id;
     }
 
-    public function setCompany_id(int $company_id)
+    public function setCompanyId(int $company_id)
     {
         $this->company_id = $company_id;
 
         return $this;
     }
  
-    public function getCompany_name()
+    public function getCompanyName()
     {
         return $this->company_name;
     }
 
-    public function setCompany_name(string $company_name)
+    public function setCompanyName(string $company_name)
     {
         $this->company_name = $company_name;
 
         return $this;
     }
 
-    public function getStyle_name()
+    public function getStyleName()
     {
         return $this->style_name;
     }
 
-    public function setStyle_name($style_name)
+    public function setStyleName($style_name)
     {
         $this->style_name = $style_name;
 
         return $this;
     }
 
-    public function getAnimation_name()
+    public function getAnimationName()
     {
         return $this->animation_name;
     }
  
-    public function setAnimation_name($animation_name)
+    public function setAnimationName($animation_name)
     {
         $this->animation_name = $animation_name;
 

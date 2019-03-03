@@ -26,7 +26,7 @@ abstract class CoreController
         );
     }
 
-    public function sendHttpError(int $errorCode, string $htmlContent='')
+    public function sendHttpError(int $errorCode, string $htmlContent = '')
     {
         if ($errorCode == 404) {
             header("HTTP/1.0 404 Not Found");
@@ -40,9 +40,14 @@ abstract class CoreController
         echo json_encode($data);
     }
 
-    public function show(string $templateName, array $dataToView=[])
+    public function show(string $templateName, array $dataToView = [])
     {
         echo $this->templateEngine->render($templateName, $dataToView);
+    }
+
+    public function redirect(string $routeName, array $params = [])
+    {
+        header('Location: '. $this->getRouter()->generate($routeName, $params));
     }
 
     public function getRouter()

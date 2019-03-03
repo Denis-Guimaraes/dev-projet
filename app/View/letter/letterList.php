@@ -9,8 +9,10 @@
                 <h4 class="card-title"><?= $letter->getTitle() ?></h5>
                 <p class="card-text">Lien : <?= $letter->getLink() ?></p>
                 <div class="d-flex justify-content-end">
-                    <a href="<?= $router->generate('letter_view', ['id' => $letter->getId()]) ?>" class="btn btn-info mr-2">Prévisualiser</a>
-                    <a href="<?= $router->generate('letter_preview', ['id' => $letter->getId()]) ?>" class="btn btn-primary ml-2">Editer</a>
+                    <a href="<?= $router->generate('letter_view', ['id' => $letter->getId()]) ?>"
+                    class="btn btn-info mr-2">Prévisualiser</a>
+                    <a href="<?= $router->generate('letter_preview', ['id' => $letter->getId()]) ?>"
+                    class="btn btn-primary ml-2">Editer</a>
                 </div>
                 <div class="section__delete d-flex justify-content-end">
                     <a href="#" class="btn btn-danger">Supprimer</a>
