@@ -100,13 +100,15 @@ class LetterModel
             `name`,
             `link`,
             `title`,
-            `user_id`
+            `user_id`,
+            `company_id`
         )
         VALUES (
             :name,
             :link,
             :title,
-            :user_id
+            :user_id,
+            :company_id
         )';
 
         // Prepare and execute request
@@ -116,6 +118,7 @@ class LetterModel
         $pdoStatement->bindValue(':link', $this->link, PDO::PARAM_STR);
         $pdoStatement->bindValue(':title', $this->title, PDO::PARAM_STR);
         $pdoStatement->bindValue(':user_id', $this->user_id, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':company_id', $this->company_id, PDO::PARAM_INT);
         $pdoStatement->execute();
         // Check Result
         $affectedRow = $pdoStatement->rowCount();
@@ -462,12 +465,12 @@ class LetterModel
         return $this;
     }
  
-    public function getCompanNd()
+    public function getCompanyId()
     {
         return $this->company_id;
     }
 
-    public function setCompanNd(int $company_id)
+    public function setCompanyId(int $company_id)
     {
         $this->company_id = $company_id;
 

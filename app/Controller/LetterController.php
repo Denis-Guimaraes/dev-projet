@@ -3,6 +3,7 @@ namespace MotivOnline\Controller;
 
 use MotivOnline\Model\LetterModel;
 use MotivOnline\Util\User;
+use MotivOnline\Model\CompanyModel;
 
 class LetterController extends CoreController
 {
@@ -60,20 +61,29 @@ class LetterController extends CoreController
             $user = User::getConnectedUser();
             $userId = $user->getId();
 
-            // Set letter and insert it in database
-            $letterModel = new LetterModel();
-            $letterModel->setName($name);
-            $letterModel->setLink($link);
-            $letterModel->setTitle($title);
-            $letterModel->setUserId($userId);
-            $letter = $letterModel->insert();
-
-            if ($letter) {
-                // Redirect to letter
-                $parameter = [
-                    'id' => $letterModel->getId(),
-                ];
-                $this->redirect('letter_view', $parameter);
+            // Create company
+            $companyModel = new CompanyModel();
+            $companyModel->setUserId($userId);
+            $result = $companyModel->insert();
+            if ($result) {
+                $companyId = $companyModel->getId();
+                // Set letter and insert it in database
+                $letterModel = new LetterModel();
+                $letterModel->setName($name);
+                $letterModel->setLink($link);
+                $letterModel->setTitle($title);
+                $letterModel->setUserId($userId);
+                $letterModel->setCompanyId($companyId);
+                $letter = $letterModel->insert();
+                if ($letter) {
+                    // Redirect to letter
+                    $parameter = [
+                        'id' => $letterModel->getId(),
+                    ];
+                    $this->redirect('letter_view', $parameter);
+                } else {
+                    $errorList[] = 'Une erreur inattendue s\'est produite';
+                }
             } else {
                 $errorList[] = 'Une erreur inattendue s\'est produite';
             }

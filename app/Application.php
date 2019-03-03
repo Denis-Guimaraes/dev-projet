@@ -68,6 +68,18 @@ class Application
             'LetterController#showPreviewLetter',
             'letter_preview'
         );
+        $this->router->map(
+            'GET',
+            '/lettre-de-motivation/[i:id]/entreprise/[i:companyId]',
+            'CompanyController#showCompany',
+            'company_view'
+        );
+        $this->router->map(
+            'POST',
+            '/lettre-de-motivation/[i:id]/entreprise/[i:companyId]',
+            'CompanyController#updateCompany',
+            'company_update'
+        );
     }
 
     public function run()

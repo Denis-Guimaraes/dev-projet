@@ -4,8 +4,6 @@ namespace Test\MotivOnline\Controller;
 use PHPUnit\Framework\TestCase;
 use MotivOnline\Application;
 use MotivOnline\Controller\LetterController;
-use MotivOnline\Model\LetterModel;
-use MotivOnline\Util\User;
 use MotivOnline\Controller\UserController;
 
 /**
