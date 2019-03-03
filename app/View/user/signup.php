@@ -5,7 +5,8 @@
     <form class="section__content" method="post" action="<?= $router->generate('user_signup') ?>">
         <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Email">
+            <input type="email" class="form-control" id="email" name="email"
+            aria-describedby="emailHelp" placeholder="Email">
         </div>
         <div class="form-group">
             <label for="password">Mot de passe</label>
@@ -13,21 +14,23 @@
         </div>
         <div class="form-group">
             <label for="confirmPassword">Confirmer mot de passe</label>
-            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirmer mot de passe">
+            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
+            placeholder="Confirmer mot de passe">
         </div>
         <button type="submit" class="btn btn-primary">Inscription</button>
     </form>
-    <?php if(isset($error) && !empty($error)) : ?>
+    <?php if (isset($error) && !empty($error)) : ?>
         <ul class="alert alert-danger" role="alert">
-            <?php foreach($error as $errorText): ?>
+            <?php foreach ($error as $errorText) : ?>
                 <li>
                     <?= $errorText ?>
                 </li>
             <?php endforeach; ?>
         </ul>
     <?php endif; ?>
-    <?php if(isset($success)) : ?>
-        <div class="modal" id="modalMessage" tabindex="-1" role="dialog" aria-labelledby="modalMessageTitle" aria-hidden="true">
+    <?php if (isset($success)) : ?>
+        <div class="modal" id="modalMessage" tabindex="-1" role="dialog"
+        aria-labelledby="modalMessageTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">

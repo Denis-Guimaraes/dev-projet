@@ -16,7 +16,7 @@ class CompanyModel
 
     const TABLE_NAME = 'company';
 
-    public function findCompany(int $companyId)
+    public function findCompany(int $company_id)
     {
         // SQL request
         $sql = 'SELECT
@@ -29,17 +29,15 @@ class CompanyModel
                     `user_id`
                 FROM ' . self::TABLE_NAME . '
                 WHERE id = :id AND user_id = :user_id';
-
         // Prepare and execute request
         $pdo = Database::getPDO();
         $pdoStatement = $pdo->prepare($sql);
-        $pdoStatement->bindValue(':id', $companyId, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':id', $company_id, PDO::PARAM_INT);
         $pdoStatement->bindValue(':user_id', $this->user_id, PDO::PARAM_INT);
         $pdoStatement->execute();
         $result = $pdoStatement->fetchObject(self::class);
         return $result;
     }
-
     public function insert()
     {
         // SQL request
@@ -59,7 +57,6 @@ class CompanyModel
                     :address,
                     :user_id
                 )';
-
         // Prepare and execute request
         $pdo = Database::getPDO();
         $pdoStatement = $pdo->prepare($sql);
@@ -72,14 +69,13 @@ class CompanyModel
         $pdoStatement->execute();
         // Check Result
         $affectedRow = $pdoStatement->rowCount();
-        if ($affectedRow < 1 ) {
+        if ($affectedRow < 1) {
             return false;
         }
         $this->id = $pdo->lastInsertId();
         return true;
     }
-
-    public function update(int $companyId)
+    public function update(int $company_id)
     {
         // SQL request
         $sql = 'UPDATE ' . self::TABLE_NAME . ' SET
@@ -90,11 +86,10 @@ class CompanyModel
                     `address` = :address
                 WHERE `id` = :id AND `user_id` = :user_id
                 ';
-
         // Prepare and execute request
         $pdo = Database::getPDO();
         $pdoStatement = $pdo->prepare($sql);
-        $pdoStatement->bindValue(':id', $companyId, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':id', $company_id, PDO::PARAM_INT);
         $pdoStatement->bindValue(':user_id', $this->user_id, PDO::PARAM_INT);
         $pdoStatement->bindValue(':name', $this->name, PDO::PARAM_STR);
         $pdoStatement->bindValue(':recipient_name', $this->recipient_name, PDO::PARAM_STR);
@@ -104,27 +99,25 @@ class CompanyModel
         $pdoStatement->execute();
         // Check Result
         $affectedRow = $pdoStatement->rowCount();
-        if ($affectedRow < 1 ) {
+        if ($affectedRow < 1) {
             return false;
         }
         $this->id = $companyId;
         return true;
     }
-
-    public function delete(int $companyId)
+    public function delete(int $company_id)
     {
         // SQL request
         $sql = 'DELETE FROM ' . self::TABLE_NAME . ' WHERE id = :id AND `user_id` = :user_id';
-
         // Prepare and execute request
         $pdo = Database::getPDO();
         $pdoStatement = $pdo->prepare($sql);
-        $pdoStatement->bindValue(':id', $companyId, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':id', $company_id, PDO::PARAM_INT);
         $pdoStatement->bindValue(':user_id', $this->user_id, PDO::PARAM_INT);
         $pdoStatement->execute();
         // Check Result
         $affectedRow = $pdoStatement->rowCount();
-        if ($affectedRow < 1 ) {
+        if ($affectedRow < 1) {
             return false;
         }
         return true;
@@ -144,31 +137,28 @@ class CompanyModel
     public function setName(string $name)
     {
         $this->name = $name;
-
         return $this;
     }
 
-    public function getRecipient_name()
+    public function getRecipientName()
     {
         return $this->recipient_name;
     }
 
-    public function setRecipient_name(string $recipient_name)
+    public function setRecipientName(string $recipient_name)
     {
         $this->recipient_name = $recipient_name;
-
         return $this;
     }
  
-    public function getZip_code()
+    public function getZipCode()
     {
         return $this->zip_code;
     }
 
-    public function setZip_code(string $zip_code)
+    public function setZipCode(string $zip_code)
     {
         $this->zip_code = $zip_code;
-
         return $this;
     }
 
@@ -180,7 +170,6 @@ class CompanyModel
     public function setCity(string $city)
     {
         $this->city = $city;
-
         return $this;
     }
 
@@ -192,19 +181,17 @@ class CompanyModel
     public function setAddress(string $address)
     {
         $this->address = $address;
-
         return $this;
     }
 
-    public function getUser_id()
+    public function getUserId()
     {
         return $this->user_id;
     }
 
-    public function setUser_id(int $user_id)
+    public function setUserId(int $user_id)
     {
         $this->user_id = $user_id;
-
         return $this;
     }
-} 
+}

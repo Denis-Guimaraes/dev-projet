@@ -38,7 +38,7 @@ class LetterController extends CoreController
         $userid = $user->getId();
         // Get letter
         $letterModel = new LetterModel();
-        $letterModel->setUser_id($userid);
+        $letterModel->setUserId($userid);
         $letter = $letterModel->findLetter($letterId);
         // Set data and return viewLetter view
         $this->templateName = 'letter/viewLetter';
@@ -65,7 +65,7 @@ class LetterController extends CoreController
             $letterModel->setName($name);
             $letterModel->setLink($link);
             $letterModel->setTitle($title);
-            $letterModel->setUser_id($userId);
+            $letterModel->setUserId($userId);
             $letter = $letterModel->insert();
 
             if ($letter) {
@@ -106,7 +106,7 @@ class LetterController extends CoreController
                 $letterModel->setDate($date);
                 $letterModel->setTitle($title);
                 $letterModel->setObject($object);
-                $letterModel->setUser_id($userId);
+                $letterModel->setUserId($userId);
                 $result = $letterModel->updateHeader($letterId);
                 if ($result) {
                     // Redirect to letter
@@ -124,9 +124,9 @@ class LetterController extends CoreController
                 $content = (isset($_POST['content'])) ? $_POST['content'] : '';
                 // Set letter and update it in database
                 $letterModel = new LetterModel();
-                $letterModel->setTitle_section_1($title);
-                $letterModel->setContent_section_1($content);
-                $letterModel->setUser_id($userId);
+                $letterModel->setTitleSection1($title);
+                $letterModel->setContentSection1($content);
+                $letterModel->setUserId($userId);
                 $result = $letterModel->updateSection1($letterId);
                 if ($result) {
                     // Redirect to letter
@@ -144,9 +144,9 @@ class LetterController extends CoreController
                 $content = (isset($_POST['content'])) ? $_POST['content'] : '';
                 // Set letter and update it in database
                 $letterModel = new LetterModel();
-                $letterModel->setTitle_section_2($title);
-                $letterModel->setContent_section_2($content);
-                $letterModel->setUser_id($userId);
+                $letterModel->setTitleSection2($title);
+                $letterModel->setContentSection2($content);
+                $letterModel->setUserId($userId);
                 $result = $letterModel->updateSection2($letterId);
                 if ($result) {
                     // Redirect to letter
@@ -165,10 +165,10 @@ class LetterController extends CoreController
                 $conclusion = (isset($_POST['conclusion'])) ? $_POST['conclusion'] : '';
                 // Set letter and update it in database
                 $letterModel = new LetterModel();
-                $letterModel->setTitle_section_3($title);
-                $letterModel->setContent_section_3($content);
+                $letterModel->setTitleSection3($title);
+                $letterModel->setContentSection3($content);
                 $letterModel->setConclusion($conclusion);
-                $letterModel->setUser_id($userId);
+                $letterModel->setUserId($userId);
                 $result = $letterModel->updateSection3($letterId);
                 if ($result) {
                     // Redirect to letter
@@ -187,10 +187,10 @@ class LetterController extends CoreController
                 $name = (isset($_POST['name'])) ? $_POST['name'] : '';
                 // Set letter and update it in database
                 $letterModel = new LetterModel();
-                $letterModel->setLetter_style_id($styleId);
-                $letterModel->setLetter_animation_id($animationId);
+                $letterModel->setLetterStyleId($styleId);
+                $letterModel->setLetterAnimationId($animationId);
                 $letterModel->setName($name);
-                $letterModel->setUser_id($userId);
+                $letterModel->setUserId($userId);
                 $result = $letterModel->updateStyle($letterId);
                 if ($result) {
                     // Redirect to letter

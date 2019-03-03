@@ -35,7 +35,7 @@ class UserController extends CoreController
             }
             if (empty($password)) {
                 $errorList[] = 'Mot de passe vide';
-            } elseif( strlen($password) < 8) {
+            } elseif (strlen($password) < 8) {
                 $errorList[] = 'Mot de passe trop court, minimum 8 caractères';
             }
             if ($password !== $confirmPassword) {
@@ -56,8 +56,8 @@ class UserController extends CoreController
                     $userModel->setEmail($email);
                     $userModel->setPassword($encryptedPassword);
                     $userModel->setPicture($picture);
-                    $userModel->setPhone_number($phoneNumber);
-                    $userModel->setZip_code($zipCode);
+                    $userModel->setPhoneNumber($phoneNumber);
+                    $userModel->setZipCode($zipCode);
                     $userModel->setCity($city);
                     $userModel->setAddress($address);
                     $insert = $userModel->insert();
@@ -93,7 +93,7 @@ class UserController extends CoreController
             $user = $userModel->findByEmail($email);
             if (!empty($user)) {
                 $passwordInBdd = $user->getPassword();
-                if (password_verify($password ,$passwordInBdd)) {
+                if (password_verify($password, $passwordInBdd)) {
                     // Connect user in session
                     User::connect($user);
                     // Redirect to profile
@@ -141,8 +141,8 @@ class UserController extends CoreController
             $user->setFirstname($firstname);
             $user->setLastname($lastname);
             $user->setPicture($picture);
-            $user->setPhone_number($phoneNumber);
-            $user->setZip_code($zipCode);
+            $user->setPhoneNumber($phoneNumber);
+            $user->setZipCode($zipCode);
             $user->setCity($city);
             $user->setAddress($address);
             $userUpdate = $user->update();

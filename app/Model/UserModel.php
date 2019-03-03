@@ -86,7 +86,7 @@ class UserModel
         $pdoStatement->execute();
         // Check Result
         $affectedRow = $pdoStatement->rowCount();
-        if ($affectedRow < 1 ) {
+        if ($affectedRow < 1) {
             return false;
         }
         $this->id = $pdo->lastInsertId();
@@ -121,7 +121,7 @@ class UserModel
         $pdoStatement->execute();
         // Check Result
         $affectedRow = $pdoStatement->rowCount();
-        if ($affectedRow < 1 ) {
+        if ($affectedRow < 1) {
             return false;
         }
         return true;
@@ -139,7 +139,7 @@ class UserModel
         $pdoStatement->execute();
         // Check Result
         $affectedRow = $pdoStatement->rowCount();
-        if ($affectedRow < 1 ) {
+        if ($affectedRow < 1) {
             return false;
         }
         return true;
@@ -206,23 +206,23 @@ class UserModel
         return $this;
     }
 
-    public function getPhone_number()
+    public function getPhoneNumber()
     {
         return $this->phone_number;
     }
 
-    public function setPhone_number(string $phone_number)
+    public function setPhoneNumber(string $phone_number)
     {
         $this->phone_number = $phone_number;
         return $this;
     }
 
-    public function getZip_code()
+    public function getZipCode()
     {
         return $this->zip_code;
     }
 
-    public function setZip_code(string $zip_code)
+    public function setZipCode(string $zip_code)
     {
         $this->zip_code = $zip_code;
         return $this;
@@ -249,4 +249,4 @@ class UserModel
         $this->address = $address;
         return $this;
     }
-} 
+}

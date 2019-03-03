@@ -13,9 +13,9 @@
         </div>
         <button type="submit" class="btn btn-primary">Créer</button>
     </form>
-    <?php if(isset($error) && !empty($error)) : ?>
+    <?php if (isset($error) && !empty($error)) : ?>
         <ul class="alert alert-danger" role="alert">
-            <?php foreach($error as $errorText): ?>
+            <?php foreach ($error as $errorText) : ?>
                 <li>
                     <?= $errorText ?>
                 </li>
