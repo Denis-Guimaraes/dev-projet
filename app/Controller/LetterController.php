@@ -4,6 +4,8 @@ namespace MotivOnline\Controller;
 use MotivOnline\Model\LetterModel;
 use MotivOnline\Util\User;
 use MotivOnline\Model\CompanyModel;
+use MotivOnline\Model\LetterStyleModel;
+use MotivOnline\Model\LetterAnimationModel;
 
 class LetterController extends CoreController
 {
@@ -37,12 +39,20 @@ class LetterController extends CoreController
         $letterId = $params['id'];
         $user = User::getConnectedUser();
         $userid = $user->getId();
+        // Get all letter style
+        $letterStyleModel = new LetterStyleModel();
+        $letterStyleList = $letterStyleModel->findAllLetterStyle();
+        // Get all letter animation
+        $letterAnimationModel = new LetterAnimationModel();
+        $letterAnimationList = $letterAnimationModel->findAllLetterAnimation();
         // Get letter
         $letterModel = new LetterModel();
         $letterModel->setUserId($userid);
         $letter = $letterModel->findLetter($letterId);
         // Set data and return viewLetter view
         $this->templateName = 'letter/viewLetter';
+        $this->data['letterStyleList'] = $letterStyleList;
+        $this->data['letterAnimationList'] = $letterAnimationList;
         $this->data['letter'] = $letter;
         $this->show($this->templateName, $this->data);
     }
@@ -223,7 +233,19 @@ class LetterController extends CoreController
 
     public function deleteLetter(array $params)
     {
-        // Todo
+        if (!User::isConnected()) {
+            $this->redirect('main_home');
+        }
+        // Get parmaeters
+        $letterId = $params['id'];
+        $user = User::getConnectedUser();
+        $userId = $user->getId();
+        // Set letter and delete it in database
+        $letterModel = new LetterModel();
+        $letterModel->setUserId($userId);
+        $result = $letterModel->delete($letterId);
+        
+        $this->redirect('letter_list');
     }
 
     // Getters and Setters
