@@ -70,6 +70,12 @@ class Application
         );
         $this->router->map(
             'GET',
+            '/lettre-de-motivation/[i:id]/supprimer',
+            'LetterController#deleteLetter',
+            'letter_delete'
+        );
+        $this->router->map(
+            'GET',
             '/lettre-de-motivation/[i:id]/entreprise/[i:companyId]',
             'CompanyController#showCompany',
             'company_view'
