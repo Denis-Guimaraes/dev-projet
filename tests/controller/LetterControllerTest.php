@@ -184,6 +184,6 @@ class LetterControllerTest extends TestCase
 
         $controller->updateLetter($params);
         $this->assertFileExists(__DIR__ .'/../../app/View/letter/viewLetter.php');
-        $this->assertFileExists(__DIR__ .'/../../app/View/letter/style.php');
+        $this->assertFileExists(__DIR__ .'/../../app/View/letter/letterCustomizer.php');
     }
 }

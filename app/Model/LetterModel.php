@@ -24,6 +24,10 @@ class LetterModel
     protected $user_id;
     protected $company_id;
     protected $company_name;
+    protected $company_recipient_name;
+    protected $company_zip_code;
+    protected $company_city;
+    protected $company_address;
     protected $style_name;
     protected $animation_name;
 
@@ -76,7 +80,11 @@ class LetterModel
                     letter_animation.name as animation_name,
                     letter.user_id,
                     letter.company_id,
-                    company.name as company_name
+                    company.name as company_name,
+                    company.recipient_name as company_recipient_name,
+                    company.zip_code as company_zip_code,
+                    company.city as company_city,
+                    company.address as company_address
                 FROM ' . self::TABLE_NAME . '
                 LEFT JOIN letter_style ON letter.letter_style_id = letter_style.id
                 LEFT JOIN letter_animation ON letter.letter_animation_id = letter_animation.id
@@ -489,12 +497,60 @@ class LetterModel
         return $this;
     }
 
+    public function getCompanyRecipientName()
+    {
+        return $this->company_recipient_name;
+    }
+
+    public function setCompanyRecipientName(string $company_recipient_name)
+    {
+        $this->company_recipient_name = $company_recipient_name;
+
+        return $this;
+    }
+
+    public function getCompanyZipCode()
+    {
+        return $this->company_zip_code;
+    }
+
+    public function setCompanyZipCode(string $company_zip_code)
+    {
+        $this->company_zip_code = $company_zip_code;
+
+        return $this;
+    }
+
+    public function getCompanyCity()
+    {
+        return $this->company_city;
+    }
+
+    public function setCompanyCity(string $company_city)
+    {
+        $this->company_city = $company_city;
+
+        return $this;
+    }
+
+    public function getCompanyAddress()
+    {
+        return $this->company_address;
+    }
+ 
+    public function setCompanyAddress(string $company_address)
+    {
+        $this->company_address = $company_address;
+
+        return $this;
+    }
+
     public function getStyleName()
     {
         return $this->style_name;
     }
 
-    public function setStyleName($style_name)
+    public function setStyleName(string $style_name)
     {
         $this->style_name = $style_name;
 
@@ -506,7 +562,7 @@ class LetterModel
         return $this->animation_name;
     }
  
-    public function setAnimationName($animation_name)
+    public function setAnimationName(string $animation_name)
     {
         $this->animation_name = $animation_name;
 

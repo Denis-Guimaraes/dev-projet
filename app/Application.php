@@ -57,6 +57,12 @@ class Application
             'letter_view'
         );
         $this->router->map(
+            'GET',
+            '/lettre-de-motivation/[i:id]/[a:section]',
+            'LetterController#updateLetter',
+            'letter_update_view'
+        );
+        $this->router->map(
             'POST',
             '/lettre-de-motivation/[i:id]/[a:section]',
             'LetterController#updateLetter',

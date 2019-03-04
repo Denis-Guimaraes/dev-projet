@@ -39,7 +39,7 @@ class LetterAnimationModel
         return $this->name;
     }
 
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
 
@@ -51,7 +51,7 @@ class LetterAnimationModel
         return $this->example;
     }
 
-    public function setExample($example)
+    public function setExample(string $example)
     {
         $this->example = $example;
 

@@ -114,116 +114,117 @@ class LetterController extends CoreController
         $letterId = $params['id'];
         $user = User::getConnectedUser();
         $userId = $user->getId();
-
-        switch ($section) {
-            case 'entete':
-                // Set parameters
-                $date = (isset($_POST['date'])) ? $_POST['date'] : '';
-                $title = (isset($_POST['title'])) ? $_POST['title'] : '';
-                $object = (isset($_POST['object'])) ? $_POST['object'] : '';
-                // Set letter and update it in database
-                $letterModel = new LetterModel();
-                $letterModel->setDate($date);
-                $letterModel->setTitle($title);
-                $letterModel->setObject($object);
-                $letterModel->setUserId($userId);
-                $result = $letterModel->updateHeader($letterId);
-                if ($result) {
-                    // Redirect to letter
-                    $parameter = [
-                        'id' => $letterId,
-                    ];
-                    $this->redirect('letter_view', $parameter);
-                } else {
-                    $errorList[] = 'Une erreur inattendue s\'est produite';
-                }
-                break;
-            case 'section1':
-                // Set parameters
-                $title = (isset($_POST['title'])) ? $_POST['title'] : '';
-                $content = (isset($_POST['content'])) ? $_POST['content'] : '';
-                // Set letter and update it in database
-                $letterModel = new LetterModel();
-                $letterModel->setTitleSection1($title);
-                $letterModel->setContentSection1($content);
-                $letterModel->setUserId($userId);
-                $result = $letterModel->updateSection1($letterId);
-                if ($result) {
-                    // Redirect to letter
-                    $parameter = [
-                        'id' => $letterId,
-                    ];
-                    $this->redirect('letter_view', $parameter);
-                } else {
-                    $errorList[] = 'Une erreur inattendue s\'est produite';
-                }
-                break;
-            case 'section2':
-                // Set parameters
-                $title = (isset($_POST['title'])) ? $_POST['title'] : '';
-                $content = (isset($_POST['content'])) ? $_POST['content'] : '';
-                // Set letter and update it in database
-                $letterModel = new LetterModel();
-                $letterModel->setTitleSection2($title);
-                $letterModel->setContentSection2($content);
-                $letterModel->setUserId($userId);
-                $result = $letterModel->updateSection2($letterId);
-                if ($result) {
-                    // Redirect to letter
-                    $parameter = [
-                        'id' => $letterId,
-                    ];
-                    $this->redirect('letter_view', $parameter);
-                } else {
-                    $errorList[] = 'Une erreur inattendue s\'est produite';
-                }
-                break;
-            case 'section3':
-                // Set parameters
-                $title = (isset($_POST['title'])) ? $_POST['title'] : '';
-                $content = (isset($_POST['content'])) ? $_POST['content'] : '';
-                $conclusion = (isset($_POST['conclusion'])) ? $_POST['conclusion'] : '';
-                // Set letter and update it in database
-                $letterModel = new LetterModel();
-                $letterModel->setTitleSection3($title);
-                $letterModel->setContentSection3($content);
-                $letterModel->setConclusion($conclusion);
-                $letterModel->setUserId($userId);
-                $result = $letterModel->updateSection3($letterId);
-                if ($result) {
-                    // Redirect to letter
-                    $parameter = [
-                        'id' => $letterId,
-                    ];
-                    $this->redirect('letter_view', $parameter);
-                } else {
-                    $errorList[] = 'Une erreur inattendue s\'est produite';
-                }
-                break;
-            case 'style':
-                // Set parameters
-                $styleId = (isset($_POST['styleId'])) ? $_POST['styleId'] : '';
-                $animationId = (isset($_POST['animationId'])) ? $_POST['animationId'] : '';
-                $name = (isset($_POST['name'])) ? $_POST['name'] : '';
-                // Set letter and update it in database
-                $letterModel = new LetterModel();
-                $letterModel->setLetterStyleId($styleId);
-                $letterModel->setLetterAnimationId($animationId);
-                $letterModel->setName($name);
-                $letterModel->setUserId($userId);
-                $result = $letterModel->updateStyle($letterId);
-                if ($result) {
-                    // Redirect to letter
-                    $parameter = [
-                        'id' => $letterId,
-                    ];
-                    $this->redirect('letter_view', $parameter);
-                } else {
-                    $errorList[] = 'Une erreur inattendue s\'est produite';
-                }
-                break;
-            default:
-                $this->sendHttpError(404, "Motiv'Online - erreur 404");
+        if (!empty($_POST)) {
+            switch ($section) {
+                case 'entete':
+                    // Set parameters
+                    $date = (isset($_POST['date'])) ? $_POST['date'] : '';
+                    $title = (isset($_POST['title'])) ? $_POST['title'] : '';
+                    $object = (isset($_POST['object'])) ? $_POST['object'] : '';
+                    // Set letter and update it in database
+                    $letterModel = new LetterModel();
+                    $letterModel->setDate($date);
+                    $letterModel->setTitle($title);
+                    $letterModel->setObject($object);
+                    $letterModel->setUserId($userId);
+                    $result = $letterModel->updateHeader($letterId);
+                    if ($result) {
+                        // Redirect to letter
+                        $parameter = [
+                            'id' => $letterId,
+                        ];
+                        $this->redirect('letter_view', $parameter);
+                    } else {
+                        $errorList[] = 'Une erreur inattendue s\'est produite';
+                    }
+                    break;
+                case 'section1':
+                    // Set parameters
+                    $title = (isset($_POST['title'])) ? $_POST['title'] : '';
+                    $content = (isset($_POST['content'])) ? $_POST['content'] : '';
+                    // Set letter and update it in database
+                    $letterModel = new LetterModel();
+                    $letterModel->setTitleSection1($title);
+                    $letterModel->setContentSection1($content);
+                    $letterModel->setUserId($userId);
+                    $result = $letterModel->updateSection1($letterId);
+                    if ($result) {
+                        // Redirect to letter
+                        $parameter = [
+                            'id' => $letterId,
+                        ];
+                        $this->redirect('letter_view', $parameter);
+                    } else {
+                        $errorList[] = 'Une erreur inattendue s\'est produite';
+                    }
+                    break;
+                case 'section2':
+                    // Set parameters
+                    $title = (isset($_POST['title'])) ? $_POST['title'] : '';
+                    $content = (isset($_POST['content'])) ? $_POST['content'] : '';
+                    // Set letter and update it in database
+                    $letterModel = new LetterModel();
+                    $letterModel->setTitleSection2($title);
+                    $letterModel->setContentSection2($content);
+                    $letterModel->setUserId($userId);
+                    $result = $letterModel->updateSection2($letterId);
+                    if ($result) {
+                        // Redirect to letter
+                        $parameter = [
+                            'id' => $letterId,
+                        ];
+                        $this->redirect('letter_view', $parameter);
+                    } else {
+                        $errorList[] = 'Une erreur inattendue s\'est produite';
+                    }
+                    break;
+                case 'section3':
+                    // Set parameters
+                    $title = (isset($_POST['title'])) ? $_POST['title'] : '';
+                    $content = (isset($_POST['content'])) ? $_POST['content'] : '';
+                    $conclusion = (isset($_POST['conclusion'])) ? $_POST['conclusion'] : '';
+                    // Set letter and update it in database
+                    $letterModel = new LetterModel();
+                    $letterModel->setTitleSection3($title);
+                    $letterModel->setContentSection3($content);
+                    $letterModel->setConclusion($conclusion);
+                    $letterModel->setUserId($userId);
+                    $result = $letterModel->updateSection3($letterId);
+                    if ($result) {
+                        // Redirect to letter
+                        $parameter = [
+                            'id' => $letterId,
+                        ];
+                        $this->redirect('letter_view', $parameter);
+                    } else {
+                        $errorList[] = 'Une erreur inattendue s\'est produite';
+                    }
+                    break;
+                case 'style':
+                    // Set parameters
+                    $styleId = (isset($_POST['styleId'])) ? $_POST['styleId'] : '';
+                    $animationId = (isset($_POST['animationId'])) ? $_POST['animationId'] : '';
+                    $name = (isset($_POST['name'])) ? $_POST['name'] : '';
+                    // Set letter and update it in database
+                    $letterModel = new LetterModel();
+                    $letterModel->setLetterStyleId($styleId);
+                    $letterModel->setLetterAnimationId($animationId);
+                    $letterModel->setName($name);
+                    $letterModel->setUserId($userId);
+                    $result = $letterModel->updateStyle($letterId);
+                    if ($result) {
+                        // Redirect to letter
+                        $parameter = [
+                            'id' => $letterId,
+                        ];
+                        $this->redirect('letter_view', $parameter);
+                    } else {
+                        $errorList[] = 'Une erreur inattendue s\'est produite';
+                    }
+                    break;
+                default:
+                    $this->sendHttpError(404, "Motiv'Online - erreur 404");
+            }
         }
         // Set data and return section view
         $this->templateName = 'letter/' . $section;

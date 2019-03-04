@@ -59,3 +59,33 @@
   text-align: center;
   padding: 0.2rem;
 }
+
+@media SCREEN AND (min-width: 768px) {
+  .letter > .section {
+    min-width: 768px;
+  }
+
+  .section__content--row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin: 0;
+  }
+}
+
+@media PRINT {
+  .body * {
+    visibility: hidden;
+  }
+
+  .section--print, .section--print * {
+    visibility: visible;
+  }
+
+  .section--print {
+    max-width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}
