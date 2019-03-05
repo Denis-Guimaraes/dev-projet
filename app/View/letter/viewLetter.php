@@ -42,7 +42,7 @@
         <div class="section__content--space d-flex flex-column mb-5">
             <h4><?= $letter->getTitleSection3() ?></h4>
             <p><?= $letter->getContentSection3() ?></p>
-            <p><?= $letter->getConclusion() ?></p>
+            <p class="mt-5"><?= $letter->getConclusion() ?></p>
             <a href="<?= $router->generate('letter_update_view', ['id' => $letter->getId(), 'section' => 'section3']) ?>"
             class="btn btn-primary btn-sm mr-auto">Editer section 3</a>
         </div>
