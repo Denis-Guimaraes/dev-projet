@@ -38,7 +38,7 @@ class LetterController extends CoreController
         // Get parameters
         $letterId = $params['id'];
         $user = User::getConnectedUser();
-        $userid = $user->getId();
+        $userId = $user->getId();
         // Get all letter style
         $letterStyleModel = new LetterStyleModel();
         $letterStyleList = $letterStyleModel->findAllLetterStyle();
@@ -47,12 +47,30 @@ class LetterController extends CoreController
         $letterAnimationList = $letterAnimationModel->findAllLetterAnimation();
         // Get letter
         $letterModel = new LetterModel();
-        $letterModel->setUserId($userid);
+        $letter = $letterModel->findLetter($letterId);
+
+        if ($userId === $letter->getUserId()) {
+            // Set data and return viewLetter view
+            $this->templateName = 'letter/viewLetter';
+            $this->data['letterStyleList'] = $letterStyleList;
+            $this->data['letterAnimationList'] = $letterAnimationList;
+            $this->data['letter'] = $letter;
+            $this->show($this->templateName, $this->data);
+        }
+        // Send error
+        $this->sendHttpError(404, "Motiv'Online - erreur 404");
+    }
+
+    public function shareLetter(array $params)
+    {
+        // Get parameters
+        $letterId = $params['id'];
+        $letterhash = $params['hash'];
+        // Get letter
+        $letterModel = new LetterModel();
         $letter = $letterModel->findLetter($letterId);
         // Set data and return viewLetter view
-        $this->templateName = 'letter/viewLetter';
-        $this->data['letterStyleList'] = $letterStyleList;
-        $this->data['letterAnimationList'] = $letterAnimationList;
+        $this->templateName = 'letter/shareLetter';
         $this->data['letter'] = $letter;
         $this->show($this->templateName, $this->data);
     }

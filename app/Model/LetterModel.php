@@ -22,6 +22,13 @@ class LetterModel
     protected $letter_style_id;
     protected $letter_animation_id;
     protected $user_id;
+    protected $user_firstname;
+    protected $user_lastname;
+    protected $user_email;
+    protected $user_phone_number;
+    protected $user_zip_code;
+    protected $user_city;
+    protected $user_address;
     protected $company_id;
     protected $company_name;
     protected $company_recipient_name;
@@ -79,6 +86,13 @@ class LetterModel
                     letter.letter_animation_id,
                     letter_animation.name as animation_name,
                     letter.user_id,
+                    user.firstname as user_firstname,
+                    user.lastname as user_lastname,
+                    user.email as user_email,
+                    user.phone_number as user_phone_number,
+                    user.zip_code as user_zip_code,
+                    user.city as user_city,
+                    user.address as user_address,
                     letter.company_id,
                     company.name as company_name,
                     company.recipient_name as company_recipient_name,
@@ -86,15 +100,15 @@ class LetterModel
                     company.city as company_city,
                     company.address as company_address
                 FROM ' . self::TABLE_NAME . '
-                LEFT JOIN letter_style ON letter.letter_style_id = letter_style.id
-                LEFT JOIN letter_animation ON letter.letter_animation_id = letter_animation.id
-                LEFT JOIN company ON letter.company_id = company.id
-                WHERE letter.user_id = :user_id AND letter.id = :letter_id';
+                INNER JOIN user ON letter.user_id = user.id
+                INNER JOIN letter_style ON letter.letter_style_id = letter_style.id
+                INNER JOIN letter_animation ON letter.letter_animation_id = letter_animation.id
+                INNER JOIN company ON letter.company_id = company.id
+                WHERE letter.id = :letter_id';
 
         // Prepare and execute request
         $pdo = Database::getPDO();
         $pdoStatement = $pdo->prepare($sql);
-        $pdoStatement->bindValue(':user_id', $this->user_id, PDO::PARAM_INT);
         $pdoStatement->bindValue(':letter_id', $letter_id, PDO::PARAM_INT);
         $pdoStatement->execute();
         $result = $pdoStatement->fetchObject(self::class);
@@ -466,6 +480,90 @@ class LetterModel
     public function setUserId(int $user_id)
     {
         $this->user_id = $user_id;
+
+        return $this;
+    }
+ 
+    public function getUserFirstname()
+    {
+        return $this->user_firstname;
+    }
+ 
+    public function setUserFirstname($user_firstname)
+    {
+        $this->user_firstname = $user_firstname;
+
+        return $this;
+    }
+
+    public function getUserLastname()
+    {
+        return $this->user_lastname;
+    }
+
+    public function setUserLastname($user_lastname)
+    {
+        $this->user_lastname = $user_lastname;
+
+        return $this;
+    }
+
+    public function getUserEmail()
+    {
+        return $this->user_email;
+    }
+ 
+    public function setUserEmail($user_email)
+    {
+        $this->user_email = $user_email;
+
+        return $this;
+    }
+
+    public function getUserPhoneNumber()
+    {
+        return $this->user_phone_number;
+    }
+
+    public function setUserPhoneNumber($user_phone_number)
+    {
+        $this->user_phone_number = $user_phone_number;
+
+        return $this;
+    }
+
+    public function getUserZipCode()
+    {
+        return $this->user_zip_code;
+    }
+
+    public function setUserZipCode($user_zip_code)
+    {
+        $this->user_zip_code = $user_zip_code;
+
+        return $this;
+    }
+
+    public function getUserCity()
+    {
+        return $this->user_city;
+    }
+
+    public function setUserCity($user_city)
+    {
+        $this->user_city = $user_city;
+
+        return $this;
+    }
+
+    public function getUserAddress()
+    {
+        return $this->user_address;
+    }
+
+    public function setUserAddress($user_address)
+    {
+        $this->user_address = $user_address;
 
         return $this;
     }

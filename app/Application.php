@@ -70,8 +70,8 @@ class Application
         );
         $this->router->map(
             'GET',
-            '/lettre/[a:hash]',
-            'LetterController#showPreviewLetter',
+            '/paratage/[i:id]/[a:hash]',
+            'LetterController#shareLetter',
             'letter_share'
         );
         $this->router->map(
