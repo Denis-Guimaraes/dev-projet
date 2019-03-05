@@ -39,6 +39,12 @@
   text-align: center;
 }
 
+.section__subtitle {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #104161;
+}
+
 .section__content {
   margin: 0.8rem 0;
 }

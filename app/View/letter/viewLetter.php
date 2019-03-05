@@ -22,7 +22,7 @@
         </div>
         <div class="section__content d-flex flex-column mb-5">
             <span class="text-right">Le <?= date("d/m/Y", strtotime($letter->getDate())) ?> à <?= $connectedUser->getCity() ?></span>
-            <h3 class="section__title text-left border-0 mt-5"><?= $letter->getTitle() ?></h3>
+            <h3 class="mt-5"><?= $letter->getTitle() ?></h3>
             <h4><?= $letter->getObject() ?></h4>
             <a href="<?= $router->generate('letter_update_view', ['id' => $letter->getId(), 'section' => 'entete']) ?>"
             class="btn btn-primary btn-sm mr-auto">Editer entête</a>

@@ -66,7 +66,7 @@ class LetterController extends CoreController
         // Check and set parameters
         if (!empty($_POST)) {
             $name = (isset($_POST['name'])) ? $_POST['name'] : '';
-            $title = (isset($_POST['title'])) ? $_POST['title'] : '';
+            $companyName = (isset($_POST['companyName'])) ? $_POST['companyName'] : '';
             $link = uniqid();
             $user = User::getConnectedUser();
             $userId = $user->getId();
@@ -74,6 +74,7 @@ class LetterController extends CoreController
             // Create company
             $companyModel = new CompanyModel();
             $companyModel->setUserId($userId);
+            $companyModel->setName($companyName);
             $result = $companyModel->insert();
             if ($result) {
                 $companyId = $companyModel->getId();
@@ -81,11 +82,10 @@ class LetterController extends CoreController
                 $letterModel = new LetterModel();
                 $letterModel->setName($name);
                 $letterModel->setLink($link);
-                $letterModel->setTitle($title);
                 $letterModel->setUserId($userId);
                 $letterModel->setCompanyId($companyId);
-                $letter = $letterModel->insert();
-                if ($letter) {
+                $letterResult = $letterModel->insert();
+                if ($letterResult) {
                     // Redirect to letter
                     $parameter = [
                         'id' => $letterModel->getId(),
@@ -128,15 +128,6 @@ class LetterController extends CoreController
                     $letterModel->setObject($object);
                     $letterModel->setUserId($userId);
                     $result = $letterModel->updateHeader($letterId);
-                    if ($result) {
-                        // Redirect to letter
-                        $parameter = [
-                            'id' => $letterId,
-                        ];
-                        $this->redirect('letter_view', $parameter);
-                    } else {
-                        $errorList[] = 'Une erreur inattendue s\'est produite';
-                    }
                     break;
                 case 'section1':
                     // Set parameters
@@ -148,15 +139,6 @@ class LetterController extends CoreController
                     $letterModel->setContentSection1($content);
                     $letterModel->setUserId($userId);
                     $result = $letterModel->updateSection1($letterId);
-                    if ($result) {
-                        // Redirect to letter
-                        $parameter = [
-                            'id' => $letterId,
-                        ];
-                        $this->redirect('letter_view', $parameter);
-                    } else {
-                        $errorList[] = 'Une erreur inattendue s\'est produite';
-                    }
                     break;
                 case 'section2':
                     // Set parameters
@@ -168,15 +150,6 @@ class LetterController extends CoreController
                     $letterModel->setContentSection2($content);
                     $letterModel->setUserId($userId);
                     $result = $letterModel->updateSection2($letterId);
-                    if ($result) {
-                        // Redirect to letter
-                        $parameter = [
-                            'id' => $letterId,
-                        ];
-                        $this->redirect('letter_view', $parameter);
-                    } else {
-                        $errorList[] = 'Une erreur inattendue s\'est produite';
-                    }
                     break;
                 case 'section3':
                     // Set parameters
@@ -190,15 +163,6 @@ class LetterController extends CoreController
                     $letterModel->setConclusion($conclusion);
                     $letterModel->setUserId($userId);
                     $result = $letterModel->updateSection3($letterId);
-                    if ($result) {
-                        // Redirect to letter
-                        $parameter = [
-                            'id' => $letterId,
-                        ];
-                        $this->redirect('letter_view', $parameter);
-                    } else {
-                        $errorList[] = 'Une erreur inattendue s\'est produite';
-                    }
                     break;
                 case 'style':
                     // Set parameters
@@ -212,23 +176,24 @@ class LetterController extends CoreController
                     $letterModel->setName($name);
                     $letterModel->setUserId($userId);
                     $result = $letterModel->updateStyle($letterId);
-                    if ($result) {
-                        // Redirect to letter
-                        $parameter = [
-                            'id' => $letterId,
-                        ];
-                        $this->redirect('letter_view', $parameter);
-                    } else {
-                        $errorList[] = 'Une erreur inattendue s\'est produite';
-                    }
                     break;
                 default:
+                    // Send error
                     $this->sendHttpError(404, "Motiv'Online - erreur 404");
             }
+            // Redirect to letter
+            $parameter = [
+                'id' => $letterId,
+            ];
+            $this->redirect('letter_view', $parameter);
         }
-        // Set data and return section view
+        // Get letter data
+        $letterModel = new LetterModel();
+        $letterModel->setUserId($userId);
+        $letter = $letterModel->findLetter($letterId);
+        // Set data and return view section
         $this->templateName = 'letter/' . $section;
-        $this->data['error'] = $errorList;
+        $this->data['letter'] = $letter;
         $this->show($this->templateName, $this->data);
     }
 

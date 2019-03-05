@@ -40,7 +40,7 @@ class LetterModel
                     letter.id,
                     letter.name,
                     letter.link,
-                    letter.title,
+                    letter.object,
                     letter.user_id,
                     letter.company_id,
                     company.name as company_name
@@ -107,14 +107,12 @@ class LetterModel
          $sql = 'INSERT INTO ' . self::TABLE_NAME . ' (
             `name`,
             `link`,
-            `title`,
             `user_id`,
             `company_id`
         )
         VALUES (
             :name,
             :link,
-            :title,
             :user_id,
             :company_id
         )';
@@ -124,7 +122,6 @@ class LetterModel
         $pdoStatement = $pdo->prepare($sql);
         $pdoStatement->bindValue(':name', $this->name, PDO::PARAM_STR);
         $pdoStatement->bindValue(':link', $this->link, PDO::PARAM_STR);
-        $pdoStatement->bindValue(':title', $this->title, PDO::PARAM_STR);
         $pdoStatement->bindValue(':user_id', $this->user_id, PDO::PARAM_INT);
         $pdoStatement->bindValue(':company_id', $this->company_id, PDO::PARAM_INT);
         $pdoStatement->execute();

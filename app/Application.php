@@ -34,61 +34,61 @@ class Application
 
         $this->router->map(
             'GET',
-            '/lettre-de-motivation',
+            '/lettre',
             'LetterController#showAllLetter',
             'letter_list'
         );
         $this->router->map(
             'GET',
-            '/lettre-de-motivation/creer',
+            '/lettre/creer',
             'LetterController#createLetter',
             'letter_create_view'
         );
         $this->router->map(
             'POST',
-            '/lettre-de-motivation/creer',
+            '/lettre/creer',
             'LetterController#createLetter',
             'letter_create'
         );
         $this->router->map(
             'GET',
-            '/lettre-de-motivation/[i:id]',
+            '/lettre/[i:id]',
             'LetterController#showLetter',
             'letter_view'
         );
         $this->router->map(
             'GET',
-            '/lettre-de-motivation/[i:id]/[a:section]',
+            '/lettre/[i:id]/[a:section]',
             'LetterController#updateLetter',
             'letter_update_view'
         );
         $this->router->map(
             'POST',
-            '/lettre-de-motivation/[i:id]/[a:section]',
+            '/lettre/[i:id]/[a:section]',
             'LetterController#updateLetter',
             'letter_update'
         );
         $this->router->map(
             'GET',
-            '/lettre-de-motivation/[i:id]/previsualiser',
+            '/lettre/[a:hash]',
             'LetterController#showPreviewLetter',
-            'letter_preview'
+            'letter_share'
         );
         $this->router->map(
             'GET',
-            '/lettre-de-motivation/[i:id]/supprimer',
+            '/lettre/supprimer/[i:id]',
             'LetterController#deleteLetter',
             'letter_delete'
         );
         $this->router->map(
             'GET',
-            '/lettre-de-motivation/[i:id]/entreprise/[i:companyId]',
+            '/lettre/[i:id]/entreprise/[i:companyId]',
             'CompanyController#showCompany',
             'company_view'
         );
         $this->router->map(
             'POST',
-            '/lettre-de-motivation/[i:id]/entreprise/[i:companyId]',
+            '/lettre/[i:id]/entreprise/[i:companyId]',
             'CompanyController#updateCompany',
             'company_update'
         );
