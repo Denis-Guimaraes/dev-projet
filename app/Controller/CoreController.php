@@ -31,23 +31,30 @@ abstract class CoreController
         if ($errorCode == 404) {
             header("HTTP/1.0 404 Not Found");
             echo $htmlContent;
+            exit;
         }
+        header("HTTP/1.0 500 Internal Server Error");
+        echo $htmlContent;
+        exit;
     }
 
     public function sendJson(array $data)
     {
         header('Content-Type: application/json');
         echo json_encode($data);
+        exit;
     }
 
     public function show(string $templateName, array $dataToView = [])
     {
         echo $this->templateEngine->render($templateName, $dataToView);
+        exit;
     }
 
     public function redirect(string $routeName, array $params = [])
     {
         header('Location: '. $this->getRouter()->generate($routeName, $params));
+        exit;
     }
 
     public function getRouter()

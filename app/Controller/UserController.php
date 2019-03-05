@@ -151,7 +151,7 @@ class UserController extends CoreController
                 // Set success
                 $this->data['success'] = 'Vos informations personnelles ont bien été modifiées.';
             } else {
-                $errorList[] = 'Une erreur inattendue s\'est produite';
+                $errorList[] = 'Aucune modification n\'a été effectuée.';
             }
         }
         // Set data and return profile view

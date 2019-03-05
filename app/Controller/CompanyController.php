@@ -53,18 +53,10 @@ class CompanyController extends CoreController
         $companyModel->setCity($city);
         $companyModel->setZipCode($zipCode);
         $result = $companyModel->update($companyId);
-        if ($result) {
-            // Redirect to letter
-            $parameter = [
-                'id' => $letterId,
-            ];
-            $this->redirect('letter_view', $parameter);
-        } else {
-            $errorList[] = 'Une erreur inattendue s\'est produite';
-        }
-        // Set data and return viewCompany view
-        $this->templateName = 'company/viewCompany';
-        $this->data['error'] = $errorList;
-        $this->show($this->templateName, $this->data);
+        // Redirect to letter
+        $parameter = [
+            'id' => $letterId,
+        ];
+        $this->redirect('letter_view', $parameter);
     }
 }

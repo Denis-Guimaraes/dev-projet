@@ -4,12 +4,14 @@
     <h2 class="section__title">Nouvelle lettre de motivation</h2>
     <form class="section__content" method="post" action="<?= $router->generate('letter_create') ?>">
         <div class="form-group">
-            <label for="name">Nom</label>
-            <input type="text" class="form-control" id="name" name="name" placeholder="Nom">
+            <label for="name">Nom de la lettre</label>
+            <input type="text" class="form-control" id="name" name="name"
+            placeholder="Nom de la lettre">
         </div>
         <div class="form-group">
-            <label for="title">Titre</label>
-            <input type="text" class="form-control" id="title" name="title" placeholder="Titre">
+            <label for="companyName">Nom de l'entreprise</label>
+            <input type="text" class="form-control" id="companyName" name="companyName"
+            placeholder="Nom de l'entreprise">
         </div>
         <button type="submit" class="btn btn-primary">Créer</button>
     </form>
