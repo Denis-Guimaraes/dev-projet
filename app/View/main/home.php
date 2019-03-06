@@ -10,7 +10,7 @@
         </p>
     </section>
     <section class="section ml-md-3 p-0">
-        <img src="<?= $basePath ?>/asset/image/mo-vid.gif" alt="Exemple de lettre" class="rounded w-100">
+        <img src="<?= $basePath ?>/asset/image/mo-gif.gif" alt="Exemple de lettre" class="rounded w-100">
     </section>
 </div>
 

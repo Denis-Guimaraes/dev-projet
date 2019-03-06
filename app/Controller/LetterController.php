@@ -58,17 +58,17 @@ class LetterController extends CoreController
             $this->show($this->templateName, $this->data);
         }
         // Send error
-        $this->sendHttpError(404, "Motiv'Online - erreur 404");
+        $this->sendHttpError(401, "Motiv'Online - erreur 401");
     }
 
     public function shareLetter(array $params)
     {
         // Get parameters
-        $letterId = $params['id'];
-        $letterhash = $params['hash'];
+        $letterHash = $params['hash'];
         // Get letter
         $letterModel = new LetterModel();
-        $letter = $letterModel->findLetter($letterId);
+        $letterModel->setLink($letterHash);
+        $letter = $letterModel->findLetterByLink();
         // Set data and return viewLetter view
         $this->templateName = 'letter/shareLetter';
         $this->data['letter'] = $letter;

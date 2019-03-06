@@ -12,8 +12,7 @@
                     <p class="card-text">Lien : 
                     <a href="<?= $router->generate('letter_share', ['id' => $letter->getId(),
                     'hash' => $letter->getLink()])?>">
-                    http://localhost<?= $router->generate('letter_share', ['id' => $letter->getId(),
-                    'hash' => $letter->getLink()]) ?></a></p>
+                    http://localhost<?= $router->generate('letter_share', ['hash' => $letter->getLink()]) ?></a></p>
                     <div class="d-flex justify-content-end">
                         <a href="<?= $router->generate('letter_view', ['id' => $letter->getId()]) ?>"
                         class="btn btn-primary ml-2">Editer la lettre</a>
