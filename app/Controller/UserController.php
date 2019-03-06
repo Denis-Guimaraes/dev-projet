@@ -15,8 +15,9 @@ class UserController extends CoreController
             $this->redirect('letter_list');
         }
         $errorList = [];
-        // Check and set parameters
+
         if (!empty($_POST)) {
+            // Check and set parameters
             $firstname = (isset($_POST['firstname'])) ? $_POST['firstname'] : '';
             $lastname = (isset($_POST['lastname'])) ? $_POST['lastname'] : '';
             $email = (isset($_POST['email'])) ? $_POST['email'] : '';
@@ -83,6 +84,7 @@ class UserController extends CoreController
             $this->redirect('letter_list');
         }
         $errorList = [];
+
         if (!empty($_POST)) {
             // Check and set parameters
             $email = (isset($_POST['email'])) ? $_POST['email'] : '';
@@ -126,8 +128,9 @@ class UserController extends CoreController
         if (!User::isConnected()) {
             $this->redirect('main_home');
         }
-        // Check and set parameters
+
         if (!empty($_POST)) {
+            // Check and set parameters
             $firstname = (isset($_POST['firstname'])) ? $_POST['firstname'] : '';
             $lastname = (isset($_POST['lastname'])) ? $_POST['lastname'] : '';
             $picture = (isset($_POST['picture'])) ? $_POST['picture'] : '';
@@ -172,7 +175,7 @@ class UserController extends CoreController
             $this->redirect('main_home');
         }
         $user = User::getConnectedUser();
-        $userDelete = $user->delete();
+        $user->delete();
         User::disconnect();
         $this->redirect('main_home');
     }

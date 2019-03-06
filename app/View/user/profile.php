@@ -37,19 +37,19 @@
             $connectedUser->getCity(); ?>" placeholder="Ville">
         </div>
         <button type="submit" class="btn btn-primary">Sauvegarder</button>
+        <?php if (isset($error) && !empty($error)) : ?>
+            <ul class="alert alert-danger mt-3" role="alert">
+                <?php foreach ($error as $errorText) : ?>
+                    <li>
+                        <?= $errorText ?>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        <?php endif; ?>
     </form>
     <div class="section__delete">
         <button type="button" class="btn btn-danger" id="deleteUser">Supprimer mon profil</button>
     </div>
-    <?php if (isset($error) && !empty($error)) : ?>
-        <ul class="alert alert-danger" role="alert">
-            <?php foreach ($error as $errorText) : ?>
-                <li>
-                    <?= $errorText ?>
-                </li>
-            <?php endforeach; ?>
-        </ul>
-    <?php endif; ?>
     <?php if (isset($success)) : ?>
         <div class="modal" id="modalMessage" tabindex="-1" role="dialog"
         aria-labelledby="modalMessageTitle" aria-hidden="true">
@@ -65,7 +65,7 @@
                         <?= $success ?>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                     </div>
                 </div>
             </div>
@@ -84,7 +84,7 @@
                         Êtes-vous sûr de vouloir supprimer votre profil ?
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
                         <form action="<?= $router->generate('user_delete') ?>" method="get">
                         <button type="submit" class="btn btn-danger">Supprimer</button>
                         </form>

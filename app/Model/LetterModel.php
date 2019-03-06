@@ -20,7 +20,9 @@ class LetterModel
     protected $content_section_3;
     protected $conclusion;
     protected $letter_style_id;
+    protected $style_name;
     protected $letter_animation_id;
+    protected $animation_name;
     protected $user_id;
     protected $user_firstname;
     protected $user_lastname;
@@ -35,12 +37,10 @@ class LetterModel
     protected $company_zip_code;
     protected $company_city;
     protected $company_address;
-    protected $style_name;
-    protected $animation_name;
 
     const TABLE_NAME = 'letter';
 
-    public function findAllLetter(int $user_id)
+    public function findAllLetter()
     {
         // SQL request
         $sql = 'SELECT
@@ -58,7 +58,7 @@ class LetterModel
         // Prepare and execute request
         $pdo = Database::getPDO();
         $pdoStatement = $pdo->prepare($sql);
-        $pdoStatement->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':user_id', $this->user_id, PDO::PARAM_INT);
         $pdoStatement->execute();
         $result = $pdoStatement->fetchAll(PDO::FETCH_CLASS, self::class);
         return $result;
@@ -511,6 +511,18 @@ class LetterModel
         return $this;
     }
 
+    public function getStyleName()
+    {
+        return $this->style_name;
+    }
+
+    public function setStyleName(string $style_name)
+    {
+        $this->style_name = $style_name;
+
+        return $this;
+    }
+
     public function getLetterAnimationId()
     {
         return $this->letter_animation_id;
@@ -519,6 +531,18 @@ class LetterModel
     public function setLetterAnimationId(int $letter_animation_id)
     {
         $this->letter_animation_id = $letter_animation_id;
+
+        return $this;
+    }
+
+    public function getAnimationName()
+    {
+        return $this->animation_name;
+    }
+ 
+    public function setAnimationName(string $animation_name)
+    {
+        $this->animation_name = $animation_name;
 
         return $this;
     }
@@ -687,30 +711,6 @@ class LetterModel
     public function setCompanyAddress(string $company_address)
     {
         $this->company_address = $company_address;
-
-        return $this;
-    }
-
-    public function getStyleName()
-    {
-        return $this->style_name;
-    }
-
-    public function setStyleName(string $style_name)
-    {
-        $this->style_name = $style_name;
-
-        return $this;
-    }
-
-    public function getAnimationName()
-    {
-        return $this->animation_name;
-    }
- 
-    public function setAnimationName(string $animation_name)
-    {
-        $this->animation_name = $animation_name;
 
         return $this;
     }

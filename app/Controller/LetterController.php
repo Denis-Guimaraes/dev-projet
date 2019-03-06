@@ -23,7 +23,8 @@ class LetterController extends CoreController
         $userId = $user->getId();
         // Get letter list
         $letterModel = new LetterModel();
-        $letterList = $letterModel->findAllLetter($userId);
+        $letterModel->setUserId($userId);
+        $letterList = $letterModel->findAllLetter();
         // Set data and return letterList view
         $this->templateName = 'letter/letterList';
         $this->data['letterList'] = $letterList;
@@ -69,7 +70,7 @@ class LetterController extends CoreController
         $letterModel = new LetterModel();
         $letterModel->setLink($letterHash);
         $letter = $letterModel->findLetterByLink();
-        // Set data and return viewLetter view
+        // Set data and return shareLetter view
         $this->templateName = 'letter/shareLetter';
         $this->data['letter'] = $letter;
         $this->show($this->templateName, $this->data);
@@ -81,8 +82,9 @@ class LetterController extends CoreController
             $this->redirect('main_home');
         }
         $errorList = [];
-        // Check and set parameters
+
         if (!empty($_POST)) {
+            // Check and set parameters
             $name = (isset($_POST['name'])) ? $_POST['name'] : '';
             $companyName = (isset($_POST['companyName'])) ? $_POST['companyName'] : '';
             $link = uniqid();
@@ -128,10 +130,12 @@ class LetterController extends CoreController
             $this->redirect('main_home');
         }
         $errorList = [];
+        // Get params
         $section = $params['section'];
         $letterId = $params['id'];
         $user = User::getConnectedUser();
         $userId = $user->getId();
+
         if (!empty($_POST)) {
             switch ($section) {
                 case 'entete':
@@ -209,7 +213,7 @@ class LetterController extends CoreController
         $letterModel = new LetterModel();
         $letterModel->setUserId($userId);
         $letter = $letterModel->findLetter($letterId);
-        // Set data and return view section
+        // Set data and return section view
         $this->templateName = 'letter/' . $section;
         $this->data['letter'] = $letter;
         $this->show($this->templateName, $this->data);
@@ -227,8 +231,7 @@ class LetterController extends CoreController
         // Set letter and delete it in database
         $letterModel = new LetterModel();
         $letterModel->setUserId($userId);
-        $result = $letterModel->delete($letterId);
-        
+        $letterModel->delete($letterId);
         $this->redirect('letter_list');
     }
 

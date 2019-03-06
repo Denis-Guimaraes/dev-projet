@@ -4,8 +4,15 @@ const app = {
     $('#deleteUser').on('click', function() {
       $('#modalAlert').modal('show');
     });
+    $('.delete-letter').on('click', app.deleteLetter);
     app.animationBasiqueOnload();
     $('.content-animation').on('click', app.animationBasique);
+  },
+
+  deleteLetter: function() {
+    const $link = $(this).data('link');
+    $('.delete-letter-link').first().attr('href', $link);
+    $('#modalLetterDelete').modal('show');
   },
 
   animationBasiqueOnload: function() {
