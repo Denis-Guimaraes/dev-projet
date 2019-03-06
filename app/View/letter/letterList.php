@@ -18,11 +18,32 @@
                         class="btn btn-primary ml-2">Editer la lettre</a>
                     </div>
                     <div class="section__delete d-flex justify-content-end">
-                        <a href="<?= $router->generate('letter_delete', ['id' => $letter->getId()]) ?>"
-                        class="btn btn-danger">Supprimer la lettre</a>
+                        <button type="button" class="btn btn-danger delete-letter" data-link="
+                        <?= $router->generate('letter_delete', ['id' => $letter->getId()]) ?>">
+                        Supprimer la lettre</button>
                     </div>
                 </div>
             </div>
         <?php endforeach; ?>
     </section>
+</div>
+<div class="modal" id="modalLetterDelete" tabindex="-1" role="dialog"
+aria-labelledby="modalLetterDeleteTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLetterDeleteTitle">Message</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Êtes-vous sûr de vouloir supprimer la lettre ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                <a href="#" class="btn btn-danger delete-letter-link">Supprimer</a>
+            </div>
+        </div>
+    </div>
 </div>
