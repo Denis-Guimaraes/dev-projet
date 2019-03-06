@@ -33,6 +33,11 @@ abstract class CoreController
             echo $htmlContent;
             exit;
         }
+        if ($errorCode == 401) {
+            header("HTTP/1.0 401 Unauthorized");
+            echo $htmlContent;
+            exit;
+        }
         header("HTTP/1.0 500 Internal Server Error");
         echo $htmlContent;
         exit;

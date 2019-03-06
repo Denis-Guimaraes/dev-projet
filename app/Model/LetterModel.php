@@ -115,6 +115,57 @@ class LetterModel
         return $result;
     }
 
+    public function findLetterByLink()
+    {
+        // SQL request
+        $sql = 'SELECT
+                    letter.id,
+                    letter.name,
+                    letter.link,
+                    letter.date,
+                    letter.title,
+                    letter.object,
+                    letter.title_section_1,
+                    letter.content_section_1,
+                    letter.title_section_2,
+                    letter.content_section_2,
+                    letter.title_section_3,
+                    letter.content_section_3,
+                    letter.conclusion,
+                    letter.letter_style_id,
+                    letter_style.name as style_name,
+                    letter.letter_animation_id,
+                    letter_animation.name as animation_name,
+                    letter.user_id,
+                    user.firstname as user_firstname,
+                    user.lastname as user_lastname,
+                    user.email as user_email,
+                    user.phone_number as user_phone_number,
+                    user.zip_code as user_zip_code,
+                    user.city as user_city,
+                    user.address as user_address,
+                    letter.company_id,
+                    company.name as company_name,
+                    company.recipient_name as company_recipient_name,
+                    company.zip_code as company_zip_code,
+                    company.city as company_city,
+                    company.address as company_address
+                FROM ' . self::TABLE_NAME . '
+                INNER JOIN user ON letter.user_id = user.id
+                INNER JOIN letter_style ON letter.letter_style_id = letter_style.id
+                INNER JOIN letter_animation ON letter.letter_animation_id = letter_animation.id
+                INNER JOIN company ON letter.company_id = company.id
+                WHERE letter.link = :link';
+
+        // Prepare and execute request
+        $pdo = Database::getPDO();
+        $pdoStatement = $pdo->prepare($sql);
+        $pdoStatement->bindValue(':link', $this->link, PDO::PARAM_STR);
+        $pdoStatement->execute();
+        $result = $pdoStatement->fetchObject(self::class);
+        return $result;
+    }
+
     public function insert()
     {
          // SQL request
