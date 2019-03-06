@@ -3,6 +3,7 @@ namespace MotivOnline\Controller;
 
 use MotivOnline\Model\UserModel;
 use MotivOnline\Util\User;
+use MotivOnline\Util\Mailer;
 
 class UserController extends CoreController
 {
@@ -177,6 +178,13 @@ class UserController extends CoreController
         $user = User::getConnectedUser();
         $user->delete();
         User::disconnect();
+        $this->redirect('main_home');
+    }
+
+    public function changePassword()
+    {
+        $mailer = new Mailer();
+        $mailer->sendForgetPassword('guimaraes.dev@gmail.com', 'test');
         $this->redirect('main_home');
     }
 

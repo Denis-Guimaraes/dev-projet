@@ -13,6 +13,8 @@
             <input type="password" class="form-control" id="password" name="password" placeholder="Mot de passe">
         </div>
         <button type="submit" class="btn btn-primary">Connexion</button>
+        <a href="<?= $router->generate('user_forgetPassword') ?>" class="d-block text-center
+        m-3">Mot de passe oublié</a>
     </form>
     <?php if (isset($error) && !empty($error)) : ?>
         <ul class="alert alert-danger" role="alert">

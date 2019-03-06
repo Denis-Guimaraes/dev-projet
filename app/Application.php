@@ -31,6 +31,7 @@ class Application
         $this->router->map('POST', '/profil', 'UserController#updateUser', 'user_update');
         $this->router->map('GET', '/deconnexion', 'UserController#signout', 'user_signout');
         $this->router->map('GET', '/profil/supprimer', 'UserController#deleteUser', 'user_delete');
+        $this->router->map('GET', '/profil/mot-de-passe', 'UserController#changePassword', 'user_forgetPassword');
 
         $this->router->map(
             'GET',
