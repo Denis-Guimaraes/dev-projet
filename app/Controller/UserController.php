@@ -3,6 +3,7 @@ namespace MotivOnline\Controller;
 
 use MotivOnline\Model\UserModel;
 use MotivOnline\Util\User;
+use MotivOnline\Util\Mailer;
 
 class UserController extends CoreController
 {
@@ -47,7 +48,7 @@ class UserController extends CoreController
                 // Check if user already exist
                 $userModel = new UserModel();
                 $user = $userModel->findByEmail($email);
-                if ($userModel) {
+                if (!empty($user)) {
                     $errorList[] = 'Le compte existe déjà pour cet email';
                 } else {
                     // Set user and insert it in database
@@ -56,7 +57,6 @@ class UserController extends CoreController
                     $userModel->setLastname($lastname);
                     $userModel->setEmail($email);
                     $userModel->setPassword($encryptedPassword);
-                    $userModel->setPicture($picture);
                     $userModel->setPhoneNumber($phoneNumber);
                     $userModel->setZipCode($zipCode);
                     $userModel->setCity($city);
@@ -143,7 +143,6 @@ class UserController extends CoreController
             $user = User::getConnectedUser();
             $user->setFirstname($firstname);
             $user->setLastname($lastname);
-            $user->setPicture($picture);
             $user->setPhoneNumber($phoneNumber);
             $user->setZipCode($zipCode);
             $user->setCity($city);
@@ -178,6 +177,99 @@ class UserController extends CoreController
         $user->delete();
         User::disconnect();
         $this->redirect('main_home');
+    }
+
+    public function changePasswordLink()
+    {
+        $errorList = [];
+        if (!User::isConnected()) {
+            if (!empty($_POST)) {
+                // Check email
+                $email = (isset($_POST['email'])) ? $_POST['email'] : '';
+                if (empty($email)) {
+                    $errorList[] = 'Email vide';
+                } elseif (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+                    $errorList[] = 'Email incorrect';
+                }
+                // Get user data
+                $userModel = new UserModel();
+                $user = $userModel->findByEmail($email);
+                if (!empty($user)) {
+                    // Set link
+                    $hash = uniqid();
+                    $user->setHash($hash);
+                    $user->update();
+                    $link = 'http://localhost' . $this->router->generate('user_changePassword_view', ['hash' => $hash]);
+                } else {
+                    $errorList[] = 'Email inconnu';
+                }
+                if (empty($errorList)) {
+                    // Send email and redirect
+                    $mailer = new Mailer();
+                    $mailer->sendChangePasswordLink($email, $link);
+                    $this->redirect('user_signin');
+                }
+            }
+            // Set data and return forgetPassword view
+            $this->templateName = 'user/forgetPassword';
+            $this->data['error'] = $errorList;
+            $this->show($this->templateName, $this->data);
+        }
+
+        $user = User::getConnectedUser();
+        // Set link
+        $hash = uniqid();
+        $user->setHash($hash);
+        $user->update();
+        $link = 'http://localhost' . $this->router->generate('user_changePassword_view', ['hash' => $hash]);
+        $userEmail = $user->getEmail();
+        $mailer = new Mailer();
+        $mailer->sendChangePasswordLink($userEmail, $link);
+        $this->signout();
+    }
+
+    public function changePassword(array $params)
+    {
+        $errorList = [];
+        $hash = $params['hash'];
+
+        if (!empty($_POST)) {
+            // Check and set parameters
+            $email = (isset($_POST['email'])) ? $_POST['email'] : '';
+            $password= (isset($_POST['password'])) ? $_POST['password'] : '';
+            $confirmPassword = (isset($_POST['confirmPassword'])) ? $_POST['confirmPassword'] : '';
+            if (empty($email)) {
+                $errorList[] = 'Email vide';
+            } elseif (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+                $errorList[] = 'Email incorrect';
+            }
+            if (empty($password)) {
+                $errorList[] = 'Mot de passe vide';
+            } elseif (strlen($password) < 8) {
+                $errorList[] = 'Mot de passe trop court, minimum 8 caractères';
+            }
+            if ($password !== $confirmPassword) {
+                $errorList[] = 'Les deux mots de passe sont différents';
+            }
+            // Get user and check if hash match
+            $userModel = new UserModel();
+            $user = $userModel->findByEmail($email);
+            $hashInBdd = $user->getHash();
+            if ($hash === $hashInBdd) {
+                // Encrypt new password and set it in database
+                $encryptedPassword = password_hash($password, PASSWORD_DEFAULT);
+                $user->setPassword($encryptedPassword);
+                $user->setHash('');
+                $user->update();
+                $this->signout();
+            } else {
+                $this->sendHttpError(401, "Motiv'Online - erreur 401");
+            }
+        }
+        // Set data and return changePassword view
+        $this->templateName = 'user/changePassword';
+        $this->data['error'] = $errorList;
+        $this->show($this->templateName, $this->data);
     }
 
     // Getters and Setters

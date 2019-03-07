@@ -1,8 +1,8 @@
-<?= $this->layout('layout', ['myTitle' => 'Connexion']); ?>
+<?= $this->layout('layout', ['myTitle' => 'Changer de mot de passe']); ?>
 
 <section class="section">
-    <h2 class="section__title">Connexion</h2>
-    <form class="section__content" method="post" action="<?= $router->generate('user_signin') ?>">
+    <h2 class="section__title">Changer de mot de passe</h2>
+    <form class="section__content" method="post" action="<?= $_SERVER['REQUEST_URI'] ?>">
         <div class="form-group">
             <label for="email">Email</label>
             <input type="email" class="form-control" id="email" name="email"
@@ -12,9 +12,12 @@
             <label for="password">Mot de passe</label>
             <input type="password" class="form-control" id="password" name="password" placeholder="Mot de passe">
         </div>
-        <button type="submit" class="btn btn-primary">Connexion</button>
-        <a href="<?= $router->generate('user_changePasswordLink_view') ?>" class="d-block text-center
-        m-3">Mot de passe oublié</a>
+        <div class="form-group">
+            <label for="confirmPassword">Confirmer mot de passe</label>
+            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
+            placeholder="Confirmer mot de passe">
+        </div>
+        <button type="submit" class="btn btn-primary">Sauvegarder</button>
     </form>
     <?php if (isset($error) && !empty($error)) : ?>
         <ul class="alert alert-danger" role="alert">
