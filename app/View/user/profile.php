@@ -5,6 +5,7 @@
     <form class="section__content" method="post" action="<?= $router->generate('user_update') ?>">
         <div class="form-group">
             <span><?= $connectedUser->getEmail(); ?></span>
+            <button type="button" class="btn btn-primary" id="open-modalPassword">Changer de mot de passe</button>
         </div>
         <div class="form-group">
             <label for="firstname">Prénom</label>
@@ -87,6 +88,29 @@
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
                         <form action="<?= $router->generate('user_delete') ?>" method="get">
                         <button type="submit" class="btn btn-danger">Supprimer</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div class="modal" id="modalPassword" tabindex="-1" role="dialog"
+    aria-labelledby="modalPasswordTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalPasswordTitle">Message</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Envoyer un lien pour le changement de mot de passe à l'adresse
+                        <?= $connectedUser->getEmail() ?> ?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                        <form action="<?= $router->generate('user_changePasswordLink') ?>" method="get">
+                        <button type="submit" class="btn btn-danger">Envoyer</button>
                         </form>
                     </div>
                 </div>

@@ -31,7 +31,30 @@ class Application
         $this->router->map('POST', '/profil', 'UserController#updateUser', 'user_update');
         $this->router->map('GET', '/deconnexion', 'UserController#signout', 'user_signout');
         $this->router->map('GET', '/profil/supprimer', 'UserController#deleteUser', 'user_delete');
-        $this->router->map('GET', '/profil/mot-de-passe', 'UserController#changePassword', 'user_forgetPassword');
+        $this->router->map(
+            'GET',
+            '/mot-de-passe-oublie',
+            'UserController#changePasswordLink',
+            'user_changePasswordLink_view'
+        );
+        $this->router->map(
+            'POST',
+            '/mot-de-passe-oublie',
+            'UserController#changePasswordLink',
+            'user_changePasswordLink'
+        );
+        $this->router->map(
+            'GET',
+            '/mot-de-passe/[a:hash]',
+            'UserController#changePassword',
+            'user_changePassword_view'
+        );
+        $this->router->map(
+            'POST',
+            '/mot-de-passe/[a:hash]',
+            'UserController#changePassword',
+            'user_changePassword'
+        );
 
         $this->router->map(
             'GET',

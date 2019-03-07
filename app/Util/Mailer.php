@@ -42,14 +42,15 @@ class Mailer
         );
     }
 
-    public function sendForgetPassword(string $recipientMail, string $link)
+    public function sendChangePasswordLink(string $recipientMail, string $link)
     {
         $this->mail->setFrom($this->config['MAILER_CLIENT_EMAIL'], 'Motiv\'Online');
         $this->mail->addAddress($recipientMail);
 
         $this->mail->isHTML(true);
         $this->mail->Subject = 'Changer de mot de passe';
-        $this->mail->Body = '<p>Voici un lien pour changer votre mot de passe ' . $link . ' .</p>';
+        $this->mail->Body = '<p>Voici un lien pour changer votre mot de passe 
+        <a href="' . $link . '">' . $link . '</a></p>';
         $this->mail->send();
     }
 }

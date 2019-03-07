@@ -11,7 +11,7 @@ class UserModel
     protected $lastname;
     protected $email;
     protected $password;
-    protected $picture;
+    protected $hash;
     protected $phone_number;
     protected $zip_code;
     protected $city;
@@ -28,7 +28,7 @@ class UserModel
                     `lastname`,
                     `email`,
                     `password`,
-                    `picture`,
+                    `hash`,
                     `phone_number`,
                     `zip_code`,
                     `city`,
@@ -53,7 +53,7 @@ class UserModel
                     `lastname`,
                     `email`,
                     `password`,
-                    `picture`,
+                    `hash`,
                     `phone_number`,
                     `zip_code`,
                     `city`,
@@ -64,7 +64,7 @@ class UserModel
                     :lastname,
                     :email,
                     :password,
-                    :picture,
+                    :hash,
                     :phone_number,
                     :zip_code,
                     :city,
@@ -78,7 +78,7 @@ class UserModel
         $pdoStatement->bindValue(':lastname', $this->lastname, PDO::PARAM_STR);
         $pdoStatement->bindValue(':email', $this->email, PDO::PARAM_STR);
         $pdoStatement->bindValue(':password', $this->password, PDO::PARAM_STR);
-        $pdoStatement->bindValue(':picture', $this->picture, PDO::PARAM_STR);
+        $pdoStatement->bindValue(':hash', $this->hash, PDO::PARAM_STR);
         $pdoStatement->bindValue(':phone_number', $this->phone_number, PDO::PARAM_STR);
         $pdoStatement->bindValue(':zip_code', $this->zip_code, PDO::PARAM_STR);
         $pdoStatement->bindValue(':city', $this->city, PDO::PARAM_STR);
@@ -99,7 +99,8 @@ class UserModel
         $sql = 'UPDATE ' . self::TABLE_NAME . ' SET
                     `firstname` = :firstname,
                     `lastname` = :lastname,
-                    `picture` = :picture,
+                    `password` = :password,
+                    `hash` = :hash,
                     `phone_number` = :phone_number,
                     `zip_code` = :zip_code,
                     `city` = :city,
@@ -113,7 +114,8 @@ class UserModel
         $pdoStatement->bindValue(':id', $this->id, PDO::PARAM_INT);
         $pdoStatement->bindValue(':firstname', $this->firstname, PDO::PARAM_STR);
         $pdoStatement->bindValue(':lastname', $this->lastname, PDO::PARAM_STR);
-        $pdoStatement->bindValue(':picture', $this->picture, PDO::PARAM_STR);
+        $pdoStatement->bindValue(':password', $this->password, PDO::PARAM_STR);
+        $pdoStatement->bindValue(':hash', $this->hash, PDO::PARAM_STR);
         $pdoStatement->bindValue(':phone_number', $this->phone_number, PDO::PARAM_STR);
         $pdoStatement->bindValue(':zip_code', $this->zip_code, PDO::PARAM_STR);
         $pdoStatement->bindValue(':city', $this->city, PDO::PARAM_STR);
@@ -195,14 +197,14 @@ class UserModel
         return $this;
     }
 
-    public function getPicture()
+    public function getHash()
     {
-        return $this->picture;
+        return $this->hash;
     }
 
-    public function setPicture(string $picture)
+    public function setHash(string $hash)
     {
-        $this->picture = $picture;
+        $this->hash = $hash;
         return $this;
     }
 

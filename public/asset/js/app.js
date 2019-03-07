@@ -4,6 +4,9 @@ const app = {
     $('#deleteUser').on('click', function() {
       $('#modalAlert').modal('show');
     });
+    $('#open-modalPassword').on('click', function() {
+      $('#modalPassword').modal('show');
+    });
     $('.delete-letter').on('click', app.deleteLetter);
     app.animationBasiqueOnload();
     $('.content-animation').on('click', app.animationBasique);
