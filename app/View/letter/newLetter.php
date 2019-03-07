@@ -2,7 +2,7 @@
 
 <section class="section">
     <h2 class="section__title">Nouvelle lettre de motivation</h2>
-    <form class="section__content" method="post" action="<?= $router->generate('letter_create') ?>">
+    <form class="section__content" method="post" action="<?= $router->generate('letter_create'); ?>">
         <div class="form-group">
             <label for="name">Nom de la lettre</label>
             <input type="text" class="form-control" id="name" name="name"
@@ -19,7 +19,7 @@
         <ul class="alert alert-danger" role="alert">
             <?php foreach ($error as $errorText) : ?>
                 <li>
-                    <?= $errorText ?>
+                    <?= $errorText; ?>
                 </li>
             <?php endforeach; ?>
         </ul>

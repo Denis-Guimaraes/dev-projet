@@ -9,6 +9,7 @@ abstract class CoreController
 {
     protected $templateEngine;
     protected $router;
+    protected $baseUrl;
 
     public function __construct(Application $application)
     {
@@ -19,11 +20,13 @@ abstract class CoreController
         $this->templateEngine->addData(
             [
                 'router' => $this->router,
+                'baseUrl' => $config['BASE_URL'],
                 'basePath' => $config['BASE_PATH'],
                 'connectedUser' => User::getConnectedUser(),
                 'isConnected' => User::isConnected(),
             ]
         );
+        $this->baseUrl = $config['BASE_URL'];
     }
 
     public function sendHttpError(int $errorCode, string $htmlContent = '')

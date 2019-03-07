@@ -2,7 +2,7 @@
 
 <section class="section">
     <h2 class="section__title">Section 2</h2>
-    <form class="section__content" method="post" action="<?= $_SERVER['REQUEST_URI'] ?>">
+    <form class="section__content" method="post" action="<?= $_SERVER['REQUEST_URI']; ?>">
         <div class="form-group">
             <label for="title">Titre section 2</label>
             <input type="text" class="form-control" id="title" name="title" value="<?=

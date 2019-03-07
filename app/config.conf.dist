@@ -7,6 +7,7 @@ DB_PASSWORD=
 DB_NAME=
 
 ;url BASE PATH
+BASE_URL=
 BASE_PATH=
 
 ;mailer
