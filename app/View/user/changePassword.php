@@ -2,7 +2,7 @@
 
 <section class="section">
     <h2 class="section__title">Changer de mot de passe</h2>
-    <form class="section__content" method="post" action="<?= $_SERVER['REQUEST_URI'] ?>">
+    <form class="section__content" method="post" action="<?= $_SERVER['REQUEST_URI']; ?>">
         <div class="form-group">
             <label for="email">Email</label>
             <input type="email" class="form-control" id="email" name="email"
@@ -23,7 +23,7 @@
         <ul class="alert alert-danger" role="alert">
             <?php foreach ($error as $errorText) : ?>
                 <li>
-                    <?= $errorText ?>
+                    <?= $errorText; ?>
                 </li>
             <?php endforeach; ?>
         </ul>

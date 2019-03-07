@@ -2,7 +2,7 @@
 
 <section class="section">
     <h2 class="section__title">Entreprise</h2>
-    <form class="section__content" method="post" action="<?= $_SERVER['REQUEST_URI'] ?>">
+    <form class="section__content" method="post" action="<?= $_SERVER['REQUEST_URI']; ?>">
         <div class="form-group">
             <label for="name">Nom</label>
             <input type="text" class="form-control" id="name" name="name" value="<?=

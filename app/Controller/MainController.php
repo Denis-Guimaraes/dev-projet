@@ -12,4 +12,14 @@ class MainController extends CoreController
         }
         $this->show('main/home');
     }
+
+    public function contact()
+    {
+        $this->show('main/contact');
+    }
+
+    public function legalNotice()
+    {
+        $this->show('main/legalNotice');
+    }
 }

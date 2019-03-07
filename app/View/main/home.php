@@ -1,9 +1,9 @@
 <?= $this->layout('layout', ['myTitle' => 'Accueil']); ?>
 <div class="d-flex flex-column flex-md-row">
     <section class="section mr-md-3">
-        <h2 class="section__title">Des lettres de motivations un peu plus fun !</h2>
+        <h2 class="section__title">Des <strong>lettres de motivations</strong> un peu plus fun !</h2>
         <p class="section__content section__content--space">
-            Ecrivez vos lettres de motivation en ligne.
+            Ecrivez vos <strong class="font-weight-normal">lettres de motivations</strong> <em>en ligne</em>.
             Choisissez leurs styles.
             Choisissez leurs animations.
             Partagez-les avec des liens unique.

@@ -3,7 +3,7 @@
 <section class="section">
     <h2 class="section__title">Mot de passe oublié</h2>
     <p>Entrez votre email pour recevoir un lien de réinitialisation.</p>
-    <form class="section__content" method="post" action="<?= $router->generate('user_changePasswordLink') ?>">
+    <form class="section__content" method="post" action="<?= $router->generate('user_changePasswordLink'); ?>">
         <div class="form-group">
             <label for="email">Email</label>
             <input type="email" class="form-control" id="email" name="email"
@@ -15,7 +15,7 @@
         <ul class="alert alert-danger" role="alert">
             <?php foreach ($error as $errorText) : ?>
                 <li>
-                    <?= $errorText ?>
+                    <?= $errorText; ?>
                 </li>
             <?php endforeach; ?>
         </ul>

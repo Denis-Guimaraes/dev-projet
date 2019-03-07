@@ -2,7 +2,7 @@
 
 <section class="section">
     <h2 class="section__title">Mon profil</h2>
-    <form class="section__content" method="post" action="<?= $router->generate('user_update') ?>">
+    <form class="section__content" method="post" action="<?= $router->generate('user_update'); ?>">
         <div class="form-group">
             <span><?= $connectedUser->getEmail(); ?></span>
             <button type="button" class="btn btn-primary" id="open-modalPassword">Changer de mot de passe</button>
@@ -42,7 +42,7 @@
             <ul class="alert alert-danger mt-3" role="alert">
                 <?php foreach ($error as $errorText) : ?>
                     <li>
-                        <?= $errorText ?>
+                        <?= $errorText; ?>
                     </li>
                 <?php endforeach; ?>
             </ul>
@@ -86,7 +86,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                        <form action="<?= $router->generate('user_delete') ?>" method="get">
+                        <form action="<?= $router->generate('user_delete'); ?>" method="get">
                         <button type="submit" class="btn btn-danger">Supprimer</button>
                         </form>
                     </div>
@@ -105,11 +105,11 @@
                     </div>
                     <div class="modal-body">
                         Envoyer un lien pour le changement de mot de passe à l'adresse
-                        <?= $connectedUser->getEmail() ?> ?
+                        <?= $connectedUser->getEmail(); ?> ?
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                        <form action="<?= $router->generate('user_changePasswordLink') ?>" method="get">
+                        <form action="<?= $router->generate('user_changePasswordLink'); ?>" method="get">
                         <button type="submit" class="btn btn-danger">Envoyer</button>
                         </form>
                     </div>

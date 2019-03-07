@@ -22,6 +22,13 @@ class Application
     {
         // Define route
         $this->router->map('GET', '/', 'MainController#home', 'main_home');
+        $this->router->map('GET', '/contact', 'MainController#contact', 'main_contact');
+        $this->router->map(
+            'GET',
+            '/mentions-legales',
+            'MainController#legalNotice',
+            'main_legalNotice'
+        );
 
         $this->router->map('POST', '/inscription', 'UserController#signup', 'user_signup');
         $this->router->map('GET', '/inscription', 'UserController#signup', 'user_signup_view');

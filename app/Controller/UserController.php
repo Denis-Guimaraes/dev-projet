@@ -199,7 +199,7 @@ class UserController extends CoreController
                     $hash = uniqid();
                     $user->setHash($hash);
                     $user->update();
-                    $link = 'http://localhost' . $this->router->generate('user_changePassword_view', ['hash' => $hash]);
+                    $link = $this->baseUrl . $this->router->generate('user_changePassword_view', ['hash' => $hash]);
                 } else {
                     $errorList[] = 'Email inconnu';
                 }
@@ -221,7 +221,7 @@ class UserController extends CoreController
         $hash = uniqid();
         $user->setHash($hash);
         $user->update();
-        $link = 'http://localhost' . $this->router->generate('user_changePassword_view', ['hash' => $hash]);
+        $link = $this->baseUrl . $this->router->generate('user_changePassword_view', ['hash' => $hash]);
         $userEmail = $user->getEmail();
         $mailer = new Mailer();
         $mailer->sendChangePasswordLink($userEmail, $link);
