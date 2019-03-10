@@ -1,8 +1,11 @@
-<?= $this->layout('layout', ['myTitle' => 'Lettre de motivation']); ?>
+<?= $this->layout('layoutShare', [
+    'myTitle' => 'LM - ' . $letter->getUserFirstname() . ' ' . $letter->getUserLastname(),
+    'description' => 'La lettre de motivation de ' . $letter->getUserFirstname() . ' ' . $letter->getUserLastname() . ' pour ' . $letter->getCompanyName() . '.',
+    ]); ?>
 
 <div class="letter">
     <section class="section section--print d-flex flex-column">
-        <div class="d-flex flex-column flex-md-row justify-content-between">
+        <div class="info-style--<?= $letter->getStyleName(); ?> d-flex flex-column flex-md-row justify-content-between px-3">
             <div class="section__content d-flex flex-column">
                 <span><?= $letter->getUserFirstname() ?> <?= $letter->getUserLastname(); ?></span>
                 <span><?= $letter->getUserAddress(); ?></span>

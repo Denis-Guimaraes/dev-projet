@@ -7,23 +7,36 @@
             <p>Aucune lettre</p>
         <?php endif; ?>
         <?php foreach ($letterList as $letter) : ?>
-            <div class="section__content card col-md-5 p-0">
-                <h3 class="section__subtitle card-header"><?= $letter->getName(); ?></h3>
+            <div class="section__content section__content--half-width card p-0">
+                <h3 class="section__subtitle card-header bg-light"><?= $letter->getName(); ?></h3>
                 <div class="card-body">
-                    <p class="card-text">Entreprise : <?= $letter->getCompanyName(); ?></p>
-                    <p class="card-text">Objet : <?= $letter->getObject(); ?></p>
-                    <p class="card-text">Lien : 
-                    <a href="<?= $router->generate('letter_share', ['id' => $letter->getId(),
-                    'hash' => $letter->getLink()]); ?>">
-                    <?= $baseUrl . $router->generate('letter_share', ['hash' => $letter->getLink()]); ?></a></p>
+                    <div class="border rounded text-center mb-2">
+                        <p class="bg-light font-weight-bold p-1 m-0">Entreprise</p>
+                        <p class="p-1 m-0"><?= $letter->getCompanyName(); ?></p>
+                    </div>
+                    <div class="border rounded text-center mb-2">
+                        <p class="bg-light font-weight-bold p-1 m-0">Objet</p>
+                        <p class="p-1 m-0"><?= $letter->getObject(); ?></p>
+                    </div>
+                    <div class="border rounded text-center mb-3">
+                        <p class="bg-light font-weight-bold p-1 m-0">Lien de partage</p>
+                        <p class="p-1 m-0">
+                            <a href="<?= $router->generate('letter_share', [
+                                'id' => $letter->getId(),'hash' => $letter->getLink()]); ?>" class="d-block" class="wrap">
+                                <?= $baseUrl . $router->generate('letter_share', ['hash' => $letter->getLink()]); ?>
+                            </a>
+                        </p>
+                    </div>
                     <div class="d-flex justify-content-end">
+                        <a href="<?= $router->generate('letter_preview', ['hash' => $letter->getLink()]); ?>"
+                        class="btn btn-info ml-2">Prévisualiser</a>
                         <a href="<?= $router->generate('letter_view', ['id' => $letter->getId()]); ?>"
-                        class="btn btn-primary ml-2">Editer la lettre</a>
+                        class="btn btn-primary ml-2">Editer</a>
                     </div>
                     <div class="section__delete d-flex justify-content-end">
                         <button type="button" class="btn btn-danger delete-letter" data-link="
                         <?= $router->generate('letter_delete', ['id' => $letter->getId()]); ?>">
-                        Supprimer la lettre</button>
+                        Supprimer</button>
                     </div>
                 </div>
             </div>

@@ -26,8 +26,8 @@
   border-radius: 5px;
   padding: 0.8rem;
   margin: 1rem 0;
-  width: 100%;
-  max-width: 25rem;
+  width: 25rem;
+  max-width: 98vw;
 }
 
 .section__title {
@@ -68,6 +68,11 @@
 }
 
 /* letter style */
+.info-style--basique {
+  background-color: #f8f9fa;
+  border-radius: 5px;
+}
+
 .title-style--basique {
   font-size: 1.4rem;
   font-weight: bold;
@@ -80,7 +85,7 @@
   font-size: 1.2rem;
   font-weight: bold;
   color: #104161;
-  background-color: #f1f1f1;
+  background-color: #f8f9fa;
   border-radius: 5px;
   padding: 0.4rem;
   cursor: pointer;
@@ -125,6 +130,11 @@
   .letter > .section {
     min-width: 768px;
   }
+
+  .letter > .section > .section__content--half-width {
+    width: 48%;
+  }
+
 
   .section__content--row {
     display: flex;

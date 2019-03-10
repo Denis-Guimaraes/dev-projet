@@ -107,6 +107,12 @@ class Application
         );
         $this->router->map(
             'GET',
+            '/lettre/[a:hash]/previsualiser',
+            'LetterController#shareLetter',
+            'letter_preview'
+        );
+        $this->router->map(
+            'GET',
             '/lettre/supprimer/[i:id]',
             'LetterController#deleteLetter',
             'letter_delete'

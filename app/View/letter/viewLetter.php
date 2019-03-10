@@ -4,22 +4,24 @@
     <?= $this->insert('letter/letterCustomizer', ['letter' => $letter, 'letterStyleList' => $letterStyleList, 'letterAnimationList' => $letterAnimationList]); ?>
 
     <section class="section section--print d-flex flex-column">
-        <div class="section__content d-flex flex-column">
-            <span><?= $connectedUser->getFirstname(); ?> <?= $connectedUser->getLastname(); ?></span>
-            <span><?= $connectedUser->getAddress(); ?></span>
-            <span><?= $connectedUser->getZipCode(); ?> <?= $connectedUser->getCity(); ?></span>
-            <span><?= $connectedUser->getPhoneNumber(); ?></span>
-            <a href="<?= $router->generate('user_profile'); ?>"
-            class="btn btn-primary btn-sm mr-auto">Editer profile</a>
-        </div>
-        <div class="section__content d-inline-flex flex-column align-self-end">
-            <span><?= $letter->getCompanyName(); ?></span>
-            <span><?= $letter->getCompanyRecipientName(); ?></span>
-            <span><?= $letter->getCompanyAddress(); ?></span>
-            <span><?= $letter->getCompanyZipCode(); ?> <?= $letter->getCompanyCity(); ?></span>
-            <a href="<?= $router->generate('company_view', ['id' => $letter->getId(), 'companyId' => $letter->getCompanyId()]); ?>"
-            class="btn btn-primary btn-sm ml-auto">Editer entreprise</a>
-            <span class="mt-3"><?= $letter->getUserCity(); ?>, le <?= date("d/m/Y", strtotime($letter->getDate())); ?></span>
+        <div class="info-style--<?= $letter->getStyleName(); ?> d-flex flex-column flex-md-row justify-content-between px-3">
+            <div class="section__content d-flex flex-column">
+                <span><?= $connectedUser->getFirstname(); ?> <?= $connectedUser->getLastname(); ?></span>
+                <span><?= $connectedUser->getAddress(); ?></span>
+                <span><?= $connectedUser->getZipCode(); ?> <?= $connectedUser->getCity(); ?></span>
+                <span><?= $connectedUser->getPhoneNumber(); ?></span>
+                <a href="<?= $router->generate('user_profile'); ?>"
+                class="btn btn-primary btn-sm mr-auto">Editer profile</a>
+            </div>
+            <div class="section__content d-inline-flex flex-column align-self-end">
+                <span><?= $letter->getCompanyName(); ?></span>
+                <span><?= $letter->getCompanyRecipientName(); ?></span>
+                <span><?= $letter->getCompanyAddress(); ?></span>
+                <span><?= $letter->getCompanyZipCode(); ?> <?= $letter->getCompanyCity(); ?></span>
+                <a href="<?= $router->generate('company_view', ['id' => $letter->getId(), 'companyId' => $letter->getCompanyId()]); ?>"
+                class="btn btn-primary btn-sm ml-auto">Editer entreprise</a>
+                <span class="mt-3"><?= $letter->getUserCity(); ?>, le <?= date("d/m/Y", strtotime($letter->getDate())); ?></span>
+            </div>
         </div>
         <div class="section__content d-flex flex-column mb-3">
             <h3 class="title-style--<?= $letter->getStyleName(); ?> mb-3"><?= $letter->getTitle(); ?></h3>
