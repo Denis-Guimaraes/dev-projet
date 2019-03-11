@@ -1,6 +1,10 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-    <a class="header__title navbar-brand"
-    href="<?= $isConnected ? $router->generate('user_profile') : $router->generate('main_home'); ?>">Motiv'Online</a>
+    <h1>
+        <a class="header__title navbar-brand"
+        href="<?= $isConnected ? $router->generate('user_profile') : $router->generate('main_home'); ?>">
+            Motiv'Online
+        </a>
+    </h1>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
     aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
