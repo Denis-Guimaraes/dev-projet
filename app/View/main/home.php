@@ -10,7 +10,8 @@
         </p>
     </section>
     <section class="section ml-md-3 p-0">
-        <video autoplay="true" muted loop class="d-block w-100 rounded">
+        <video autoplay playsinline muted loop class="d-block w-100 rounded">
+            <source src="<?= $basePath ?>/asset/image/mo-vid_764x.webm" type="video/webm">
             <source src="<?= $basePath ?>/asset/image/mo-vid_764x.mp4" type="video/mp4">
             <img src="<?= $basePath ?>/asset/image/mo-img_766x.png" alt="exemple de lettre" class="d-block w-100 rounded">
         </video>

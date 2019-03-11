@@ -5,11 +5,27 @@
         <title><?= $myTitle; ?></title>
         <meta name="description" content="Des lettres de motivations un peu plus fun ! Ecrivez vos lettres de motivation en ligne, choisissez leurs styles, leurs animations et partagez-les.">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="stylesheet" href="<?= $basePath; ?>/asset/css/reset.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
         <link rel="stylesheet" href="<?= $basePath; ?>/asset/css/style.css">
+        <link rel="apple-touch-icon" sizes="57x57" href="<?= $basePath ?>/asset/image/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="<?= $basePath ?>/asset/image/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="<?= $basePath ?>/asset/image/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="<?= $basePath ?>/asset/image/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="<?= $basePath ?>/asset/image<?= $basePath ?>/asset/image/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="<?= $basePath ?>/asset/image<?= $basePath ?>/asset/image/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="<?= $basePath ?>/asset/image<?= $basePath ?>/asset/image/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="<?= $basePath ?>/asset/image<?= $basePath ?>/asset/image/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="<?= $basePath ?>/asset/image<?= $basePath ?>/asset/image/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192"  href="<?= $basePath ?>/asset/image/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="<?= $basePath ?>/asset/image/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="<?= $basePath ?>/asset/image/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="<?= $basePath ?>/asset/image/favicon-16x16.png">
+        <link rel="manifest" href="<?= $basePath ?>/asset/image/manifest.json">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="<?= $basePath ?>/asset/image/ms-icon-144x144.png">
+        <meta name="theme-color" content="#ffffff">
     </head>
     <body class="body">
         <header class="header"> 
