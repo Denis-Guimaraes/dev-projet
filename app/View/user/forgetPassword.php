@@ -1,4 +1,4 @@
-<?= $this->layout('layout', ['myTitle' => 'Mot de passe oublié']); ?>
+<?= $this->layout('layout', ['myTitle' => 'MO - mot de passe oublié']); ?>
 
 <section class="section">
     <h2 class="section__title">Mot de passe oublié</h2>

@@ -1,4 +1,4 @@
-<?= $this->layout('layout', ['myTitle' => 'Entête']); ?>
+<?= $this->layout('layout', ['myTitle' => 'MO - éditer entête']); ?>
 
 <section class="section">
     <h2 class="section__title">Entreprise</h2>

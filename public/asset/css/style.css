@@ -127,6 +127,10 @@
 }
 
 @media SCREEN AND (min-width: 768px) {
+  .section--half-width {
+    width: 50%;
+  }
+
   .letter > .section {
     min-width: 768px;
   }

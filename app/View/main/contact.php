@@ -1,4 +1,4 @@
-<?= $this->layout('layout', ['myTitle' => 'Contact']); ?>
+<?= $this->layout('layout', ['myTitle' => 'MO -contact']); ?>
 
 <section class="section">
 <h2 class="section__title">Contact</h2>
