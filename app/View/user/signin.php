@@ -1,4 +1,4 @@
-<?= $this->layout('layout', ['myTitle' => 'Connexion']); ?>
+<?= $this->layout('layout', ['myTitle' => 'MO - connexion']); ?>
 
 <section class="section">
     <h2 class="section__title">Connexion</h2>

@@ -1,4 +1,4 @@
-<?= $this->layout('layout', ['myTitle' => 'profil']); ?>
+<?= $this->layout('layout', ['myTitle' => 'MO - profil']); ?>
 
 <section class="section">
     <h2 class="section__title">Mon profil</h2>

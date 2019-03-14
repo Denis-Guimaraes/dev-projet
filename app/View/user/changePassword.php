@@ -1,4 +1,4 @@
-<?= $this->layout('layout', ['myTitle' => 'Changer de mot de passe']); ?>
+<?= $this->layout('layout', ['myTitle' => 'MO - changer de mot de passe']); ?>
 
 <section class="section">
     <h2 class="section__title">Changer de mot de passe</h2>

@@ -1,4 +1,4 @@
-<?= $this->layout('layout', ['myTitle' => 'Mes lettre de motivation']); ?>
+<?= $this->layout('layout', ['myTitle' => 'MO - mes lettres de motivation']); ?>
 
 <div class="letter">
     <section class="section row justify-content-around">

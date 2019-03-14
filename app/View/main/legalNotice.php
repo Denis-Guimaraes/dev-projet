@@ -1,4 +1,4 @@
-<?= $this->layout('layout', ['myTitle' => 'Mentions légales']); ?>
+<?= $this->layout('layout', ['myTitle' => 'MO - mentions légales']); ?>
 
 <section class="section">
 <h2 class="section__title">Mentions légales</h2>

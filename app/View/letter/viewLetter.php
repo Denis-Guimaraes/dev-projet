@@ -1,4 +1,4 @@
-<?= $this->layout('layout', ['myTitle' => 'Lettre de motivation']); ?>
+<?= $this->layout('layout', ['myTitle' => 'MO - ' . $letter->getName()]); ?>
 
 <div class="letter">
     <?= $this->insert('letter/letterCustomizer', ['letter' => $letter, 'letterStyleList' => $letterStyleList, 'letterAnimationList' => $letterAnimationList]); ?>

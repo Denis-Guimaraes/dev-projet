@@ -1,4 +1,4 @@
-<?= $this->layout('layout', ['myTitle' => 'Nouvelle lettre de motivation']); ?>
+<?= $this->layout('layout', ['myTitle' => 'MO - nouvelle lettre de motivation']); ?>
 
 <section class="section">
     <h2 class="section__title">Nouvelle lettre de motivation</h2>
