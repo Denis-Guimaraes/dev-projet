@@ -27,10 +27,14 @@
         <meta name="msapplication-TileImage" content="<?= $basePath ?>/asset/image/ms-icon-144x144.png">
         <meta name="theme-color" content="#ffffff">
         <meta property="og:title" content="Motiv'Online"/>
-        <meta property="og:image" content="//motivonlone.fr/asset/image/mo-img_380x.png"/>
+        <meta property="og:image:secure_url" content="https://motivonline.fr/asset/image/mo-img_380x.png"/>
+        <meta property="og:image:type" content="image/png"/>
+        <meta property="og:image:width" content="380"/>
+        <meta property="og:image:height" content="437"/>
+        <meta property="og:image:alt" content="Exemple de lettre de motivation" />
         <meta property="og:description" content="Des lettres de motivations un peu plus fun !
         Ecrivez vos lettres de motivation en ligne, choisissez leurs styles, leurs animations et partagez-les."/>
-        <meta property="og:url" content="//motivonlone.fr" />
+        <meta property="og:url" content="https://motivonline.fr" />
     </head>
     <body class="body">
         <header class="header"> 
