@@ -27,6 +27,8 @@
         <meta name="msapplication-TileImage" content="<?= $basePath ?>/asset/image/ms-icon-144x144.png">
         <meta name="theme-color" content="#ffffff">
         <meta property="og:title" content="Motiv'Online"/>
+        <meta property="og:type" content="website"/>
+        <meta property="og:image" content="http://motivonline.fr/asset/image/mo-img_380x.png"/>
         <meta property="og:image:secure_url" content="https://motivonline.fr/asset/image/mo-img_380x.png"/>
         <meta property="og:image:type" content="image/png"/>
         <meta property="og:image:width" content="380"/>
