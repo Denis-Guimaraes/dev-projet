@@ -26,6 +26,11 @@
         <meta name="msapplication-TileColor" content="#ffffff">
         <meta name="msapplication-TileImage" content="<?= $basePath ?>/asset/image/ms-icon-144x144.png">
         <meta name="theme-color" content="#ffffff">
+        <meta property="og:title" content="Motiv'Online"/>
+        <meta property="og:image" content="<?= $basePath ?>/asset/image/mo-img_380x.png"/>
+        <meta property="og:description" content="Des lettres de motivations un peu plus fun !
+        Ecrivez vos lettres de motivation en ligne, choisissez leurs styles, leurs animations et partagez-les."/>
+        <meta property="og:url" content="https://motivonlone.fr" />
     </head>
     <body class="body">
         <header class="header"> 

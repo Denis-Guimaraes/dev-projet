@@ -1,4 +1,4 @@
-<?= $this->layout('layout', ['myTitle' => 'MO - accueil']); ?>
+<?= $this->layout('layout', ['myTitle' => 'Motiv\'Online']); ?>
 <div class="d-flex flex-column flex-md-row">
     <section class="section section--half-width mr-md-3">
         <h2 class="section__title">Des <strong>lettres de motivation</strong> un peu plus fun !</h2>
